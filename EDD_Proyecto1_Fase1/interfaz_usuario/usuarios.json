@@ -1,8 +1,14 @@
 [
-  {
-    "usuario": "admin",
-    "contrasena": "1234",
-    "correo": "admin@example.com",
-    "tipo": "admin"
-  }
+   {
+      "contrasena" : "1234",
+      "correo" : "admin@example.com",
+      "tipo" : "admin",
+      "usuario" : "admin"
+   },
+   {
+      "contrasena" : "w",
+      "correo" : "juan25@example.com",
+      "tipo" : "usuario",
+      "usuario" : "juan"
+   }
 ]

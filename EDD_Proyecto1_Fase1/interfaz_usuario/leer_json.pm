@@ -1,10 +1,11 @@
 #!/usr/bin/perl
+package interfaz_usuario::leer_json;
+
 use strict;
 use warnings;
 use JSON::PP;
-package interfaz_usuario::leer_json;
 
-sub cargar_usuario {
+sub parsear_json {
   my ($ruta) = @_;
 
   open my $fh, '<', $ruta
@@ -18,15 +19,59 @@ sub cargar_usuario {
   return $datos;
 }
 
-sub validar_usuario {
-  my ($nombre_usuario, $usuario_contrasena) = @_;
+sub guardar_json {
+  my ($ruta, $datos) = @_;
 
-  my $datos = cargar_usuario('../interfaz_usuario/usuarios.json');
+  my $aspecto = JSON::PP->new
+                        ->utf8
+                        ->pretty
+                        ->canonical(1);
 
-  return 0
-    unless $nombre_usuario eq $datos->{usuario} && $usuario_contrasena eq $datos->{contrasena};
+  open my $fh, '>', $ruta
+    or die "No se pudo abrir el archvio en $ruta \n";
+
+  print $fh $aspecto->encode($datos);
+  close $fh;
 
   return 1;
+}
+
+sub ver_nombre_usuario {
+  my $datos = parsear_json('interfaz_usuario/usuarios.json');
+  my $nombre_usuario;
+  foreach my $element ( @$datos ) {
+    $nombre_usuario = $element->{usuario};
+  }
+
+  return $nombre_usuario;
+}
+
+sub validar_usuario_normal {
+  my ($nombre_usuario, $usuario_contrasena) = @_;
+
+  my $datos = parsear_json('interfaz_usuario/usuarios.json');
+
+  foreach my $element ( @$datos ) {
+    if ( $element->{usuario} eq $nombre_usuario && $element->{contrasena} eq $usuario_contrasena ) {
+      return 1;
+    }
+  }
+
+  return 0;
+}
+
+sub validar_usuario_admin {
+  my ($nombre_usuario, $usuario_contrasena, $tipo_usuario) = @_;
+
+  my $datos = parsear_json('interfaz_usuario/usuarios.json');
+
+  foreach my $element ( @$datos ) {
+    if ( $element->{usuario} eq $nombre_usuario && $element->{contrasena} eq $usuario_contrasena && $element->{tipo} eq $tipo_usuario ) {
+      return 1;
+    }
+  }
+
+  return 0;
 }
 
 1;
