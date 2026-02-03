@@ -2,9 +2,11 @@
 package interfaz_usuario::admin;
 use strict;
 use warnings;
+use feature qw(say switch);
 
-use interfaz_usuario::leer_json;
 use utilidades::limite_entrada;
+use utilidades::leer_json;
+use datos::inventario;
 
 #our $nombre_admin = 'admin';
 #our $contrasenia_admin = '1234';
@@ -13,7 +15,7 @@ sub inicio_sesion_admin_exitoso {
   print "Bienvenido nuevamente administrador \n";
   print "¿Qué haremos hoy?";
   print "
-  1. Registrar medicamentos
+  1. Registrar medicamento
   2. Carga masiva de medicamentos
   3. Gestionar proveedores
   4. Registrar engrega de proveedor
@@ -25,6 +27,16 @@ sub inicio_sesion_admin_exitoso {
   ";
 
   my $consulta = utilidades::limite_entrada::comprobacion_menu(1, 9);
+  return seleccion($consulta);
+}
+
+sub seleccion {
+  my ($opcion_seleccionada) = @_;
+
+  given ($opcion_seleccionada) {
+    when (1) {say datos::inventario::registrar_medicamento()}
+    when (2) {say datos::inventario::registrar_medicamento_masivo()}
+  }
 }
 
 sub nuevo_usuario {
@@ -34,7 +46,7 @@ sub nuevo_usuario {
 sub validar_nueva_contrasena {
   my ($usuario_nombre, $usuario_correo) = @_;
 
-  my $datos = interfaz_usuario::leer_json::parsear_json('interfaz_usuario/usuarios.json');
+  my $datos = utilidades::leer_json::parsear_json('interfaz_usuario/usuarios.json');
 
   foreach my $element ( @$datos ) {
     if ( $element->{usuario} eq $usuario_nombre && $element->{correo} eq $usuario_correo ) {
@@ -48,7 +60,7 @@ sub validar_nueva_contrasena {
 sub cambio_contrasena_exitoso {
   my ($nombre_usuario, $correo_usuario) = @_;
   my $ruta = 'interfaz_usuario/usuarios.json';
-  my $datos = interfaz_usuario::leer_json::parsear_json($ruta);
+  my $datos = utilidades::leer_json::parsear_json($ruta);
 
   print "Ingrese una nueva contraseña: ";
     my $nueva_contrasena = <STDIN>;
@@ -65,7 +77,7 @@ sub cambio_contrasena_exitoso {
   foreach my $element ( @$datos ) {
     if ( $element->{usuario} eq $nombre_usuario && $element->{correo} eq $correo_usuario ) {
       $element->{contrasena} = $nueva_contrasena;
-      interfaz_usuario::leer_json::guardar_json($ruta, $datos);
+      utilidades::leer_json::guardar_json($ruta, $datos);
       return 1;
     }
   }

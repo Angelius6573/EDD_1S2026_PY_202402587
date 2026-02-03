@@ -3,11 +3,10 @@ package interfaz_usuario::inicio;
 use strict;
 use warnings;
 
-use interfaz_usuario::admin;
-use interfaz_usuario::leer_json;
-use interfaz_usuario::usuario;
-
+use utilidades::leer_json;
 use utilidades::limite_entrada;
+use interfaz_usuario::admin;
+use interfaz_usuario::usuario;
 
 ## Variables globales
 # my $usuario_admin = $interfaz_usuario::admin::nombre_admin;
@@ -49,10 +48,10 @@ sub comprobar_entrada {
       my $contrasena = <STDIN>;
       chomp $contrasena;
 
-    if ( interfaz_usuario::leer_json::validar_usuario_admin($usuario, $contrasena, $tipo) ) {
+    if ( utilidades::leer_json::validar_usuario_admin($usuario, $contrasena, $tipo) ) {
       return interfaz_usuario::admin::inicio_sesion_admin_exitoso();
     } else {
-      if ( interfaz_usuario::leer_json::validar_usuario_normal($usuario, $contrasena) ) {
+      if ( utilidades::leer_json::validar_usuario_normal($usuario, $contrasena) ) {
         print "Acceso concedido \n";
         return interfaz_usuario::usuario::inicio_sesion_usuario_exitoso();
       } else {

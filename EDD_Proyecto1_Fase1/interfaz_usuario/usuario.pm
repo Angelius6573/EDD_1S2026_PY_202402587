@@ -3,10 +3,10 @@ package interfaz_usuario::usuario;
 use strict;
 use warnings;
 
-use interfaz_usuario::leer_json;
+use utilidades::leer_json;
 use utilidades::limite_entrada;
 
-my $nombre_usuario = interfaz_usuario::leer_json::ver_nombre_usuario; 
+my $nombre_usuario = utilidades::leer_json::ver_nombre_usuario; 
 
 sub inicio_sesion_usuario_exitoso {
   print "Bienvenido nuevamente $nombre_usuario\n";

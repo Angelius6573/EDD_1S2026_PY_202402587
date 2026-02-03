@@ -1,0 +1,22 @@
+[
+   {
+      "cantidad" : "200",
+      "codigo" : "qwe",
+      "fecha_vencimiento" : "01/03/2006",
+      "laboratorio" : "rty",
+      "nivel_minimo" : "5",
+      "nombre" : "wer",
+      "precio_unitario" : "230",
+      "principio_activo" : "ert"
+   },
+   {
+      "cantidad" : "2000",
+      "codigo" : "fjsdl",
+      "fecha_vencimiento" : "01/01/2006",
+      "laboratorio" : "kjf",
+      "nivel_minimo" : "200",
+      "nombre" : "kjfgÃ±",
+      "precio_unitario" : "200",
+      "principio_activo" : "eojd"
+   }
+]
