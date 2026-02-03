@@ -20,4 +20,16 @@ sub comprobacion_menu {
   return $consulta; 
 }
 
+sub ruta {
+  my ($ruta, $ruta_d) = @_;
+
+  if ( $ruta eq "\n" ) {
+      print "Usando ruta por defecto...";
+      $ruta = $ruta_d;
+  } else {
+    chomp $ruta;
+  }
+  return $ruta;
+}
+
 1;

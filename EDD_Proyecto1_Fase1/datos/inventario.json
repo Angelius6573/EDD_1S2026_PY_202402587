@@ -18,5 +18,145 @@
       "nombre" : "kjfgÃ±",
       "precio_unitario" : "200",
       "principio_activo" : "eojd"
+   },
+   {
+      "cantidad" : "5000",
+      "codigo" : "MED001",
+      "fecha_vencimiento" : "2026-12-31",
+      "laboratorio" : "LabFarma",
+      "nivel_minimo" : "500",
+      "nombre" : "Tylenol",
+      "precio_unitario" : "2.50",
+      "principio_activo" : "Paracetamol"
+   },
+   {
+      "cantidad" : "3000",
+      "codigo" : "MED002",
+      "fecha_vencimiento" : "2026-08-15",
+      "laboratorio" : "MediPharma",
+      "nivel_minimo" : "300",
+      "nombre" : "Amoxil",
+      "precio_unitario" : "12.50",
+      "principio_activo" : "Amoxicilina"
+   },
+   {
+      "cantidad" : "4500",
+      "codigo" : "MED003",
+      "fecha_vencimiento" : "2026-10-20",
+      "laboratorio" : "GenericLab",
+      "nivel_minimo" : "450",
+      "nombre" : "Advil",
+      "precio_unitario" : "4.20",
+      "principio_activo" : "Ibuprofeno"
+   },
+   {
+      "cantidad" : "3500",
+      "codigo" : "MED004",
+      "fecha_vencimiento" : "2026-09-30",
+      "laboratorio" : "LabFarma",
+      "nivel_minimo" : "400",
+      "nombre" : "Prilosec",
+      "precio_unitario" : "5.75",
+      "principio_activo" : "Omeprazol"
+   },
+   {
+      "cantidad" : "6000",
+      "codigo" : "MED005",
+      "fecha_vencimiento" : "2026-11-15",
+      "laboratorio" : "BioFarma",
+      "nivel_minimo" : "600",
+      "nombre" : "Glucophage",
+      "precio_unitario" : "3.90",
+      "principio_activo" : "Metformina"
+   },
+   {
+      "cantidad" : "2800",
+      "codigo" : "MED006",
+      "fecha_vencimiento" : "2026-07-20",
+      "laboratorio" : "GenericLab",
+      "nivel_minimo" : "350",
+      "nombre" : "Zantac",
+      "precio_unitario" : "6.30",
+      "principio_activo" : "Ranitidina"
+   },
+   {
+      "cantidad" : "4000",
+      "codigo" : "MED007",
+      "fecha_vencimiento" : "2027-01-10",
+      "laboratorio" : "CardioMed",
+      "nivel_minimo" : "450",
+      "nombre" : "Cozaar",
+      "precio_unitario" : "8.20",
+      "principio_activo" : "Losartán"
+   },
+   {
+      "cantidad" : "2500",
+      "codigo" : "MED008",
+      "fecha_vencimiento" : "2026-10-05",
+      "laboratorio" : "CardioMed",
+      "nivel_minimo" : "300",
+      "nombre" : "Lipitor",
+      "precio_unitario" : "15.80",
+      "principio_activo" : "Atorvastatina"
+   },
+   {
+      "cantidad" : "5500",
+      "codigo" : "MED009",
+      "fecha_vencimiento" : "2026-08-25",
+      "laboratorio" : "GenericLab",
+      "nivel_minimo" : "500",
+      "nombre" : "Voltaren",
+      "precio_unitario" : "3.75",
+      "principio_activo" : "Diclofenaco"
+   },
+   {
+      "cantidad" : "1800",
+      "codigo" : "MED010",
+      "fecha_vencimiento" : "2026-12-20",
+      "laboratorio" : "AntibioLab",
+      "nivel_minimo" : "250",
+      "nombre" : "Cipro",
+      "precio_unitario" : "18.50",
+      "principio_activo" : "Ciprofloxacino"
+   },
+   {
+      "cantidad" : "1500",
+      "codigo" : "MED011",
+      "fecha_vencimiento" : "2026-11-30",
+      "laboratorio" : "Antibiolab",
+      "nivel_minimo" : "200",
+      "nombre" : "Zithromax",
+      "precio_unitario" : "22.00",
+      "principio_activo" : "Azitromicina"
+   },
+   {
+      "cantidad" : "3200",
+      "codigo" : "MED012",
+      "fecha_vencimiento" : "2027-02-15",
+      "laboratorio" : "CardioMed",
+      "nivel_minimo" : "400",
+      "nombre" : "Capoten",
+      "precio_unitario" : "4.10",
+      "principio_activo" : "Captopril"
+   },
+   {
+      "cantidad" : "800",
+      "codigo" : "MED013",
+      "fecha_vencimiento" : "2026-06-30",
+      "laboratorio" : "DiabetPharma",
+      "nivel_minimo" : "100",
+      "nombre" : "Humulina N",
+      "precio_unitario" : "125.00",
+      "principio_activo" : "Insulina NPH"
+   },
+   {
+      "cantidad" : "750",
+      "codigo" : "MED014",
+      "fecha_vencimiento" : "2026-06-30",
+      "laboratorio" : "Diabet Pharma",
+      "nivel_minimo" : "100",
+      "nombre" : "Humulina R",
+      "precio_unitario" : "135.00",
+      "principio_activo" : "Insulina Humana"
    }
 ]
