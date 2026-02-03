@@ -1,0 +1,8 @@
+[
+  {
+    "usuario": "admin",
+    "contrasena": "1234",
+    "correo": "admin@example.com",
+    "tipo": "admin"
+  }
+]
