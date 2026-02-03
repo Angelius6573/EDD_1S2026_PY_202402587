@@ -7,6 +7,7 @@ use interfaz_usuario::admin;
 use utilidades::leer_json;
 use utilidades::leer_csv;
 use gestion_datos::lista_doblemente_enlazada;
+use reportes::inventario_dots;
 
 my $lista = gestion_datos::lista_doblemente_enlazada->nuevo();
 
@@ -50,6 +51,11 @@ sub registrar_medicamento {
 
   my $datos = $lista->gestion_datos::lista_doblemente_enlazada::almacenar_array_simple();
   utilidades::leer_json::guardar_json('datos/inventario.json', $datos);
+
+  ## Generación de imágenes con graphviz
+  my $nombre_tiempo = time();
+  reportes::inventario_dots::generar_diagrama_inventario($lista, "reportes/imagenes/inventario_$nombre_tiempo.dot", "reportes/imagenes/inventario_$nombre_tiempo.png", "reportes/imagenes/inventario_$nombre_tiempo.svg");
+
   print "Carga finalizada, regresando a interfaz de administrador...";
   return interfaz_usuario::admin::inicio_sesion_admin_exitoso();
 }
@@ -78,6 +84,10 @@ sub registrar_medicamento_masivo {
 
   my $datos = $lista->gestion_datos::lista_doblemente_enlazada::almacenar_array_simple();
   utilidades::leer_json::guardar_json('datos/inventario.json', $datos);
+
+  my $nombre_tiempo = time();
+  reportes::inventario_dots::generar_diagrama_inventario($lista, "reportes/imagenes/inventario_$nombre_tiempo.dot", "reportes/imagenes/inventario_$nombre_tiempo.png", "reportes/imagenes/inventario_$nombre_tiempo.svg");
+
   print "Carga finalizada, regresando a interfaz de administrador...";
   return interfaz_usuario::admin::inicio_sesion_admin_exitoso();
 }

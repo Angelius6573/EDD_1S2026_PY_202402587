@@ -36,6 +36,7 @@ sub seleccion {
   given ($opcion_seleccionada) {
     when (1) {say datos::inventario::registrar_medicamento()}
     when (2) {say datos::inventario::registrar_medicamento_masivo()}
+    when (9) {say print interfaz_usuario::inicio::consultar_usuario()}
   }
 }
 

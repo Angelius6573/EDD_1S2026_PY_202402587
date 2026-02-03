@@ -62,5 +62,4 @@ sub almacenar_array_simple {
   return \@datos;
 }
 
-
 1;
