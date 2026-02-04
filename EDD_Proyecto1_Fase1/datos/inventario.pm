@@ -6,6 +6,8 @@ use warnings;
 use interfaz_usuario::admin;
 use utilidades::leer_json;
 use utilidades::leer_csv;
+use utilidades::fecha_regex;
+use utilidades::validar_numeros;
 use gestion_datos::lista_doblemente_enlazada;
 use reportes::inventario_dots;
 
@@ -19,10 +21,21 @@ sub registrar_medicamento { #Registro manual
   print "Principio activo: "; chomp(my $principio_activo = <STDIN>);
   print "Laboratorio fabricante: "; chomp(my $lab_fabricante = <STDIN>);
   print "Precio del medicamento: "; chomp(my $precio = <STDIN>);
+    while (!utilidades::validar_numeros::validar_float_positivo($precio)) {
+      print "Ingrese un formato de precio válido: "; chomp($precio = <STDIN>);
+    }
   print "Cantidad a registrar: "; chomp(my $cantidad = <STDIN>);
-  print "Fecha de Vencimiento (01/01/2028): "; chomp(my $fecha_vencimiento = <STDIN>);
-    
+    while (!utilidades::validar_numeros::validar_int_positivo($cantidad)) {
+      print "Ingrese una cantidad válida: "; chomp($cantidad = <STDIN>);
+    }
+  print "Fecha de Vencimiento (2028/12/31): "; chomp(my $fecha_vencimiento = <STDIN>);
+    while (!utilidades::fecha_regex::validar_fecha($fecha_vencimiento)) {
+      print "Ingrese un formato de fecha válido (Año/Mes/Día): "; chomp($fecha_vencimiento = <STDIN>);
+    }
   print "Cantidad mínima permitida en stock: "; chomp(my $cantidad_minima = <STDIN>);
+    while (!utilidades::validar_numeros::validar_int_positivo($cantidad_minima)) {
+      print "Ingrese una cantidad válida: "; chomp($cantidad_minima = <STDIN>);
+    }
 
   ## OJO: Si lo dejamos como estaba hasta las 7 am del 03/02, se sobreescribe todo
   # Derivado a que JSON no permite solo insertar al final, hay que hacer un backup de todo el inventario...
@@ -33,7 +46,7 @@ sub registrar_medicamento { #Registro manual
   # y los vamos a meter en un solo documento :D
   my $copia_inventario = [];
   if (-e 'datos/inventario.json') {
-    $copia_inventario = utilidades::leer_json::parsear_json('datos/inventario.json');
+    $copia_inventario = utilidades::leer_json::parsear_json_posiblemente_vacio('datos/inventario.json');
   }
   foreach my $element ( @$copia_inventario) {
     $lista->insertar_final($element);
@@ -82,7 +95,7 @@ sub registrar_medicamento_masivo { # Carga por archivos .csv
   ## y luego metemos la info nueva
   my $copia_inventario = [];
   if (-e 'datos/inventario.json') {
-    $copia_inventario = utilidades::leer_json::parsear_json('datos/inventario.json');
+    $copia_inventario = utilidades::leer_json::parsear_json_posiblemente_vacio('datos/inventario.json');
   }
   foreach my $element ( @$copia_inventario) {
     $lista->insertar_final($element);
@@ -102,7 +115,7 @@ sub registrar_medicamento_masivo { # Carga por archivos .csv
   my $nombre_tiempo = time();
   reportes::inventario_dots::generar_diagrama_inventario($lista, "reportes/imagenes/inventario_$nombre_tiempo.dot", "reportes/imagenes/inventario_$nombre_tiempo.png", "reportes/imagenes/inventario_$nombre_tiempo.svg");
 
-  print "Carga finalizada, regresando a interfaz de administrador...";
+  print "Carga finalizada, regresando a interfaz de administrador...\n";
   return interfaz_usuario::admin::inicio_sesion_admin_exitoso();
 }
 

@@ -19,6 +19,17 @@ sub parsear_json {
   return $datos;
 }
 
+sub parsear_json_posiblemente_vacio {
+  my ($ruta) = @_;
+
+  return [] unless -e $ruta; ## Hace una llamada al sistema para comprobar si el archivo existe.
+  return [] if -z $ruta; ## Comprueba el tamaño del json solo consultando sus metadatos, si es 0 devuelve []
+
+  my $datos = parsear_json($ruta);
+  return [] unless defined $datos && ref $datos eq 'ARRAY'; ## Una mera formalidad para comprobar que los datos realmente existen, sino, se regenera el json
+  return $datos;
+}
+
 sub guardar_json {
   my ($ruta, $datos) = @_;
 

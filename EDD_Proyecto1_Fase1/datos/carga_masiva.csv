@@ -1,7 +1,7 @@
 codigo,nombre,principio_activo,laboratorio,precio_unitario,cantidad,fecha_vencimiento,nivel_minimo
-MED001,Tylenol,Paracetamol,LabFarma,2.50,5000,2026-12-31,500
+MED001,Tylenol,Paracetamol,LabFarma,2.50,150,2026-12-31,500
 MED002,Amoxil,Amoxicilina,MediPharma,12.50,3000,2026-08-15,300
-MED003,Advil,Ibuprofeno,GenericLab,4.20,4500,2026-10-20,450
+MED003,Advil,Ibuprofeno,GenericLab,4.20,460,2026-10-20,450
 MED004,Prilosec,Omeprazol,LabFarma,5.75,3500,2026-09-30,400
 MED005,Glucophage,Metformina,BioFarma,3.90,6000,2026-11-15,600
 MED006,Zantac,Ranitidina,GenericLab,6.30,2800,2026-07-20,350
