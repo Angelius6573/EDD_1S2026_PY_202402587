@@ -7,6 +7,7 @@ use feature qw(say switch);
 use utilidades::limite_entrada;
 use utilidades::leer_json;
 use datos::inventario;
+use datos::proveedores;
 
 #our $nombre_admin = 'admin';
 #our $contrasenia_admin = '1234';
@@ -36,6 +37,8 @@ sub seleccion {
   given ($opcion_seleccionada) {
     when (1) {say datos::inventario::registrar_medicamento()}
     when (2) {say datos::inventario::registrar_medicamento_masivo()}
+    when (3) {say datos::proveedores::gestionar_proveedor()}
+    when (4) {say datos::proveedores::registrar_entrega()}
     when (9) {say print interfaz_usuario::inicio::consultar_usuario()}
   }
 }
