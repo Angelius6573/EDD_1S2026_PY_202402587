@@ -1,17 +1,20 @@
 #!/usr/bin/perl
-package datos::inventario;
+package datos::Inventario::inventario;
 use strict;
 use warnings;
+
+use POSIX qw(strftime); #Facilita formatear la fecha de localtime a un formato en concreto Año/Mes/Día, Día/Mes/Año, etc.
 
 use interfaz_usuario::admin;
 use utilidades::leer_json;
 use utilidades::leer_csv;
 use utilidades::fecha_regex;
 use utilidades::validar_numeros;
+use utilidades::copiar_contenido_json;
 use gestion_datos::lista_doblemente_enlazada;
 use reportes::inventario_dots;
 
-my $lista = gestion_datos::lista_doblemente_enlazada->nuevo();
+my $lista = gestion_datos::lista_doblemente_enlazada->nuevo(); # Creación de la lista
 
 sub registrar_medicamento { #Registro manual
   print "Bienvenido administrador al registro unitario de medicamentos.\n";
@@ -44,13 +47,20 @@ sub registrar_medicamento { #Registro manual
   # Para un caso real se tendrían que usar BDs o segmentar los JSON a modo de BDs.
   # En este caso y porque soy muy vago vamos a llenar la lista constantemente con los datos ya presentes y los nuevos
   # y los vamos a meter en un solo documento :D
+  #
+  # my $copia_inventario = [];
+  # if (-e 'datos/inventario.json') {
+  #   $copia_inventario = utilidades::leer_json::parsear_json_posiblemente_vacio('datos/inventario.json');
+  # }
+  # foreach my $element ( @$copia_inventario) {
+  #   $lista->insertar_final($element);
+  # }
+  ## La siguiente implementación resume en un modulo lo previamente desarrollado, facilita el ingreso de los datos en 
+  ## múltiples tipos de listas según el método que definas.
   my $copia_inventario = [];
-  if (-e 'datos/inventario.json') {
-    $copia_inventario = utilidades::leer_json::parsear_json_posiblemente_vacio('datos/inventario.json');
-  }
-  foreach my $element ( @$copia_inventario) {
-    $lista->insertar_final($element);
-  }
+  my $ruta = 'datos/Inventario/inventario.json';
+  my $metodo = "insertar_final";
+  utilidades::copiar_contenido_json::copiar($copia_inventario, $ruta, $metodo, $lista);
 
   ## A partir de este punto ya se mantiene como antes.
   # Llenar la lista con los datos previamente ingresados
@@ -68,22 +78,29 @@ sub registrar_medicamento { #Registro manual
   # Mandamos los datos al gestor de datos puesto en la lista
   # Y a continuación metemos tanto los datos previos como los nuevos al JSON 
   my $datos = $lista->gestion_datos::lista_doblemente_enlazada::almacenar_array_simple();
-  utilidades::leer_json::guardar_json('datos/inventario.json', $datos);
+  utilidades::leer_json::guardar_json('datos/Inventario/inventario.json', $datos);
 
   ## Generación de imágenes con graphviz
   # Dado a que el .png es requerimiento, lo pongo, pero es mejor usar .svg, funciona bajo el mismo mecanismo
-  my $nombre_tiempo = time();
-  reportes::inventario_dots::generar_diagrama_inventario($lista, "reportes/imagenes/inventario_$nombre_tiempo.dot", "reportes/imagenes/inventario_$nombre_tiempo.png", "reportes/imagenes/inventario_$nombre_tiempo.svg");
+  my $nombre_tiempo = strftime("%Y-%m-%d", localtime);
+  my $numero_pseudo_aleatorio = time();
+  my $name_dot = "reportes/imagenes/Inventario/inventario_$nombre_tiempo-$numero_pseudo_aleatorio.dot";
+  my $name_png = "reportes/imagenes/Inventario/inventario_$nombre_tiempo-$numero_pseudo_aleatorio.png";
+  my $name_svg = "reportes/imagenes/Inventario/inventario_$nombre_tiempo-$numero_pseudo_aleatorio.svg";
+  reportes::inventario_dots::generar_diagrama_inventario($lista, $name_dot, $name_png, $name_svg);
 
   print "Carga finalizada, regresando a interfaz de administrador...";
   return interfaz_usuario::admin::inicio_sesion_admin_exitoso();
 }
 
 sub registrar_medicamento_masivo { # Carga por archivos .csv
-  my $ruta_d = 'datos/carga_masiva.csv';
+  my $ruta_d = 'datos/Inventario/carga_masiva.csv';
   print "Bienvenido administrador, al entorno de carga masiva de datos por archivos .csv\n";
   print "Por favor ingrese la ruta local del archivo, si no ingresa nada se usa la ruta \"$ruta_d\": ";
     my $ruta = <STDIN>;
+
+    ## !Urgente: Añadir método para validar si la ruta ingresada es válida
+    ## !Urgente: Añadir una salvaguarda en caso de no encontrar la ruta por default
 
     # Metodo para comprobar si la entrada $ruta es un string vacío o si de hecho cambio. 
     my $ruta_f = utilidades::limite_entrada::ruta($ruta, $ruta_d);
@@ -93,27 +110,35 @@ sub registrar_medicamento_masivo { # Carga por archivos .csv
 
   ## Aquí, al igual que con la carga manual, hacemos un backup de todo el JSON original
   ## y luego metemos la info nueva
+  # my $copia_inventario = [];
+  # if (-e 'datos/inventario.json') {
+  #   $copia_inventario = utilidades::leer_json::parsear_json_posiblemente_vacio('datos/inventario.json');
+  # }
+  # foreach my $element ( @$copia_inventario) {
+  #   $lista->insertar_final($element);
+  # }
   my $copia_inventario = [];
-  if (-e 'datos/inventario.json') {
-    $copia_inventario = utilidades::leer_json::parsear_json_posiblemente_vacio('datos/inventario.json');
-  }
-  foreach my $element ( @$copia_inventario) {
-    $lista->insertar_final($element);
-  }
+  $ruta = 'datos/Inventario/inventario.json';
+  my $metodo = "insertar_final";
+  utilidades::copiar_contenido_json::copiar($copia_inventario, $ruta, $metodo, $lista);
 
-  # Nuevos datos
+  # Nuevos datos, solo que esta vez más automatico.
   foreach my $element ( @$medicamentos ) {
     $lista->insertar_final($element);
-  }
+  } # Usar mismo proceso para validar usuarios
 
   # Cargamos en el JSON todo lo almacenado en la lista
   my $datos = $lista->gestion_datos::lista_doblemente_enlazada::almacenar_array_simple();
-  utilidades::leer_json::guardar_json('datos/inventario.json', $datos);
+  utilidades::leer_json::guardar_json('datos/Inventario/inventario.json', $datos);
 
   ## Generación de graphviz, se genera un trío nuevo por cada nueva carga, para mantener un historial
   ## Muy apropiado para un hospital real en realidad :P
-  my $nombre_tiempo = time();
-  reportes::inventario_dots::generar_diagrama_inventario($lista, "reportes/imagenes/inventario_$nombre_tiempo.dot", "reportes/imagenes/inventario_$nombre_tiempo.png", "reportes/imagenes/inventario_$nombre_tiempo.svg");
+  my $nombre_tiempo = strftime("%Y-%m-%d", localtime);
+  my $numero_pseudo_aleatorio = time();
+  my $name_dot = "reportes/imagenes/Inventario/inventario_$nombre_tiempo-$numero_pseudo_aleatorio.dot";
+  my $name_png = "reportes/imagenes/Inventario/inventario_$nombre_tiempo-$numero_pseudo_aleatorio.png";
+  my $name_svg = "reportes/imagenes/Inventario/inventario_$nombre_tiempo-$numero_pseudo_aleatorio.svg";
+  reportes::inventario_dots::generar_diagrama_inventario($lista, $name_dot, $name_png, $name_svg);
 
   print "Carga finalizada, regresando a interfaz de administrador...\n";
   return interfaz_usuario::admin::inicio_sesion_admin_exitoso();

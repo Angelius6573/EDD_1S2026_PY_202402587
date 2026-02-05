@@ -1,0 +1,12 @@
+[
+   {
+      "cantidad" : "15",
+      "codigo" : "Prueba",
+      "fecha_vencimiento" : "2028/12/12",
+      "laboratorio" : "Prueba Inc",
+      "nivel_minimo" : "16",
+      "nombre" : "Pruebas",
+      "precio_unitario" : "100",
+      "principio_activo" : "Waos"
+   }
+]

@@ -82,7 +82,7 @@ sub comprobar_entrada {
       chomp $mensaje;
 
     interfaz_usuario::admin::nuevo_usuario($nombre, $correo, $contrasena, $mensaje);
-    print "Su solicitud ha sido procesada, un administrador la confirmará pronto, gracias.";
+    print "Su solicitud ha sido procesada, un administrador la confirmará pronto, gracias.\n";
     return consultar_usuario();
 
   } elsif ( $consulta == 3 ) {

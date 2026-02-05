@@ -8,7 +8,7 @@ sub nuevo {
   my ($clase, $datos) = @_;
   return bless {
     datos => $datos,
-    siguiente => $undef
+    siguiente => undef
   }, $clase;
 }
 

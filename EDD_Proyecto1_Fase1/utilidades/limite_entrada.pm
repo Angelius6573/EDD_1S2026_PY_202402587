@@ -11,7 +11,7 @@ sub comprobacion_menu {
   chomp $consulta;
 
   while ( $consulta !~ /^\d+$/ || $consulta < $inf_limit || $consulta > $sup_limit ) {
-    print "Ingrese una opciór válida. ($inf_limit~$sup_limit): ";
+    print "Ingrese una opción válida. ($inf_limit~$sup_limit): ";
     $consulta = <STDIN>;
 
     last unless defined $consulta;

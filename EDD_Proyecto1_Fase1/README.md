@@ -11,6 +11,9 @@ La interfaz de inicio de sesión se conforma por cuatro elementos importantes:
 La interfaz del administrador es el módulo de gestión de mas alta categoría en el sistema, tiene la capacidad de leer, editar y eliminar datos de la "EDD MedTrack", así como el control total sobre la gestión de los usuarios. Para nuestro sistema hospitalario es vital contar con el inventario necesario para atender las necesidades del paciente, es por esto que el administrador tiene este nivel de control. Además su interfaz se divide en nueve puntos clave que facilitan la visualización de la gestión:
 1. Registrar medicamento: El administrador debe llenar un formulario con datos apropiados para el código de medicamento, nombre comercial, principio activo, laboratorio del fabricante, cantidad disponible, fecha de vencimiento, precio y cantidad mínima de inventario, respectivamente, estos datos son ingresados en una lista doblemente enlazada de forma dinámica.
 2. Carga masiva de medicamentos: Al igual que en el punto anterior, el administrador debe cargar el mismo listado de datos, pero además, aquí se deben cargar archivos .csv, este sistema de gestión en tablas permite la carga masiva de datos. Los datos recibidos de esta manera son almacenados en la misma lista doblemente enlazada del punto anterior.
+## !Urgente: Añadir método en carga masiva para validar si la ruta ingresada es válida
+## !Urgente: Añadir una salvaguarda en caso de no encontrar la ruta por default
+
 3. Gestionar proveedores: 
 9. Cerrar sesión: Finaliza la interfaz del administrador y le devuelve al menú de inicio.
 

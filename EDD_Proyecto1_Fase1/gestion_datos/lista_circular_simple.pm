@@ -4,49 +4,68 @@ use warnings;
 use strict;
 
 package gestion_datos::lista_circular_simple::nodo;
-sub nodo {
-  my ($datos) = @_;
-  return {
+sub nuevo {
+  my ($clase, $datos) = @_;
+  return bless {
     datos => $datos,
-    siguiente => undef
-  };
+    siguiente => undef,
+  }, $clase;
 }
 
 package gestion_datos::lista_circular_simple;
-## Variables para lista como tal
-my $ultimo_nodo = undef;
+sub nuevo {
+  my ($clase) = @_;
+  return bless {
+    ultimo_nodo => undef
+  }; $clase
+}
 
 sub insertar_nuevo {
-  my ($datos) = @_;
+  my ($self, $datos) = @_;
   my $nuevo_nodo = gestion_datos::lista_circular_simple::nodo->nuevo($datos);
 
-  if ( !defined $ultimo ) {
+  if ( !defined $self->{ultimo_nodo} ) {
     $nuevo_nodo->{siguiente} = $nuevo_nodo;
-    $ultimo_nodo = $nuevo_nodo;
-  } else {
-    $nuevo_nodo->{siguiente} = $ultimo_nodo->{siguiente};
-    $ultimo_nodo->{siguiente} = $nuevo_nodo;
+    $self->{ultimo_nodo} = $nuevo_nodo;
+    return;
   }
+
+  $nuevo_nodo->{siguiente} = $self->{ultimo_nodo}->{siguiente};
+  $self->{ultimo_nodo}->{siguiente} = $nuevo_nodo;
+  $self->{ultimo_nodo} = $nuevo_nodo;
 }
 
 sub imprimir {
-  my $nodo_actual = $ultimo_nodo->{siguiente};
+  my ($self) = @_;
+
+  print "Lista vacía\n" and return
+    unless defined $self->{ultimo_nodo};
+
+  my $inicio = $self->{ultimo_nodo}->{siguiente};
+  my $actual = $inicio;
 
   do {
-    print $nodo_actual->{datos} . " -> ";
-    $nodo_actual = $nodo_actual->{siguiente};
-  } while ( $nodo_actual != $ultimo_nodo->{siguiente} );
+    print $actual->{datos} . " -> ";
+    $actual = $actual->{siguiente};
+  } while ( $actual != $inicio );
+
+  print "\n";
 }
 
 sub almacenar_array_simple {
-  my $self = shift;
+  my ($self) = @_;
   my @datos;
 
-  my $actual = $self->{cabeza};
-  while ( $actual ) {
+  return [] unless defined $self->{ultimo_nodo};
+
+  my $inicio = $self->{ultimo_nodo}->{siguiente};
+  my $actual = $inicio;
+
+  do {
     push @datos, $actual->{datos};
     $actual = $actual->{siguiente};
-  }
+  } while ( $actual != $inicio );
+
   return \@datos;
 }
 
