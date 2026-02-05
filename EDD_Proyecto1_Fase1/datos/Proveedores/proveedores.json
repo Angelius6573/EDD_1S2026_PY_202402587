@@ -5,5 +5,12 @@
       "Empresa" : "Prueba",
       "NIT" : "1234",
       "Telefono" : "12345678"
+   },
+   {
+      "Contacto" : "789",
+      "Direccion" : "s",
+      "Empresa" : "2",
+      "NIT" : "12345",
+      "Telefono" : "56565656"
    }
 ]
