@@ -35,21 +35,9 @@ sub insertar_nuevo {
   $self->{ultimo_nodo} = $nuevo_nodo;
 }
 
-sub imprimir {
+sub limpiar {
   my ($self) = @_;
-
-  print "Lista vacía\n" and return
-    unless defined $self->{ultimo_nodo};
-
-  my $inicio = $self->{ultimo_nodo}->{siguiente};
-  my $actual = $inicio;
-
-  do {
-    print $actual->{datos} . " -> ";
-    $actual = $actual->{siguiente};
-  } while ( $actual != $inicio );
-
-  print "\n";
+  $self->{ultimo_nodo} = undef;
 }
 
 sub almacenar_array_simple {
@@ -70,3 +58,24 @@ sub almacenar_array_simple {
 }
 
 1;
+
+=begin comment
+sub imprimir {
+  my ($self) = @_;
+
+  print "Lista vacía\n" and return
+    unless defined $self->{ultimo_nodo};
+
+  my $inicio = $self->{ultimo_nodo}->{siguiente};
+  my $actual = $inicio;
+
+  do {
+    print $actual->{datos} . " -> ";
+    $actual = $actual->{siguiente};
+  } while ( $actual != $inicio );
+
+  print "\n";
+}
+=end comment
+
+

@@ -123,8 +123,8 @@ sub registrar_medicamento_masivo { # Carga por archivos .csv
   utilidades::copiar_contenido_json::copiar($copia_inventario, $ruta, $metodo, $lista);
 
   # Nuevos datos, solo que esta vez más automatico.
-  foreach my $element ( @$medicamentos ) {
-    $lista->insertar_final($element);
+  foreach my $medicamento ( @$medicamentos ) {
+    $lista->insertar_final($medicamento);
   } # Usar mismo proceso para validar usuarios
 
   # Cargamos en el JSON todo lo almacenado en la lista
