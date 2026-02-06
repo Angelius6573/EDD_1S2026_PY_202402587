@@ -40,7 +40,7 @@ sub registrar_entrega {
 
     if ( $proveedor ) {
       print "NIT válidado correctamente, por favor, llene el siguiente formulario: \n";
-      datos::Proveedores::formulario_entrega::formulario_nueva_entrega($proveedor); 
+      datos::Proveedores::formulario_entrega::formulario_nueva_entrega($proveedor, $lista_circular); 
       ## Solicita el formulario y actualiza el archivo JSON con las entregas validadas.
 
       my $json_proveedores_actualizado = $lista_circular->almacenar_array_simple();
