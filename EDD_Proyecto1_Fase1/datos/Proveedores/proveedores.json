@@ -1,16 +1,23 @@
 [
    {
-      "Contacto" : "Linea",
-      "Direccion" : "Mi casa",
-      "Empresa" : "Prueba",
-      "NIT" : "1234",
+      "Contacto" : "a",
+      "Direccion" : "a",
+      "Empresa" : "a",
+      "Entregas" : [
+         {
+            "Cantidad" : "7",
+            "Codigo" : "bcd",
+            "Factura" : "123",
+            "FechaDeEntrega" : "2026/02/02"
+         },
+         {
+            "Cantidad" : "1",
+            "Codigo" : "abc",
+            "Factura" : "123",
+            "FechaDeEntrega" : "2026/02/02"
+         }
+      ],
+      "NIT" : "1",
       "Telefono" : "12345678"
-   },
-   {
-      "Contacto" : "789",
-      "Direccion" : "s",
-      "Empresa" : "2",
-      "NIT" : "12345",
-      "Telefono" : "56565656"
    }
 ]

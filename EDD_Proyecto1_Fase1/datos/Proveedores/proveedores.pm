@@ -8,11 +8,11 @@ use interfaz_usuario::admin;
 use gestion_datos::lista_circular_simple;
 use gestion_datos::lista_simple;
 use datos::Proveedores::formulario_proveedores;
+use datos::Proveedores::formulario_entrega;
 
 ## Variables globales
 my $lista_circular = gestion_datos::lista_circular_simple->nuevo();
 my $lista_simple = gestion_datos::lista_simple->nuevo();
-my $regresar_menu_admin = interfaz_usuario::admin::inicio_sesion_admin_exitoso();
 
 sub gestionar_proveedor {
   print "Bienvenido administrador al registro de proveedores\n";
@@ -20,7 +20,7 @@ sub gestionar_proveedor {
   datos::Proveedores::formulario_proveedores::leer_json_proveedores($lista_circular);
   datos::Proveedores::formulario_proveedores::formulario_nuevo_proveedor($lista_circular);
   print "Proveedor registrado correctamente.\n";
-  return $regresar_menu_admin; 
+  return interfaz_usuario::admin::inicio_sesion_admin_exitoso();
 }
 
 sub registrar_entrega {
@@ -30,11 +30,38 @@ sub registrar_entrega {
 
   if ( !@$verificar_ruta ) {
     print "No hay proveedores registrados, por favor, use el registro de proveedores previamente.\n";
-    gestionar_proveedor();
+    return gestionar_proveedor();
   } else {
+    print "Bienvenido administrador al área de registro de entregas.\n";
+    print "Por favor, ingrese el NIT del proveedor que va a gestionar: "; chomp(my $nit_comprobar = <STDIN>);
+    
+    datos::Proveedores::formulario_proveedores::leer_json_proveedores($lista_circular); ## Leer el archivo proveedores.json
+    my $proveedor = datos::Proveedores::formulario_entrega::buscar_proveedor_por_nit($lista_circular, $nit_comprobar);
+
+    if ( $proveedor ) {
+      print "NIT válidado correctamente, por favor, llene el siguiente formulario: \n";
+      datos::Proveedores::formulario_entrega::formulario_nueva_entrega($proveedor); 
+      ## Solicita el formulario y actualiza el archivo JSON con las entregas validadas.
+
+      my $json_proveedores_actualizado = $lista_circular->almacenar_array_simple();
+      utilidades::leer_json::guardar_json($ruta, $json_proveedores_actualizado);
+
+      while ( 1 ) {
+        print "Datos guardados, ¿Desea registrar otra entrega? (Y/N): ";
+        chomp(my $consulta = <STDIN>);
+
+        return registrar_entrega() if $consulta eq "Y";
+        return interfaz_usuario::admin::inicio_sesion_admin_exitoso() if $consulta eq "N";
+
+        print "Inválido, ingrese Y ó N\n";
+      }
+    } else {
+      print "El NIT que ingreso no existe.\n";
+    }
+
     print "why?\n";
   }
-  return $regresar_menu_admin;
+  return interfaz_usuario::admin::inicio_sesion_admin_exitoso();
 }
 
 

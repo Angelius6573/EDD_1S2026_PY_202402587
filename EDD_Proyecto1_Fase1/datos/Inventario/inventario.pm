@@ -31,7 +31,7 @@ sub registrar_medicamento { #Registro manual
     while (!utilidades::validar_numeros::validar_int_positivo($cantidad)) {
       print "Ingrese una cantidad válida: "; chomp($cantidad = <STDIN>);
     }
-  print "Fecha de Vencimiento (2028/12/31): "; chomp(my $fecha_vencimiento = <STDIN>);
+  print "Fecha de vencimiento (2028/12/31): "; chomp(my $fecha_vencimiento = <STDIN>);
     while (!utilidades::fecha_regex::validar_fecha($fecha_vencimiento)) {
       print "Ingrese un formato de fecha válido (Año/Mes/Día): "; chomp($fecha_vencimiento = <STDIN>);
     }

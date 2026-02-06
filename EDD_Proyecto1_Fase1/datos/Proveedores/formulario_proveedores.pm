@@ -27,7 +27,8 @@ sub formulario_nuevo_proveedor {
     Empresa => $nombre_empresa,
     Contacto => $contacto_principal,
     Telefono => $telefono_num,
-    Direccion => $direccion
+    Direccion => $direccion,
+    Entregas => []
   });
 
   my $proveedor_instancia = $lista_circular->almacenar_array_simple(); # No hace falta poner la ruta completa aparentemente
