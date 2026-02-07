@@ -1,56 +1,17 @@
 [
    {
-      "Contacto" : "a",
-      "Direccion" : "a",
-      "Empresa" : "a",
+      "Contacto" : "Celular",
+      "Direccion" : "Guatemala",
+      "Empresa" : "Test",
       "Entregas" : [
          {
-            "Cantidad" : "6",
-            "Codigo" : "5",
-            "Factura" : "86",
-            "FechaDeEntrega" : "2028/02/02"
-         },
-         {
             "Cantidad" : "10",
-            "Codigo" : "abc",
-            "Factura" : "123",
-            "FechaDeEntrega" : "2026/02/20"
-         },
-         {
-            "Cantidad" : "1",
-            "Codigo" : "abc",
-            "Factura" : "123",
-            "FechaDeEntrega" : "2026/02/02"
-         },
-         {
-            "Cantidad" : "7",
-            "Codigo" : "bcd",
-            "Factura" : "123",
-            "FechaDeEntrega" : "2026/02/02"
-         },
-         {
-            "Cantidad" : "10",
-            "Codigo" : "abc",
-            "Factura" : "123",
-            "FechaDeEntrega" : "2026/02/02"
+            "Codigo" : "ABC",
+            "Factura" : "159",
+            "FechaDeEntrega" : "2027/02/06"
          }
       ],
       "NIT" : "1",
       "Telefono" : "12345678"
-   },
-   {
-      "Contacto" : "Casa",
-      "Direccion" : "X",
-      "Empresa" : "Pruebas",
-      "Entregas" : [
-         {
-            "Cantidad" : "5",
-            "Codigo" : "wert",
-            "Factura" : "159",
-            "FechaDeEntrega" : "2028/02/02"
-         }
-      ],
-      "NIT" : "2",
-      "Telefono" : "56461236"
    }
 ]

@@ -11,20 +11,28 @@ sub generar_diagrama_entregas {
 
   print $fh "digraph entregas {\n";
   print $fh "rankdir=LR;\n";
-  print $fh "node [shape=box, style=filled, width=2, height=1];\n";
+  print $fh "node [shape=box, style=filled];\n";
+  print $fh "graph [nodesep=0.6, ranksep=1];\n\n";
+
+  # Nodo proveedor
+  my $label_prov =
+    "Empresa: $proveedor->{Empresa}\\n" .
+    "Contacto: $proveedor->{Contacto}\\n" .
+    "NIT: $proveedor->{NIT}";
+
+  print $fh "prov [label=\"$label_prov\", fillcolor=lightblue];\n\n";
 
   my $index = 0;
-  my $anterior;
+  my $anterior = "prov";
 
-  foreach my $entrega ( @{$proveedor->{Entregas} || []} ) {
+  foreach my $entrega ( @{ $proveedor->{Entregas} || [] } ) {
     my $id = "e$index";
-    my $label = "
-      Código: $entrega->{Codigo}\\n
-      Cantidad: $entrega->{Cantidad}\\n
-      Fecha de Entrega: $entrega->{FechaDeEntrega}\\n
-      Factura: $entrega->{Factura}
-    ";
-    print $fh "$anterior->$id;\n" if defined  $anterior;
+
+    my $label = "Código: $entrega->{Codigo}\\nCantidad: $entrega->{Cantidad}\\nFecha: $entrega->{FechaDeEntrega}\\nFactura: $entrega->{Factura}";
+
+    print $fh "$id [label=\"$label\", fillcolor=gray90];\n";
+    print $fh "$anterior -> $id;\n\n";
+
     $anterior = $id;
     $index++;
   }
@@ -32,11 +40,11 @@ sub generar_diagrama_entregas {
   print $fh "}\n";
   close $fh;
 
-  # Generar imágenes
   system("dot -Tpng $ruta_dot -o $ruta_png") == 0
-    or warn "Falló en generación de reporte .png";
+    or warn "Falló generación PNG";
   system("dot -Tsvg $ruta_dot -o $ruta_svg") == 0
-    or warn "Falló en generación de reporte .svg";
+    or warn "Falló generación SVG";
 }
 
 1;
+

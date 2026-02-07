@@ -2,5 +2,5 @@ digraph inventario {
 rankdir=LR;
 node [shape=box, style=filled, width=2, height=1];
 graph [nodesep=0.5, ranksep=1, splines=true, overlap=false];
-n0 [label="Código: Prueba\nNombre: Pruebas\nVence: 2028/12/12\nStock: 15", fillcolor=red];
+n0 [label="Código: ABC\nNombre: Prueba\nVence: 2027/02/06\nStock: 50", fillcolor=red];
 }

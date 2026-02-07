@@ -1,13 +1,23 @@
 [
    {
-      "cantidad" : "15",
-      "codigo" : "Prueba",
-      "fecha_vencimiento" : "2028/12/12",
-      "laboratorio" : "Prueba Inc",
-      "nivel_minimo" : "16",
-      "nombre" : "Pruebas",
-      "precio_unitario" : "100",
-      "principio_activo" : "Waos"
+      "cantidad" : "50",
+      "codigo" : "ABC",
+      "fecha_vencimiento" : "2027/02/06",
+      "laboratorio" : "Pruebas INC",
+      "nivel_minimo" : "60",
+      "nombre" : "Prueba",
+      "precio_unitario" : "499",
+      "principio_activo" : "Test"
+   },
+   {
+      "cantidad" : "50",
+      "codigo" : "ABC",
+      "fecha_vencimiento" : "2027/02/06",
+      "laboratorio" : "Pruebas INC",
+      "nivel_minimo" : "60",
+      "nombre" : "Prueba",
+      "precio_unitario" : "499",
+      "principio_activo" : "Test"
    },
    {
       "cantidad" : "150",

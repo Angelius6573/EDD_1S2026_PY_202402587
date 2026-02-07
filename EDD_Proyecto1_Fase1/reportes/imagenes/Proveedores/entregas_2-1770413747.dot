@@ -1,4 +1,0 @@
-digraph entregas {
-rankdir=LR;
-node [shape=box, style=filled, width=2, height=1];
-}

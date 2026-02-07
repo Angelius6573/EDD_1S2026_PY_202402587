@@ -9,7 +9,6 @@ use utilidades::fecha_regex;
 use utilidades::validar_numeros;
 use utilidades::copiar_contenido_json;
 use gestion_datos::lista_simple;
-use gestion_datos::lista_circular_simple;
 use reportes::proveedores_dots;
 use reportes::proveedores_entregas_dots;
 
@@ -77,20 +76,20 @@ sub formulario_nueva_entrega {
   $proveedor->{Entregas} = $lista_simple_entregas->almacenar_array_simple();
 
   my $fecha = strftime("%Y-%m-%d", localtime);
-  my $t = time();
+  my $nombre_tiempo = time();
   my $nit = $proveedor->{NIT};
   reportes::proveedores_dots::generar_diagrama_proveedores(
     $lista_circular,
-    "reportes/imagenes/Proveedores/proveedores_$fecha-$t.dot",
-    "reportes/imagenes/Proveedores/proveedores_$fecha-$t.png",
-    "reportes/imagenes/Proveedores/proveedores_$fecha-$t.svg"
+    "reportes/archivos_dots/Proveedores/proveedores_$fecha-$nombre_tiempo.dot",
+    "reportes/imagenes/Proveedores/proveedores_$fecha-$nombre_tiempo.png",
+    "reportes/imagenes/Proveedores/proveedores_$fecha-$nombre_tiempo.svg"
   );
 
   reportes::proveedores_entregas_dots::generar_diagrama_entregas(
     $proveedor,
-    "reportes/imagenes/Proveedores/entregas_$nit-$t.dot",
-    "reportes/imagenes/Proveedores/entregas_$nit-$t.png",
-    "reportes/imagenes/Proveedores/entregas_$nit-$t.svg"
+    "reportes/archivos_dots/Entrega_Proveedor/entregas_$nit-$nombre_tiempo.dot",
+    "reportes/imagenes/Entrega_Proveedor/entregas_$nit-$nombre_tiempo.png",
+    "reportes/imagenes/Entrega_Proveedor/entregas_$nit-$nombre_tiempo.svg"
   );
 
 }

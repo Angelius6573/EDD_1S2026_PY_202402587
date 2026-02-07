@@ -84,7 +84,7 @@ sub registrar_medicamento { #Registro manual
   # Dado a que el .png es requerimiento, lo pongo, pero es mejor usar .svg, funciona bajo el mismo mecanismo
   my $nombre_tiempo = strftime("%Y-%m-%d", localtime);
   my $numero_pseudo_aleatorio = time();
-  my $name_dot = "reportes/imagenes/Inventario/inventario_$nombre_tiempo-$numero_pseudo_aleatorio.dot";
+  my $name_dot = "reportes/archivos_dots/Inventario/inventario_$nombre_tiempo-$numero_pseudo_aleatorio.dot";
   my $name_png = "reportes/imagenes/Inventario/inventario_$nombre_tiempo-$numero_pseudo_aleatorio.png";
   my $name_svg = "reportes/imagenes/Inventario/inventario_$nombre_tiempo-$numero_pseudo_aleatorio.svg";
   reportes::inventario_dots::generar_diagrama_inventario($lista, $name_dot, $name_png, $name_svg);
@@ -135,7 +135,7 @@ sub registrar_medicamento_masivo { # Carga por archivos .csv
   ## Muy apropiado para un hospital real en realidad :P
   my $nombre_tiempo = strftime("%Y-%m-%d", localtime);
   my $numero_pseudo_aleatorio = time();
-  my $name_dot = "reportes/imagenes/Inventario/inventario_$nombre_tiempo-$numero_pseudo_aleatorio.dot";
+  my $name_dot = "reportes/archivos_dots/Inventario/inventario_$nombre_tiempo-$numero_pseudo_aleatorio.dot";
   my $name_png = "reportes/imagenes/Inventario/inventario_$nombre_tiempo-$numero_pseudo_aleatorio.png";
   my $name_svg = "reportes/imagenes/Inventario/inventario_$nombre_tiempo-$numero_pseudo_aleatorio.svg";
   reportes::inventario_dots::generar_diagrama_inventario($lista, $name_dot, $name_png, $name_svg);

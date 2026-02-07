@@ -13,10 +13,10 @@
 <g id="node1" class="node">
 <title>n0</title>
 <polygon fill="red" stroke="black" points="148,-77 0,-77 0,0 148,0 148,-77"/>
-<text xml:space="preserve" text-anchor="middle" x="74" y="-59.7" font-family="Times,serif" font-size="14.00">Código: Prueba</text>
-<text xml:space="preserve" text-anchor="middle" x="74" y="-42.45" font-family="Times,serif" font-size="14.00">Nombre: Pruebas</text>
-<text xml:space="preserve" text-anchor="middle" x="74" y="-25.2" font-family="Times,serif" font-size="14.00">Vence: 2028/12/12</text>
-<text xml:space="preserve" text-anchor="middle" x="74" y="-7.95" font-family="Times,serif" font-size="14.00">Stock: 15</text>
+<text xml:space="preserve" text-anchor="middle" x="74" y="-59.7" font-family="Times,serif" font-size="14.00">Código: ABC</text>
+<text xml:space="preserve" text-anchor="middle" x="74" y="-42.45" font-family="Times,serif" font-size="14.00">Nombre: Prueba</text>
+<text xml:space="preserve" text-anchor="middle" x="74" y="-25.2" font-family="Times,serif" font-size="14.00">Vence: 2027/02/06</text>
+<text xml:space="preserve" text-anchor="middle" x="74" y="-7.95" font-family="Times,serif" font-size="14.00">Stock: 50</text>
 </g>
 </g>
 </svg>

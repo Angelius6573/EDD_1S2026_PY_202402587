@@ -5,6 +5,7 @@ use warnings;
 
 use utilidades::validar_numeros;
 use utilidades::leer_json;
+use POSIX qw(strftime);
 
 sub formulario_nuevo_proveedor {
   my ($lista_circular) = @_;
@@ -33,6 +34,15 @@ sub formulario_nuevo_proveedor {
 
   my $proveedor_instancia = $lista_circular->almacenar_array_simple(); # No hace falta poner la ruta completa aparentemente
   utilidades::leer_json::guardar_json('datos/Proveedores/proveedores.json', $proveedor_instancia);
+
+  my $fecha = strftime("%Y-%m-%d", localtime);
+  my $nombre_tiempo = time();
+  reportes::proveedores_dots::generar_diagrama_proveedores(
+    $lista_circular,
+    "reportes/archivos_dots/Proveedores/Proveedores_$fecha-$nombre_tiempo.dot",
+    "reportes/imagenes/Proveedores/Proveedores_$fecha-$nombre_tiempo.png",
+    "reportes/imagenes/Proveedores/Proveedores_$fecha-$nombre_tiempo.svg"
+  );
 }
 
 sub leer_json_proveedores {

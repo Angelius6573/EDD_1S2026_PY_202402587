@@ -1,0 +1,11 @@
+digraph entregas {
+rankdir=LR;
+node [shape=box, style=filled];
+graph [nodesep=0.6, ranksep=1];
+
+prov [label="Empresa: Test\nContacto: Celular\nNIT: 1", fillcolor=lightblue];
+
+e0 [label="Código: ABC\nCantidad: 10\nFecha: 2027/02/06\nFactura: 159", fillcolor=gray90];
+prov -> e0;
+
+}
