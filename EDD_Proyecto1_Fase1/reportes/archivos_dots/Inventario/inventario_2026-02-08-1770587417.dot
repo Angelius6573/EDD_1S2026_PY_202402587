@@ -1,0 +1,12 @@
+digraph inventario {
+rankdir=LR;
+node [shape=box, style=filled, width=2, height=1];
+graph [nodesep=0.5, ranksep=1, splines=true, overlap=false];
+n0 [label="Código: Waos\nNombre: Test\nVence: 2025/02/02\nStock: 300", fillcolor=green];
+n1 [label="Código: MED001\nNombre: Tylenol\nVence: 2026-12-31\nStock: 150", fillcolor=red];
+n2 [label="Código: MED002\nNombre: Amoxil\nVence: 2026-08-15\nStock: 3000", fillcolor=green];
+n0 -> n1;
+n1 -> n0 [style=dashed];
+n1 -> n2;
+n2 -> n1 [style=dashed];
+}

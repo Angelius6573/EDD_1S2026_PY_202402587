@@ -1,0 +1,6 @@
+digraph inventario {
+rankdir=LR;
+node [shape=box, style=filled, width=2, height=1];
+graph [nodesep=0.5, ranksep=1, splines=true, overlap=false];
+n0 [label="Código: Waos\nNombre: Test\nVence: 2025/02/02\nStock: 159", fillcolor=yellow];
+}

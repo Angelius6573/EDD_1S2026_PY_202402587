@@ -1,0 +1,32 @@
+[
+   {
+      "cantidad" : 6015,
+      "codigo" : "MED005",
+      "fecha_vencimiento" : "2026-11-15",
+      "laboratorio" : "BioFarma",
+      "nivel_minimo" : "600",
+      "nombre" : "Glucophage",
+      "precio_unitario" : "3.90",
+      "principio_activo" : "Metformina"
+   },
+   {
+      "cantidad" : "2800",
+      "codigo" : "MED006",
+      "fecha_vencimiento" : "2026-07-20",
+      "laboratorio" : "GenericLab",
+      "nivel_minimo" : "350",
+      "nombre" : "Zantac",
+      "precio_unitario" : "6.30",
+      "principio_activo" : "Ranitidina"
+   },
+   {
+      "cantidad" : "4000",
+      "codigo" : "MED007",
+      "fecha_vencimiento" : "2027-01-10",
+      "laboratorio" : "CardioMed",
+      "nivel_minimo" : "450",
+      "nombre" : "Cozaar",
+      "precio_unitario" : "8.20",
+      "principio_activo" : "Losartán"
+   }
+]

@@ -1,0 +1,16 @@
+digraph proveedores {
+rankdir=TB;
+node [shape=box, style=filled, fillcolor=gray90];
+graph [nodesep=1.2, ranksep=0.7];
+
+prov0 [label="Contacto: Pruebas INC\nDirección: Home\nEmpresa: Test\nNIT: 1234-Test\nTeléfono: 12345678", fillcolor=lightblue];
+
+prov0_e0 [label="Código: MED005\nCantidad: 15\nFecha de Entrega: 2028/02/02\nFactura: 159", fillcolor=lightyellow];
+
+{ rank=same; prov0; }
+
+prov0 -> prov0_e0;
+
+prov0 -> prov0 [constraint=false];
+
+}

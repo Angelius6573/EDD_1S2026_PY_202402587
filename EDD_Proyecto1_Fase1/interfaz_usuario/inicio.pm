@@ -7,6 +7,7 @@ use utilidades::leer_json;
 use utilidades::limite_entrada;
 use interfaz_usuario::admin;
 use interfaz_usuario::usuario;
+use utilidades::validar_usuarios;
 
 ## Variables globales
 # my $usuario_admin = $interfaz_usuario::admin::nombre_admin;
@@ -40,26 +41,12 @@ sub comprobar_entrada {
   my ($consulta) = @_;
 
   if ( $consulta == 1 ) {
-    print "Inicio de Sesión \n";
-    print "Usuario: ";
-      my $usuario = <STDIN>;
-      chomp $usuario;
-      print "Contraseña: ";
-      my $contrasena = <STDIN>;
-      chomp $contrasena;
-
-    if ( utilidades::leer_json::validar_usuario_admin($usuario, $contrasena, $tipo) ) {
-      return interfaz_usuario::admin::inicio_sesion_admin_exitoso();
-    } else {
-      if ( utilidades::leer_json::validar_usuario_normal($usuario, $contrasena) ) {
-        print "Acceso concedido \n";
-        return interfaz_usuario::usuario::inicio_sesion_usuario_exitoso();
-      } else {
-        print "Usuario no identificado \n";
-        return consultar_usuario();
-      }
-    }
-
+    print "Inicio de Sesión\n";
+    print "Usuario: "; chomp(my $usuario = <STDIN>);
+    print "Contraseña: "; chomp(my $contrasena = <STDIN>);
+    utilidades::validar_usuarios::validar_usuario($usuario, $contrasena);
+    print "Usuario no identificado. Volviendo a inicio...\n";
+    return consultar_usuario();
   } elsif ( $consulta == 2 ) {
     print "Servicio de creación de cuentas de usuario \n";
     print "Nombre de usuario: ";

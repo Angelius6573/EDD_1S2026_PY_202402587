@@ -62,4 +62,20 @@ sub almacenar_array_simple {
   return \@datos;
 }
 
+# Método para buscar el elemento cuyo código coincida y modificar su cantidad
+# Esto es para modificar el inventario.json desde el formulario de nueva entrega
+sub modificar_cantidad {
+  my ($self, $codigo, $cantidad) = @_;
+  my $actual = $self->{cabeza};
+
+  while ( $actual ) {
+    if ( $actual->{datos}->{codigo} eq $codigo ) {
+      $actual->{datos}->{cantidad} += $cantidad;
+      return 1;
+    }
+    $actual = $actual->{siguiente};
+  }
+  return 0;
+}
+
 1;

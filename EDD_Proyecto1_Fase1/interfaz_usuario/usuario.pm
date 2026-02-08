@@ -5,8 +5,9 @@ use warnings;
 
 use utilidades::leer_json;
 use utilidades::limite_entrada;
+use utilidades::validar_usuarios;
 
-my $nombre_usuario = utilidades::leer_json::ver_nombre_usuario; 
+my $nombre_usuario = utilidades::validar_usuarios::ver_nombre_usuario; 
 
 sub inicio_sesion_usuario_exitoso {
   print "Bienvenido nuevamente $nombre_usuario\n";

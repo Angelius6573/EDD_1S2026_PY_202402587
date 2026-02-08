@@ -6,8 +6,8 @@ use feature qw(say switch);
 
 use utilidades::limite_entrada;
 use utilidades::leer_json;
-use datos::Inventario::inventario;
-use datos::Proveedores::proveedores;
+use administrador::Inventario::inventario;
+use administrador::Proveedores::proveedores;
 
 #our $nombre_admin = 'admin';
 #our $contrasenia_admin = '1234';
@@ -22,8 +22,8 @@ sub inicio_sesion_admin_exitoso {
   4. Registrar engrega de proveedor
   5. Procesar solicitudes de reabastecimiento
   6. Visualizar inventario
-  7. Consultar inventario 󰘍
-  8. Gestionar usuarios 󰘍
+  7. Consultar inventario //Matriz Dispersa
+  8. Gestionar usuarios //Función aún por valuar su implementación
   9. Cerrar sesión
   ";
 
@@ -35,10 +35,10 @@ sub seleccion {
   my ($opcion_seleccionada) = @_;
 
   given ($opcion_seleccionada) {
-    when (1) {say datos::Inventario::inventario::registrar_medicamento()}
-    when (2) {say datos::Inventario::inventario::registrar_medicamento_masivo()}
-    when (3) {say datos::Proveedores::proveedores::gestionar_proveedor()}
-    when (4) {say datos::Proveedores::proveedores::registrar_entrega()}
+    when (1) {say administrador::Inventario::inventario::registrar_medicamento()}
+    when (2) {say administrador::Inventario::inventario::registrar_medicamento_masivo()}
+    when (3) {say administrador::Proveedores::proveedores::gestionar_proveedor()}
+    when (4) {say administrador::Proveedores::proveedores::registrar_entrega()}
     when (9) {say print interfaz_usuario::inicio::consultar_usuario()}
   }
 }
@@ -73,10 +73,8 @@ sub cambio_contrasena_exitoso {
     my $confirmar_contrasena;
       do {
         print "Confirme su nueva contraseña por favor: ";
-        $confirmar_contrasena = <STDIN>;
-        chomp $confirmar_contrasena;
-      } while ( $nueva_contrasena ne $confirmar_contrasena );
-
+        chomp($confirmar_contrasena = <STDIN>);
+      } while ($nueva_contrasena ne $confirmar_contrasena);
 
   foreach my $element ( @$datos ) {
     if ( $element->{usuario} eq $nombre_usuario && $element->{correo} eq $correo_usuario ) {
@@ -85,7 +83,7 @@ sub cambio_contrasena_exitoso {
       return 1;
     }
   }
-  print "Salvaguarda, error, el usuario no ha sido encontrado.";
+  print "Salvaguarda, error, el usuario no ha sido encontrado.\n";
   return 0;
 }
 
