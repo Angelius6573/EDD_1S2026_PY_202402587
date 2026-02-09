@@ -16,4 +16,4 @@ El usuario administrador, tras haber iniciado sesión llega a un menú con nueve
 
 ---
 ### Regresar al menú principal
-[<Regresar>]('../../README.md')
+![<Regresar>]('../../README.md')

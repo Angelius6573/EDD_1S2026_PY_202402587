@@ -1,5 +1,5 @@
 # Consultar Disponibilidad de Medicamentos
 
 ---
-### Regresar al menú de administración
-[<Regresar>]('Usuarios.md')
+### Regresar al menú de usuario
+![<Regresar>]('Usuarios.md')

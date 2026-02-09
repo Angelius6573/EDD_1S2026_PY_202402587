@@ -72,4 +72,4 @@ Este es un ejemplo del resultado generado:
 
 ---
 ### Regresar al menú de administración
-[<Regresar>]('Administrador.md')
+![<Regresar>]('Administrador.md')
