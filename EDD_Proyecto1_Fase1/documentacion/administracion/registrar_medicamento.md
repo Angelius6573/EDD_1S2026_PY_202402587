@@ -41,7 +41,7 @@ my $ruta = 'administrador/Inventario/inventario.json';
 my $metodo = "insertar_final";
 utilidades::copiar_contenido_json::copiar($copia_inventario, $ruta, $metodo, $lista);
 ```
-Después de eso, es utiliza el método "**insertar_final**" de la lista para ingresar los datos del formulario asociandolos a un **ID** específico en el archivo de la siguiente manera:
+Después de eso, es utiliza el método "**insertar_final**" de la lista para ingresar los datos del formulario asociándolos a un **ID** específico en el archivo de la siguiente manera:
 ```perl
 $lista->insertar_final({ 
     codigo => $codigo_medicamento, 

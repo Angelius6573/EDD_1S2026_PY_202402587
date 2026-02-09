@@ -33,3 +33,39 @@ Visualmente con un ejemplo sencillo podría verse de la siguiente forma:
   )
 ```
 
+---
+## Almacenamiento de Información
+El formato de almacenamiento de los datos es en archivos **JSON**, estos tienen una limitación, no se puede hacer carga de datos y que se agreguen al final, en su lugar, por cada nueva carga se sobreescribe totalmente la información. Lo anterior, en principio puede provocar perdida de información, la solución planteada fue hacer una copia del archivo y almacenarla en memoria RAM utilizando la lista doblemente enlazada desarrollada en "[utilidades/lista_doblemente_enlazada](../../gestion_datos/lista_doblemente_enlazada.pm)", para utilizarla se genera una instancia dentro de "**registrar_medicamento()**" con:
+```perl
+my $lista = gestion_datos::lista_doblemente_enlazada->nuevo(); # Creación de la lista, no global, sin dupeos
+```
+Además, se utiliza el método "**copiar()**" que se ubica dentro de "[utilidades/copiar_contenido_json](../../utilidades/copiar_contenido_json.pm)" el cual recibe cuatro datos y devuelve la misma lista anterior pero con los datos copiados de la siguiente forma:
+```perl
+my $copia_inventario = [];
+my $ruta = 'administrador/Inventario/inventario.json';
+my $metodo = "insertar_final";
+utilidades::copiar_contenido_json::copiar($copia_inventario, $ruta, $metodo, $lista);
+```
+Después de eso, es utiliza el método "**insertar_final**" de la lista para ingresar los datos del formulario asociándolos a un **ID** específico en el archivo de la siguiente manera:
+```perl
+foreach my $medicamento ( @$medicamentos ) {
+    $lista->insertar_final($medicamento);
+  } # Usar mismo proceso para validar usuarios
+```
+Con lo hecho anteriormente, ya tenemos todos los datos almacenados en la lista, por lo que ya solo tenemos que usar el método "**almacenar_array_simple()**" de la lista para convertir los datos a texto plano que puede ser almacenado en el archivo gracias al método "**guardar_json()**" que esta en el archivo "[utilidades/leer_json](../../utilidades/leer_json.pm)" y que sirve para ingresar los datos.
+
+---
+## Reportes de Graphviz
+Este apartado genera tres archivos, un archivo **.dot** asociado a graphviz con todas las instrucciones necesarias y apoyado por la lista doblemente enlazada para dar forma al gráfico, y dos archivos de imagen, un arhivo **.png** por los requerimientos del proyecto y una imagen de formato vectorial **.svg** por razones de gusto del desarrollador, para ello se llama al método "**generar_diagrama_inventario()**" dentro de "[reportes/inventario_dots.pm](../../reportes/inventario_dots.pm)" y que se invoca de la siguiente manera:
+```perl
+my $nombre_tiempo = strftime("%Y-%m-%d", localtime);
+my $numero_pseudo_aleatorio = time();
+my $name_dot = "reportes/archivos_dots/Inventario/inventario_$nombre_tiempo-$numero_pseudo_aleatorio.dot";
+my $name_png = "reportes/imagenes/Inventario/PNG/inventario_$nombre_tiempo-$numero_pseudo_aleatorio.png";
+my $name_svg = "reportes/imagenes/Inventario/SVG/inventario_$nombre_tiempo-$numero_pseudo_aleatorio.svg";
+  reportes::inventario_dots::generar_diagrama_inventario($lista, $name_dot, $name_png, $name_svg);
+```
+Este es un ejemplo del resultado generado:
+<p align="center">
+  <img src="../../assets/ejemplo_inventario.svg" alt="Ejemplo del Inventario en una Lista Doblemente Enlazada" width="1000">
+</p>
