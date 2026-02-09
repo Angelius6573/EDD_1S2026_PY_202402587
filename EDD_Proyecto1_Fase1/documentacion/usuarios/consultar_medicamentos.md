@@ -2,4 +2,4 @@
 
 ---
 ### Regresar al menú de usuario
-![<Regresar>]('Usuarios.md')
+![<Regresar>]('Usuarios')
