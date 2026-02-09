@@ -1,7 +1,7 @@
 [
    {
-      "cantidad" : 6015,
-      "codigo" : "MED005",
+      "cantidad" : "860",
+      "codigo" : "MED001",
       "fecha_vencimiento" : "2026-11-15",
       "laboratorio" : "BioFarma",
       "nivel_minimo" : "600",
@@ -10,8 +10,8 @@
       "principio_activo" : "Metformina"
    },
    {
-      "cantidad" : "2800",
-      "codigo" : "MED006",
+      "cantidad" : "355",
+      "codigo" : "MED002",
       "fecha_vencimiento" : "2026-07-20",
       "laboratorio" : "GenericLab",
       "nivel_minimo" : "350",
@@ -20,8 +20,8 @@
       "principio_activo" : "Ranitidina"
    },
    {
-      "cantidad" : "4000",
-      "codigo" : "MED007",
+      "cantidad" : "430",
+      "codigo" : "MED003",
       "fecha_vencimiento" : "2027-01-10",
       "laboratorio" : "CardioMed",
       "nivel_minimo" : "450",

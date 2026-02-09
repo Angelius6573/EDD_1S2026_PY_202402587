@@ -1,4 +1,4 @@
 codigo,nombre,principio_activo,laboratorio,precio_unitario,cantidad,fecha_vencimiento,nivel_minimo
-MED005,Glucophage,Metformina,BioFarma,3.90,6000,2026-11-15,600
-MED006,Zantac,Ranitidina,GenericLab,6.30,2800,2026-07-20,350
-MED007,Cozaar,Losartán,CardioMed,8.20,4000,2027-01-10,450
+MED001,Glucophage,Metformina,BioFarma,3.90,860,2026-11-15,600
+MED002,Zantac,Ranitidina,GenericLab,6.30,355,2026-07-20,350
+MED003,Cozaar,Losartán,CardioMed,8.20,430,2027-01-10,450

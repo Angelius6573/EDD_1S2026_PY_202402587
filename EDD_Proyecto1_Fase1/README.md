@@ -14,7 +14,7 @@ El Hospital General San Carlos necesita implementar el sistema **EDD MedTrack** 
 - [Reportes](documentacion/reportes/Reportes.md)
 
 ## Tecnología
-La **EDD MedTrack** esta enteramente desarrollada con el lenguaje de programación Perl, el entorno de desarrollo fue una computadora portátil con ArchLinux y NeoVim como IDE. El uso de librerías externas se redujo únicamente a **Text::CSV**, que es útil para la lectura de archivos **.csv** con mayor facilidad.
+La **EDD MedTrack** esta enteramente desarrollada con el lenguaje de programación Perl, el entorno de desarrollo fue una computadora portátil con ArchLinux y NeoVim como IDE. El uso de librerías externas se redujo únicamente a **Text::CSV** y a **Graphviz**, que es útil para la lectura de archivos **.csv** con mayor facilidad y la generación de reportes gráficos respectivamente.
 
 ## Instalación
 Si su entorno de desarrollo es Linux, Perl es nativo, sin embargo debe instalar o actualizar ciertas dependencias, se tomará a ArchLinux como referencia, pero puede usar los comandos equivalentes en su distribución de preferencia:
@@ -24,10 +24,13 @@ mkdir -p ~/Desktop/EDD && git clone https://github.com/Angelius6573/EDD_1S2026_P
 ```
 Descarga e instalación de la librería **Text::CSV**
 ```sh
-sudo pacman -S perl perl-text-csv
+sudo pacman -S perl perl-text-csv graphviz
 ```
 
 ---
+<p align="center">
 Copyright (c) 2026 Angel Raúl Herrera Chilel.
-
+</p>
+<p align="center">
 El contenido de terceros utilizado en este proyecto se emplea únicamente con fines educativos. Todos los derechos pertenecen a sus respectivos propietarios.
+</p>
