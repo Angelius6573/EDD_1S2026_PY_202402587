@@ -14,18 +14,62 @@ El Hospital General San Carlos necesita implementar el sistema **EDD MedTrack** 
 - [Reportes](documentacion/reportes/Reportes.md)
 
 ## Tecnología
-La **EDD MedTrack** esta enteramente desarrollada con el lenguaje de programación Perl, el entorno de desarrollo fue una computadora portátil con ArchLinux y NeoVim como IDE. El uso de librerías externas se redujo únicamente a **Text::CSV** y a **Graphviz**, que es útil para la lectura de archivos **.csv** con mayor facilidad y la generación de reportes gráficos respectivamente.
+La **EDD MedTrack** esta enteramente desarrollada con el lenguaje de programación Perl, el entorno de desarrollo fue una computadora portátil con ArchLinux y NeoVim como IDE. El uso de librerías externas se redujo únicamente a dos, **Text::CSV** y **Graphviz**, que son útiles para la lectura de archivos **.csv** con mayor facilidad y a la generación de reportes gráficos respectivamente.
 
-## Instalación
-Si su entorno de desarrollo es Linux, Perl es nativo, sin embargo debe instalar o actualizar ciertas dependencias, se tomará a ArchLinux como referencia, pero puede usar los comandos equivalentes en su distribución de preferencia:
-Descarga del repositorio
+## Instalación en Linux
+Descarga del repositorio:
 ```sh
 mkdir -p ~/Desktop/EDD && git clone https://github.com/Angelius6573/EDD_1S2026_PY_202402587
 ```
+
+### ArchLinux y derivados (Manjaro, EndeavourOS, Garuda Linux, CachyOS)
 Descarga e instalación de las dependencias necesarias:
 ```sh
 sudo pacman -S perl perl-text-csv graphviz
 ```
+
+### Debian/Ubuntu y derivados (Linux Mint, Xubuntu, Lubuntu, Pop! OS, Zorin OSm Deepin, Kali Linux, Elementary OS)
+```bash
+sudo apt update
+sudo apt install perl libtext-csv-perl graphviz
+```
+
+### RHEL y derivados (Fedora, Rocky Linux, AlmaLinux)
+```bash
+sudo dnf install perl perl-Text-CSV graphviz
+```
+
+### Alpine Linux y derivados (PorsmarketOS, Wolfi Linux)
+```bash
+sudo apk add perl perl-text-csv graphviz
+```
+
+### Gentoo y derivados (Chrome OS, Calculate Linux)
+```bash
+sudo emerge --ask dev-lang/perl dev-perl/Text-CSV media-gfx/graphviz
+```
+
+## Instalación en MacOS
+Descarga del repositorio sin **Homebrew**
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+Descarga e instalación de las dependencias necesarias:
+```bash
+brew install perl graphviz
+cpan Text::CSV
+```
+
+## Instalación en Windows 11
+- Descargar e instalar [Strawberry Perl](https://strawberryperl.com/)
+- Agregar a Perl al PATH
+- Instalar dependencias desde cpan
+```bash
+cpan Text::CSV
+```
+- Descargar e instalar [Graphviz](https://graphviz.org/download/)
+- Agregar Graphviz al PATH
 
 ---
 <p align="center">
