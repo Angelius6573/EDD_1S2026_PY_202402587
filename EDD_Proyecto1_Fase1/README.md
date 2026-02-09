@@ -9,7 +9,7 @@ El Hospital General San Carlos necesita implementar el sistema **EDD MedTrack** 
 - Los administradores podrán gestionar las transacciones, mientras los usuarios podrán hacer consultas y solicitudes.
 
 ## Documentación
-- [Administración](documentacion/administrador/Administrador.md)
+- [Administración](documentacion/administracion/Administrador.md)
 - [Usuarios](documentacion/usuarios/Usuarios.md)
 - [Reportes](documentacion/reportes/Reportes.md)
 
