@@ -22,7 +22,7 @@ Descarga del repositorio
 ```sh
 mkdir -p ~/Desktop/EDD && git clone https://github.com/Angelius6573/EDD_1S2026_PY_202402587
 ```
-Descarga e instalación de la librería **Text::CSV**
+Descarga e instalación de las dependencias necesarias:
 ```sh
 sudo pacman -S perl perl-text-csv graphviz
 ```

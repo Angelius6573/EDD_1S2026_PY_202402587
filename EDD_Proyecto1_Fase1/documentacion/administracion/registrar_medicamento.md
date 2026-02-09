@@ -69,5 +69,5 @@ my $name_svg = "reportes/imagenes/Inventario/SVG/inventario_$nombre_tiempo-$nume
 ```
 Este es un ejemplo del resultado generado:
 <p align="center">
-  <img src="../../assets/ejemplo_inventario.svg" alt="Ejemplo del Inventario en una Lista Doblemente Enlazada" width="500">
+  <img src="../../assets/ejemplo_inventario.svg" alt="Ejemplo del Inventario en una Lista Doblemente Enlazada" width="1000">
 </p>
