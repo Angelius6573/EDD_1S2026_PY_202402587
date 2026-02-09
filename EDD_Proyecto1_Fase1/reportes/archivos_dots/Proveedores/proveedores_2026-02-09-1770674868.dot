@@ -1,0 +1,26 @@
+digraph proveedores {
+rankdir=TB;
+node [shape=box, style=filled, fillcolor=gray90];
+graph [nodesep=1.2, ranksep=0.7];
+
+prov0 [label="Contacto: E-mail\nDirección: Ciudad de Guatemala\nEmpresa: Pruebas INC\nNIT: 1234-Test\nTeléfono: 15963248", fillcolor=lightblue];
+prov1 [label="Contacto: Teléfono\nDirección: Flores, Petén\nEmpresa: Asociación de Pruebas\nNIT: 7536-Test\nTeléfono: 75369849", fillcolor=lightblue];
+prov2 [label="Contacto: E-Mail\nDirección: Antigua Guatemala\nEmpresa: Pruebas Waos\nNIT: 4562-Test\nTeléfono: 45612389", fillcolor=lightblue];
+
+prov0_e0 [label="Código: MED002\nCantidad: 46\nFecha de Entrega: 2026/04/06\nFactura: 45321", fillcolor=lightyellow];
+prov0_e1 [label="Código: MED001\nCantidad: 40\nFecha de Entrega: 2026/02/09\nFactura: 12345", fillcolor=lightyellow];
+prov0_e2 [label="Código: MED001\nCantidad: 48\nFecha de Entrega: 2026/03/10\nFactura: 15963", fillcolor=lightyellow];
+
+{ rank=same; prov0; prov1; prov2; }
+
+prov0 -> prov0_e0;
+prov0_e0 -> prov0_e1;
+prov0_e1 -> prov0_e2;
+
+prov0 -> prov1 [constraint=false];
+prov1 -> prov2 [constraint=false];
+prov2 -> prov0 [constraint=false];
+
+prov0 -> prov1 [style=invis, weight=10];
+prov1 -> prov2 [style=invis, weight=10];
+}

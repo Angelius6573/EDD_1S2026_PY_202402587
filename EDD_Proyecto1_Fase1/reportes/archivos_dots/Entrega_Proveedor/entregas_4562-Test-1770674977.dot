@@ -1,0 +1,14 @@
+digraph entregas {
+rankdir=LR;
+node [shape=box, style=filled];
+graph [nodesep=0.6, ranksep=1];
+
+prov [label="Empresa: Pruebas Waos\nContacto: E-Mail\nNIT: 4562-Test", fillcolor=lightblue];
+
+e0 [label="Código: MED001\nCantidad: 2\nFecha: 2027/06/29\nFactura: 78953", fillcolor=gray90];
+prov -> e0;
+
+e1 [label="Código: MED002\nCantidad: 75\nFecha: 2026/06/04\nFactura: 15932", fillcolor=gray90];
+e0 -> e1;
+
+}

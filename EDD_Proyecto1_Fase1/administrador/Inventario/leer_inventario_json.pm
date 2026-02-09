@@ -11,31 +11,33 @@ use gestion_datos::lista_doblemente_enlazada;
 use utilidades::copiar_contenido_json;
 use reportes::inventario_dots;
 
-sub identificar_codigo {
+sub identificar_codigo { ## Esta subrutinas se usa tanto en la subrutina del registro de medicamentos del administrador y
+  ## en la identificación inicial del usuario para comprobar si el medicamento que quiere consultar existe.
   my ($codigo_verificar, $tipo) = @_;
   my $ruta = 'administrador/Inventario/inventario.json';
 
   my $datos = utilidades::leer_json::parsear_json_posiblemente_vacio($ruta);
 
   foreach my $medicamento ( @$datos ) {
-    if ( $medicamento->{codigo} eq $codigo_verificar && $tipo eq "administrador" ) {
-      return 1;
-    } elsif ( $medicamento->{codigo} eq $codigo_verificar && $tipo eq "usuario" ) {
-      print "Nombre del medicamento: $medicamento->{nombre}\n";
-      print "Cantidad disponible: $medicamento->{cantidad}\n";
-      return 1;
-    } 
-    else {
+    if ( $medicamento->{codigo} eq $codigo_verificar) {
       if ( $tipo eq "administrador" ) {
-        print "El código no existe. Regresando al menú del administrador...\n";
-        interfaz_usuario::admin::inicio_sesion_admin_exitoso();
-      }
-      if ( $tipo eq "usuario" ) {
-        print "El código no existe. Regresando al menú de usuario...\n";
-        interfaz_usuario::usuario::inicio_sesion_usuario_exitoso();
-      }
+        return 1;
+      } elsif ( $tipo eq "usuario" ) {
+          print "Nombre del medicamento: $medicamento->{nombre}\n";
+          print "Cantidad disponible: $medicamento->{cantidad}\n";
+          return 1;
+        } 
     }
   }
+
+  if ( $tipo eq "administrador" ) {
+    print "El código no existe. Regresando al menú del administrador...\n";
+    interfaz_usuario::admin::inicio_sesion_admin_exitoso();
+  } elsif ( $tipo eq "usuario") {
+    print "El código no existe. Regresando al menú del usuario...\n";
+    interfaz_usuario::usuario::inicio_sesion_usuario_exitoso();
+  }
+  return 0;
 }
 
 sub agregar_cantidad {

@@ -38,14 +38,15 @@ sub formulario_nueva_entrega {
   my $lista_simple_entregas = gestion_datos::lista_simple->nuevo();
 
   print "Código del medicamento: "; chomp(my $codigo_medicamento = <STDIN>);
-    administrador::Inventario::leer_inventario_json::identificar_codigo($codigo_medicamento, "administrador"); #Codigo identificado, a la espera de modificar la cantidad
+    administrador::Inventario::leer_inventario_json::identificar_codigo($codigo_medicamento, "administrador"); 
+    #Código identificado, a la espera de modificar la cantidad
   print "Fecha de entrega (Año/Mes/Días): "; chomp(my $fecha_entrega = <STDIN>);
     while (!utilidades::fecha_regex::validar_fecha($fecha_entrega)) {
       print "Ingrese un formato de fecha válido (Año/Mes/Día): "; chomp($fecha_entrega = <STDIN>);
     }
   print "Número de factura (Número Entero): "; chomp(my $factura = <STDIN>);
     while (!utilidades::validar_numeros::validar_int_positivo($factura) ||
-           !administrador::Proveedores::comprobaciones::validar_factura($factura)) {
+           !administrador::Proveedores::comprobaciones::validar_factura($lista_circular, $factura)) {
       print "El número de factura ya existe o no es válido. Ingreselo nuevamente: "; chomp($factura = <STDIN>);
     }
   ## SI el código ingresado y la fecha de vencimiento coinciden con un elemento de "inventario.json" se suma a lo ya existente.
