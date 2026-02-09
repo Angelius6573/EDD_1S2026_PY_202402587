@@ -50,3 +50,7 @@ Este es un ejemplo del resultado generado:
 <p align="center">
   <img src="../../assets/ejemplo_proveedores.svg" alt="Ejemplo de la Lista Circular Simple con Tres Proveedores" width="1000">
 </p>
+
+---
+### Regresar al menú de administración
+[<Regresar>]('Administrador.md')

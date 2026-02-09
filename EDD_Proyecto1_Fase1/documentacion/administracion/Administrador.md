@@ -1,8 +1,9 @@
-## Administración
+# Administración
 El usuario administrador, tras haber iniciado sesión llega a un menú con nueve opciones
 
-Poner screenshot
+**Poner screenshot cuando tenga colores**
 
+## Documentación Asociada
 | Módulo | README |
 | ------ | ------ |
 | Registrar Medicamento | [Registrar Medicamento](registrar_medicamento.md) |
@@ -12,3 +13,7 @@ Poner screenshot
 | Procesar Solicitudes de Reabastecimiento | [Procesar Solicitudes de Reabastecimiento](solicitud_reabastecimiento.md) |
 | Visualizar Inventario Completo | [Visualizar Inventario Completo](visualizar_inventario_completo.md) |
 | Consultar Inventario | [Consultar Inventario](consultar_inventario.md) |
+
+---
+### Regresar al menú principal
+[<Regresar>]('../../README.md')
