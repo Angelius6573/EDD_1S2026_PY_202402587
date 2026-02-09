@@ -6,22 +6,34 @@ use warnings;
 use POSIX qw(strftime);
 use utilidades::leer_json;
 use interfaz_usuario::admin;
+use interfaz_usuario::usuario;
 use gestion_datos::lista_doblemente_enlazada;
 use utilidades::copiar_contenido_json;
 use reportes::inventario_dots;
 
 sub identificar_codigo {
-  my ($codigo_verificar) = @_;
+  my ($codigo_verificar, $tipo) = @_;
   my $ruta = 'administrador/Inventario/inventario.json';
 
   my $datos = utilidades::leer_json::parsear_json_posiblemente_vacio($ruta);
 
   foreach my $medicamento ( @$datos ) {
-    if ( $medicamento->{codigo} eq $codigo_verificar ) {
+    if ( $medicamento->{codigo} eq $codigo_verificar && $tipo eq "administrador" ) {
       return 1;
-    } else {
-      print "El código no existe. Regresando al menú del administrador...\n";
-      interfaz_usuario::admin::inicio_sesion_admin_exitoso();
+    } elsif ( $medicamento->{codigo} eq $codigo_verificar && $tipo eq "usuario" ) {
+      print "Nombre del medicamento: $medicamento->{nombre}\n";
+      print "Cantidad disponible: $medicamento->{cantidad}\n";
+      return 1;
+    } 
+    else {
+      if ( $tipo eq "administrador" ) {
+        print "El código no existe. Regresando al menú del administrador...\n";
+        interfaz_usuario::admin::inicio_sesion_admin_exitoso();
+      }
+      if ( $tipo eq "usuario" ) {
+        print "El código no existe. Regresando al menú de usuario...\n";
+        interfaz_usuario::usuario::inicio_sesion_usuario_exitoso();
+      }
     }
   }
 }

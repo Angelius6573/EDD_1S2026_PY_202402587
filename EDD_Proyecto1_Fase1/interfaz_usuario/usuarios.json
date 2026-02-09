@@ -6,9 +6,9 @@
       "usuario" : "admin"
    },
    {
-      "contrasena" : "w",
-      "correo" : "juan25@example.com",
+      "contrasena" : "a",
+      "correo" : "a@example.com",
       "tipo" : "usuario",
-      "usuario" : "juan"
+      "usuario" : "a"
    }
 ]

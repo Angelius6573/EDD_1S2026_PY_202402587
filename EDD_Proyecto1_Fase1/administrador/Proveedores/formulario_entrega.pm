@@ -38,7 +38,7 @@ sub formulario_nueva_entrega {
   my $lista_simple_entregas = gestion_datos::lista_simple->nuevo();
 
   print "Código del medicamento: "; chomp(my $codigo_medicamento = <STDIN>);
-    administrador::Inventario::leer_inventario_json::identificar_codigo($codigo_medicamento); #Codigo identificado, a la espera de modificar la cantidad
+    administrador::Inventario::leer_inventario_json::identificar_codigo($codigo_medicamento, "administrador"); #Codigo identificado, a la espera de modificar la cantidad
   print "Fecha de entrega (Año/Mes/Días): "; chomp(my $fecha_entrega = <STDIN>);
     while (!utilidades::fecha_regex::validar_fecha($fecha_entrega)) {
       print "Ingrese un formato de fecha válido (Año/Mes/Día): "; chomp($fecha_entrega = <STDIN>);
