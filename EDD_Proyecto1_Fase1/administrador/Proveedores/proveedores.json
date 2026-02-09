@@ -1,17 +1,26 @@
 [
    {
-      "Contacto" : "Pruebas INC",
-      "Direccion" : "Home",
-      "Empresa" : "Test",
-      "Entregas" : [
-         {
-            "Cantidad" : "15",
-            "Codigo" : "MED005",
-            "Factura" : "159",
-            "FechaDeEntrega" : "2028/02/02"
-         }
-      ],
+      "Contacto" : "E-mail",
+      "Direccion" : "Ciudad de Guatemala",
+      "Empresa" : "Pruebas INC",
+      "Entregas" : [],
       "NIT" : "1234-Test",
-      "Telefono" : "12345678"
+      "Telefono" : "15963248"
+   },
+   {
+      "Contacto" : "TelÃ©fono",
+      "Direccion" : "Flores, PetÃ©n",
+      "Empresa" : "AsociaciÃ³n de Pruebas",
+      "Entregas" : [],
+      "NIT" : "7536-Test",
+      "Telefono" : "75369849"
+   },
+   {
+      "Contacto" : "E-Mail",
+      "Direccion" : "Antigua Guatemala",
+      "Empresa" : "Pruebas Waos",
+      "Entregas" : [],
+      "NIT" : "4562-Test",
+      "Telefono" : "45612389"
    }
 ]

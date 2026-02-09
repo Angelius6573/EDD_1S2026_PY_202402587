@@ -13,7 +13,7 @@ El usuario al elegir la opción 1 del menú del administrador será llevado a un
 | Cantidad Mínima Permitida en Existencias | Int |
 
 ---
-## Validación de datos
+## Validación de Datos
 Derivado al bajo tipado existente en Perl se tuvo que crear los archivos "[utilidades/fecha_regex](../../utilidades/fecha_regex.pm)" y "[utilidades/validar_numeros](../../utilidades/validar_numeros.pm)", ambos archivos se basan en la comprobación si los datos ingresados por consola coinciden con un formato definido por una expresión regular.
 Validar números:
 ```perl

@@ -28,7 +28,7 @@ Descarga e instalación de las dependencias necesarias:
 sudo pacman -S perl perl-text-csv graphviz
 ```
 
-### Debian/Ubuntu y derivados (Linux Mint, Xubuntu, Lubuntu, Pop! OS, Zorin OSm Deepin, Kali Linux, Elementary OS)
+### Debian/Ubuntu y derivados (Linux Mint, Xubuntu, Pop! OS, Zorin OS, Kali Linux, Elementary OS)
 ```bash
 sudo apt update
 sudo apt install perl libtext-csv-perl graphviz
