@@ -70,4 +70,4 @@ Este es un ejemplo del resultado que se genera para un proveedor y sus entregas:
 
 ---
 ### Regresar al menú de administración
-![<Regresar>]('Administrador')
+![<Regresar>](Administrador.md)

@@ -12,4 +12,4 @@ Un usuario normal es aquel que cuyas credenciales están validadas en [usuarios.
 
 ---
 ### Regresar al menú principal
-![<Regresar>]('../../README')
+![<Regresar>]('../../README.md)

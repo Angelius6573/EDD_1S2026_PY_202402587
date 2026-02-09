@@ -4,4 +4,4 @@
 
 ---
 ### Regresar al menú de administración
-![<Regresar>]('Administrador')
+![<Regresar>](Administrador.md)
