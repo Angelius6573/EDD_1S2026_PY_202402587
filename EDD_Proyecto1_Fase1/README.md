@@ -1,28 +1,33 @@
 # EDD MedTrack
-## Menú de inicio
-La interfaz de inicio de sesión se conforma por cuatro elementos importantes:
-1. Iniciar Sesión: Comprueba el nombre de usuario y su contraseña en un archivo "[./interfaz_usuario/usuarios.json](./interfaz_usuario/usuarios.json)", si los datos coinciden le deja pasar, ya sea un usuario normal o el administrador.
-2. Crear usuario: En este apartado se solicitan cuatro partes, el nombre y correo del usuario, se solicita ingresar y confirmar la contraseña, además, se debe mandar un ticket de solicitud al administrador, el cual debe aceptar al nuevo usuario, si ocurre, se actualiza el previamente mencionado archivo "usuarios.json" y le deja pasar usando el apartado del inciso 1.
-3. Recuperar contraseña: Se debe ingresar el nombre y correo de la cuenta, si los datos coinciden, se puede cambiar la contraseña, si falla tres veces se deberá contactar al administrador, esta es una decisión de interfaz (puede estar sujeta a cambios).
-4. Salir: Finaliza el programa de forma segura.
+## Primer Semestre 2026 - Proyecto 1 | Estructura de Datos
+[![Perl](https://img.shields.io/badge/Perl-39457E?style=flat&logo=perl&logoColor=white)](https://www.perl.org/) [![Linux](https://img.shields.io/badge/Linux-FCC624?style=flat&logo=linux&logoColor=black)](https://www.kernel.org/) [![Arch Linux](https://img.shields.io/badge/Arch_Linux-1793D1?style=flat&logo=arch-linux&logoColor=white)](https://archlinux.org/) [![Graphviz](https://img.shields.io/badge/Graphviz-DOT-5A7E3E?style=flat&logo=graphviz&logoColor=white)](https://graphviz.org/) [![SVG](https://img.shields.io/badge/SVG-Images-FFB13B?style=flat&logo=svg&logoColor=black)](https://www.w3.org/Graphics/SVG/) [![FIUSAC](https://img.shields.io/badge/FIUSAC-Facultad%20de%20Ingenieria-blue?style=flat)](https://portal.ingenieria.usac.edu.gt/) [![Licencia MIT](https://img.shields.io/badge/Licencia-MIT-blue?style=flat)](LICENSE)
 
 
-## Interfaz del administrador
-La interfaz del administrador es el módulo de gestión de mas alta categoría en el sistema, tiene la capacidad de leer, editar y eliminar datos de la "EDD MedTrack", así como el control total sobre la gestión de los usuarios. Para nuestro sistema hospitalario es vital contar con el inventario necesario para atender las necesidades del paciente, es por esto que el administrador tiene este nivel de control. Además su interfaz se divide en nueve puntos clave que facilitan la visualización de la gestión:
-1. Registrar medicamento: El administrador debe llenar un formulario con datos apropiados para el código de medicamento, nombre comercial, principio activo, laboratorio del fabricante, cantidad disponible, fecha de vencimiento, precio y cantidad mínima de inventario, respectivamente, estos datos son ingresados en una lista doblemente enlazada de forma dinámica.
-2. Carga masiva de medicamentos: Al igual que en el punto anterior, el administrador debe cargar el mismo listado de datos, pero además, aquí se deben cargar archivos .csv, este sistema de gestión en tablas permite la carga masiva de datos. Los datos recibidos de esta manera son almacenados en la misma lista doblemente enlazada del punto anterior.
-## !Urgente: Añadir método en carga masiva para validar si la ruta ingresada es válida
-## !Urgente: Añadir una salvaguarda en caso de no encontrar la ruta por default
+El Hospital General San Carlos necesita implementar el sistema **EDD MedTrack** para automatizar la gestión de su inventario de medicamentos y equipos, actualmente basada en registros manuales que causan desabastecimiento, pérdida de información de vencimientos y falta de trazabilidad. 
 
-3. Gestionar proveedores: 
-9. Cerrar sesión: Finaliza la interfaz del administrador y le devuelve al menú de inicio.
+- El sistema permitirá un control integral del stock, gestionará solicitudes de reabastecimiento por departamento.
+- Mantendrá un historial completo de todas las transacciones y generará reportes automáticos.
+- Los administradores podrán gestionar las transacciones, mientras los usuarios podrán hacer consultas y solicitudes.
 
+# Documentación
+- [Administración](Administrador/Administrador)
+- [Usuarios](Usuario/Usuarios)
+- [Reportes](Reportes/Reportes)
 
-## Interfaz del usuario
-4. Cerrar sesión: Finaliza la interfaz del usuario y le devuelve al menú de inicio.
+# Tecnología
+La **EDD MedTrack** esta enteramente desarrollada con el lenguaje de programación Perl, el entorno de desarrollo fue un portátil con ArchLinux y NeoVim como IDE. El uso de librerías externas se redujo únicamente a **Text - CSV**, sirve para la lectura de archivos **.csv** con mayor facilidad
 
-## Reportes
-
+ # Instalación
+Si su entorno de desarrollo es Linux, Perl es nativo, sin embargo debe instalar o actualizar ciertas dependencias, se tomará a ArchLinux como referencia, pero puede usar los comandos equivalentes en su distribución de preferencia:
+Descarga del repositorio
+```sh
+mkdir -p ~/Desktop/EDD && git clone https://github.com/Angelius6573/EDD_1S2026_PY_202402587
+```
+Descarga e instalación de la librería **Text::CSV**
+```sh
+sudo pacman -S perl perl-text-csv
+```
 
 ---
 Copyright (c) 2026 Angel Raúl Herrera Chilel.
+El contenido de terceros utilizado en este proyecto se emplea únicamente con fines educativos. Todos los derechos pertenecen a sus respectivos propietarios.
