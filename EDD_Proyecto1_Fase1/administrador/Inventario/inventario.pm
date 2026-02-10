@@ -13,6 +13,7 @@ use utilidades::validar_numeros;
 use utilidades::copiar_contenido_json;
 use gestion_datos::lista_doblemente_enlazada;
 use reportes::inventario_dots;
+use utilidades::comparar_cantidades;
 
 sub registrar_medicamento { #Registro manual
   my $lista = gestion_datos::lista_doblemente_enlazada->nuevo(); # Creación de la lista, no global, sin dupeos
@@ -40,6 +41,7 @@ sub registrar_medicamento { #Registro manual
       print "Ingrese una cantidad válida (Número entero): "; chomp($cantidad_minima = <STDIN>);
     }
 
+  my $tiempo_reabastecimiento = utilidades::comparar_cantidades::comparar_cantidades($cantidad, $cantidad_minima);
   ## OJO: Si lo dejamos como estaba hasta las 7 am del 03/02, se sobreescribe todo
   # Derivado a que JSON no permite solo insertar al final, hay que hacer un backup de todo el inventario...
   # Esto en un caso real puede llegar a desbordar la memoria RAM, ya que tenemos que tomar en cuenta el consumo
@@ -72,7 +74,8 @@ sub registrar_medicamento { #Registro manual
     precio_unitario => $precio,
     cantidad => $cantidad,
     fecha_vencimiento => $fecha_vencimiento,
-    nivel_minimo => $cantidad_minima
+    nivel_minimo => $cantidad_minima,
+    tiempo_reabastecer => $tiempo_reabastecimiento
   });
 
   # Mandamos los datos al gestor de datos puesto en la lista
@@ -125,7 +128,14 @@ sub registrar_medicamento_masivo { # Carga por archivos .csv
   utilidades::copiar_contenido_json::copiar($copia_inventario, $ruta, $metodo, $lista);
 
   # Nuevos datos, solo que esta vez más automatico.
+  # Validamos el tiempo de reabastecimiento para todos los datos del archivo CSV
   foreach my $medicamento ( @$medicamentos ) {
+    my $tiempo_reabastecimiento = utilidades::comparar_cantidades::comparar_cantidades(
+      $medicamento->{cantidad},
+      $medicamento->{nivel_minimo}
+    );
+    $medicamento->{tiempo_reabastecer} = $tiempo_reabastecimiento;
+
     $lista->insertar_final($medicamento);
   } # Usar mismo proceso para validar usuarios
 

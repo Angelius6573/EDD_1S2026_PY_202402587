@@ -25,6 +25,7 @@ sub identificar_codigo { ## Esta subrutinas se usa tanto en la subrutina del reg
       } elsif ( $tipo eq "usuario" ) {
           print "Nombre del medicamento: $medicamento->{nombre}\n";
           print "Cantidad disponible: $medicamento->{cantidad}\n";
+          print "Tiempo máximo para el reabastecimiento: $medicamento->{tiempo_reabastecer}\n";
           return 1;
         } 
     }
