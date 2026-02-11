@@ -3,33 +3,14 @@ package administrador::Proveedores::formulario_entrega;
 use strict;
 use warnings;
 
-use POSIX qw(strftime);
-
 use utilidades::fecha_regex;
 use utilidades::validar_numeros;
 use utilidades::copiar_contenido_json;
 use gestion_datos::lista_simple;
 use reportes::proveedores_dots;
 use reportes::proveedores_entregas_dots;
+use reportes::nombre_archivos;
 use administrador::Inventario::leer_inventario_json;
-
-sub buscar_proveedor_por_nit {
-  my ($lista_circular, $comprobar_nit) = @_;
-
-  return undef unless defined $lista_circular->{ultimo_nodo};
-
-  my $inicio = $lista_circular->{ultimo_nodo}->{siguiente};
-  my $actual = $inicio;
-
-  do {
-    if ( $actual->{datos}->{NIT} eq $comprobar_nit ) {
-      return $actual->{datos};
-    }
-    $actual = $actual->{siguiente};
-  } while ( $actual != $inicio );
-
-  return undef;
-}
 
 sub formulario_nueva_entrega {
   my ($proveedor, $lista_circular) = @_;
@@ -38,7 +19,7 @@ sub formulario_nueva_entrega {
   my $lista_simple_entregas = gestion_datos::lista_simple->nuevo();
 
   print "Código del medicamento: "; chomp(my $codigo_medicamento = <STDIN>);
-    administrador::Inventario::leer_inventario_json::identificar_codigo($codigo_medicamento, "administrador"); 
+    administrador::Inventario::leer_inventario_json::identificar_codigo_registro_medicamentos($codigo_medicamento); 
     #Código identificado, a la espera de modificar la cantidad
   print "Fecha de entrega (Año/Mes/Días): "; chomp(my $fecha_entrega = <STDIN>);
     while (!utilidades::fecha_regex::validar_fecha($fecha_entrega)) {
@@ -76,18 +57,10 @@ sub formulario_nueva_entrega {
 
   $proveedor->{Entregas} = $lista_simple_entregas->almacenar_array_simple();
 
-  my $nombre_tiempo = time();
-
-  my $fecha = strftime("%Y-%m-%d", localtime);
-  my $dot_provs = "reportes/archivos_dots/Proveedores/proveedores_$fecha-$nombre_tiempo.dot";
-  my $png_provs = "reportes/imagenes/Proveedores/PNG/proveedores_$fecha-$nombre_tiempo.png";
-  my $svg_provs = "reportes/imagenes/Proveedores/SVG/proveedores_$fecha-$nombre_tiempo.svg"; 
+  my ($dot_provs, $png_provs, $svg_provs) = reportes::nombre_archivos::nombre("Proveedores", "proveedores");
   reportes::proveedores_dots::generar_diagrama_proveedores($lista_circular, $dot_provs, $png_provs, $svg_provs);
 
-  my $nit = $proveedor->{NIT};
-  my $dot_entrega = "reportes/archivos_dots/Entrega_Proveedor/entregas_$nit-$nombre_tiempo.dot";
-  my $png_entrega = "reportes/imagenes/Entrega_Proveedor/PNG/entregas_$nit-$nombre_tiempo.png";
-  my $svg_entrega = "reportes/imagenes/Entrega_Proveedor/SVG/entregas_$nit-$nombre_tiempo.svg"; 
+  my ($dot_entrega, $png_entrega, $svg_entrega) = reportes::nombre_archivos::nombre("Entrega_Proveedor", "entregas");
   reportes::proveedores_entregas_dots::generar_diagrama_entregas($proveedor, $dot_entrega, $png_entrega, $svg_entrega);
 }
 

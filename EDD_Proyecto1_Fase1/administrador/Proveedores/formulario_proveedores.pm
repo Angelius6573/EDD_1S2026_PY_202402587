@@ -7,11 +7,12 @@ use interfaz_usuario::admin;
 use utilidades::validar_numeros;
 use utilidades::leer_json;
 use administrador::Proveedores::comprobaciones;
-use POSIX qw(strftime);
+use reportes::nombre_archivos;
 
 sub formulario_nuevo_proveedor {
   my ($lista_circular) = @_;
 
+  system("clear");
   print "Ingrese el NIT del proveedor: "; chomp(my $nit = <STDIN>);
     while (!administrador::Proveedores::comprobaciones::validar_nit($lista_circular, $nit)) {
       print "NIT ya registrado, ingrese uno distinto ó escriba la palabra \"Cancelar\" para volver al menú del administrador: "; chomp($nit = <STDIN>);
@@ -45,11 +46,7 @@ sub formulario_nuevo_proveedor {
   my $proveedor_instancia = $lista_circular->almacenar_array_simple(); # No hace falta poner la ruta completa aparentemente
   utilidades::leer_json::guardar_json('administrador/Proveedores/proveedores.json', $proveedor_instancia);
 
-  my $fecha = strftime("%Y-%m-%d", localtime);
-  my $nombre_tiempo = time();
-  my $dot_name = "reportes/archivos_dots/Proveedores/Proveedores_$fecha-$nombre_tiempo.dot";
-  my $png_name = "reportes/imagenes/Proveedores/PNG/Proveedores_$fecha-$nombre_tiempo.png";
-  my $svg_name = "reportes/imagenes/Proveedores/SVG/Proveedores_$fecha-$nombre_tiempo.svg";
+  my ($dot_name, $png_name, $svg_name) = reportes::nombre_archivos::nombre("Proveedores", "proveedores");
   reportes::proveedores_dots::generar_diagrama_proveedores($lista_circular, $dot_name, $png_name, $svg_name);
 }
 

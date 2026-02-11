@@ -15,15 +15,17 @@ my $lista_circular = gestion_datos::lista_circular_simple->nuevo();
 my $lista_simple = gestion_datos::lista_simple->nuevo();
 
 sub gestionar_proveedor {
+  system("clear");
   print "Bienvenido administrador al registro de proveedores\n";
   print "Por favor llene el siguiente formulario: \n";
-  administrador::Proveedores::formulario_proveedores::leer_json_proveedores($lista_circular);
-  administrador::Proveedores::formulario_proveedores::formulario_nuevo_proveedor($lista_circular);
+    administrador::Proveedores::formulario_proveedores::leer_json_proveedores($lista_circular);
+    administrador::Proveedores::formulario_proveedores::formulario_nuevo_proveedor($lista_circular);
   print "Proveedor registrado correctamente.\n";
   return interfaz_usuario::admin::inicio_sesion_admin_exitoso();
 }
 
 sub registrar_entrega {
+  system("clear");
   ## Primero verificar si el archivo "proveedores.json" esta vacío, sino, no opera hasta que se actualice en "gestionar_proveedor"
   my $ruta = 'administrador/Proveedores/proveedores.json';
   my $verificar_ruta = utilidades::leer_json::parsear_json_posiblemente_vacio($ruta);
@@ -36,7 +38,7 @@ sub registrar_entrega {
     print "Por favor, ingrese el NIT del proveedor que va a gestionar: "; chomp(my $nit_comprobar = <STDIN>);
     
     administrador::Proveedores::formulario_proveedores::leer_json_proveedores($lista_circular); ## Leer el archivo proveedores.json
-    my $proveedor = administrador::Proveedores::formulario_entrega::buscar_proveedor_por_nit($lista_circular, $nit_comprobar);
+    my $proveedor = administrador::Proveedores::comprobaciones::buscar_proveedor_por_nit($lista_circular, $nit_comprobar);
 
     if ( $proveedor ) {
       print "NIT válidado correctamente, por favor, llene el siguiente formulario: \n";

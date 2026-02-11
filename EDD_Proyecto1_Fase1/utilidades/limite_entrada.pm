@@ -3,10 +3,12 @@ package utilidades::limite_entrada;
 use strict;
 use warnings;
 
+use interfaz_usuario::admin;
+
 sub comprobacion_menu {
   my ($inf_limit, $sup_limit) = @_;
 
-  print "Ingrese el número de la acción que desea: ";
+  print "Ingrese el número de la opción que desea: ";
   my $consulta = <STDIN>;
   chomp $consulta;
 
@@ -22,13 +24,18 @@ sub comprobacion_menu {
 
 sub ruta {
   my ($ruta, $ruta_d) = @_;
+  chomp $ruta if defined $ruta;
 
-  if ( $ruta eq "\n" ) {
-      print "Usando ruta por defecto...";
-      $ruta = $ruta_d;
-  } else {
-    chomp $ruta;
+  if ( $ruta eq '' ) {
+    return $ruta_d;
   }
+  if ( !defined $ruta || !-e $ruta ) {
+    print "La ruta ingresada no es válida.\n";
+    print "Regresando al menú de usuario...\n";
+    interfaz_usuario::admin::inicio_sesion_admin_exitoso();
+  }
+
+  print "Ruta válidada correctamente, procediendo...\n";
   return $ruta;
 }
 

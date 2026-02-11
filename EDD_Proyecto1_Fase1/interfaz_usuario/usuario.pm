@@ -21,8 +21,7 @@ sub inicio_sesion_usuario_exitoso {
   2. Solicitar reabastecimiento
   3. Visualizar historial de solicitudes
   4. Cerrar Sesión
-  ";
-
+";
   my $consulta = utilidades::limite_entrada::comprobacion_menu(1, 4);
   return consulta($consulta);
 }
@@ -31,9 +30,9 @@ sub consulta {
   my ($opcion) = @_;
 
   given($opcion) {
-    when (1) {say usuario::consultar_disponibilidad::consulta_medicamento($nombre_usuario)}
-    when (2) {say usuario::historial_solicitudes::historial_solicitudes()}
-    when (3) {say usuario::solicitar_reabastecimiento::solicitud_medicamentos()}
+    when (1) {say usuario::consultar_disponibilidad::consulta_medicamento($nombre_usuario)} # Terminado
+    when (2) {say usuario::solicitar_reabastecimiento::solicitud_medicamentos($nombre_usuario)}
+    when (3) {say usuario::historial_solicitudes::historial_solicitudes($nombre_usuario)}
     when (4) {say interfaz_usuario::inicio::consultar_usuario()}
   }
 }

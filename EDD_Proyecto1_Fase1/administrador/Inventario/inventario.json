@@ -1,5 +1,16 @@
 [
    {
+      "cantidad" : "5",
+      "codigo" : "5",
+      "fecha_vencimiento" : "2026/02/01",
+      "laboratorio" : "0",
+      "nivel_minimo" : "4",
+      "nombre" : "3",
+      "precio_unitario" : "8",
+      "principio_activo" : "2",
+      "tiempo_reabastecer" : "4 dÃ­as"
+   },
+   {
       "cantidad" : "860",
       "codigo" : "MED001",
       "fecha_vencimiento" : "2026-11-15",

@@ -5,6 +5,24 @@ use warnings;
 
 use utilidades::leer_json;
 
+sub buscar_proveedor_por_nit {
+  my ($lista_circular, $comprobar_nit) = @_;
+
+  return undef unless defined $lista_circular->{ultimo_nodo};
+
+  my $inicio = $lista_circular->{ultimo_nodo}->{siguiente};
+  my $actual = $inicio;
+
+  do {
+    if ( $actual->{datos}->{NIT} eq $comprobar_nit ) {
+      return $actual->{datos};
+    }
+    $actual = $actual->{siguiente};
+  } while ( $actual != $inicio );
+
+  return undef;
+}
+
 # Metodo para parsear todo el archivo proveedores.json para identificar que no haya NITs repetidos
 sub validar_nit {
   my ($lista_circular, $validar_nit) = @_;

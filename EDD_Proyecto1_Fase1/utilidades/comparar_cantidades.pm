@@ -7,7 +7,6 @@ use feature qw(say switch);
 
 sub comparar_cantidades {
   my ($cantidad, $cantidad_minima) = @_;
-  my $tiempo_reabastecimiento = 0;
 
   my @rangos = (
     { factor => 0.2 , estado => "24 horas"},
@@ -29,6 +28,8 @@ sub comparar_cantidades {
 
 1;
 =begin comment
+  my $tiempo_reabastecimiento = 0;
+
   my @Estados = ("24 horas", "48 horas", "3 días", "4 días", "5 días", "10 días", "20 días");
 
   my @valores = (

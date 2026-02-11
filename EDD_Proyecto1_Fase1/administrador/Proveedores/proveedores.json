@@ -61,5 +61,21 @@
       ],
       "NIT" : "4562-Test",
       "Telefono" : "45612389"
+   },
+   {
+      "Contacto" : "3",
+      "Direccion" : "Ã±Ã±Ã±",
+      "Empresa" : "3",
+      "Entregas" : [],
+      "NIT" : "1",
+      "Telefono" : "78956301"
+   },
+   {
+      "Contacto" : "9",
+      "Direccion" : "5",
+      "Empresa" : "6",
+      "Entregas" : [],
+      "NIT" : "5",
+      "Telefono" : "54981236"
    }
 ]

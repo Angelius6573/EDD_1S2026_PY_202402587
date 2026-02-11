@@ -3,8 +3,6 @@ package administrador::Inventario::inventario;
 use strict;
 use warnings;
 
-use POSIX qw(strftime); #Facilita formatear la fecha de localtime a un formato en concreto Año/Mes/Día, Día/Mes/Año, etc.
-
 use interfaz_usuario::admin;
 use utilidades::leer_json;
 use utilidades::leer_csv;
@@ -13,11 +11,13 @@ use utilidades::validar_numeros;
 use utilidades::copiar_contenido_json;
 use gestion_datos::lista_doblemente_enlazada;
 use reportes::inventario_dots;
+use reportes::nombre_archivos;
 use utilidades::comparar_cantidades;
 
 sub registrar_medicamento { #Registro manual
   my $lista = gestion_datos::lista_doblemente_enlazada->nuevo(); # Creación de la lista, no global, sin dupeos
 
+  system("clear");
   print "Bienvenido administrador al registro unitario de medicamentos.\n";
   print "Por favor llene el siguiente formulario: \n";
   print "Código del medicamento: "; chomp(my $codigo_medicamento = <STDIN>);
@@ -85,12 +85,8 @@ sub registrar_medicamento { #Registro manual
 
   ## Generación de imágenes con graphviz
   # Dado a que el .png es requerimiento, lo pongo, pero es mejor usar .svg, funciona bajo el mismo mecanismo
-  my $nombre_tiempo = strftime("%Y-%m-%d", localtime);
-  my $numero_pseudo_aleatorio = time();
-  my $name_dot = "reportes/archivos_dots/Inventario/inventario_$nombre_tiempo-$numero_pseudo_aleatorio.dot";
-  my $name_png = "reportes/imagenes/Inventario/PNG/inventario_$nombre_tiempo-$numero_pseudo_aleatorio.png";
-  my $name_svg = "reportes/imagenes/Inventario/SVG/inventario_$nombre_tiempo-$numero_pseudo_aleatorio.svg";
-  reportes::inventario_dots::generar_diagrama_inventario($lista, $name_dot, $name_png, $name_svg);
+  my ($nombre_dot, $nombre_png, $nombre_svg) = reportes::nombre_archivos::nombre("Inventario", "inventario");
+  reportes::inventario_dots::generar_diagrama_inventario($lista, $nombre_dot, $nombre_png, $nombre_svg);
 
   print "Carga finalizada, regresando a interfaz de administrador...\n";
   return interfaz_usuario::admin::inicio_sesion_admin_exitoso();
@@ -99,10 +95,12 @@ sub registrar_medicamento { #Registro manual
 sub registrar_medicamento_masivo { # Carga por archivos .csv
   my $lista = gestion_datos::lista_doblemente_enlazada->nuevo(); # Creación de la lista, esta vez sin dupeos
 
+  system("clear");
   my $ruta_d = 'administrador/Inventario/carga_masiva.csv';
   print "Bienvenido administrador, al entorno de carga masiva de datos por archivos .csv\n";
-  print "Por favor ingrese la ruta local del archivo, si no ingresa nada se usa la ruta \"$ruta_d\": ";
-    my $ruta = <STDIN>;
+  print "Por favor ingrese la ruta local del archivo.\n";
+  print "Si no ingresa nada se usa la ruta \"$ruta_d\" \n";
+  print " Ruta: "; my $ruta = <STDIN>;
 
     ## !Urgente: Añadir método para validar si la ruta ingresada es válida
     ## !Urgente: Añadir una salvaguarda en caso de no encontrar la ruta por default
@@ -145,12 +143,8 @@ sub registrar_medicamento_masivo { # Carga por archivos .csv
 
   ## Generación de graphviz, se genera un trío nuevo por cada nueva carga, para mantener un historial
   ## Muy apropiado para un hospital real en realidad :P
-  my $nombre_tiempo = strftime("%Y-%m-%d", localtime);
-  my $numero_pseudo_aleatorio = time();
-  my $name_dot = "reportes/archivos_dots/Inventario/inventario_$nombre_tiempo-$numero_pseudo_aleatorio.dot";
-  my $name_png = "reportes/imagenes/Inventario/PNG/inventario_$nombre_tiempo-$numero_pseudo_aleatorio.png";
-  my $name_svg = "reportes/imagenes/Inventario/SVG/inventario_$nombre_tiempo-$numero_pseudo_aleatorio.svg";
-  reportes::inventario_dots::generar_diagrama_inventario($lista, $name_dot, $name_png, $name_svg);
+  my ($nombre_dot, $nombre_png, $nombre_svg) = reportes::nombre_archivos::nombre("Inventario", "inventario");
+  reportes::inventario_dots::generar_diagrama_inventario($lista, $nombre_dot, $nombre_png, $nombre_svg);
 
   print "Carga finalizada, regresando a interfaz de administrador...\n";
   return interfaz_usuario::admin::inicio_sesion_admin_exitoso();

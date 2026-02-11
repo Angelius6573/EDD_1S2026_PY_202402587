@@ -1,0 +1,6 @@
+digraph inventario {
+rankdir=LR;
+node [shape=box, style=filled, width=2, height=1];
+graph [nodesep=0.5, ranksep=1, splines=true, overlap=false];
+n0 [label="Código: 5\nNombre: 3\nVence: 2026/02/01\nStock: 5", fillcolor=yellow];
+}
