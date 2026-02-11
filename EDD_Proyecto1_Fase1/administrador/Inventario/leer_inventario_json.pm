@@ -37,7 +37,7 @@ sub identificar_codigo_nombre_disponible {
 }
 
 sub identificar_codigo_reabastecimiento {
-  my ($codigo) = @_;
+  my ($codigo, $nombre_usuario, $codigo_depto) = @_;
   my $ruta = 'administrador/Inventario/inventario.json';
   my $datos = utilidades::leer_json::parsear_json_posiblemente_vacio($ruta);
 
@@ -49,7 +49,7 @@ sub identificar_codigo_reabastecimiento {
 
   print "El medicamento solicitado no existe en el inventario.\n";
   print "Regresando a menú de usuario...\n";
-  interfaz_usuario::usuario::inicio_sesion_usuario_exitoso();
+  interfaz_usuario::usuario::inicio_sesion_usuario_exitoso($nombre_usuario, $codigo_depto);
   return 0;
 }
 

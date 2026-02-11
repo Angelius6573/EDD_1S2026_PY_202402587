@@ -7,7 +7,7 @@ use interfaz_usuario::usuario;
 use administrador::Inventario::leer_inventario_json;
 
 sub consulta_medicamento {
-  my ($nombre_usuario) = @_;
+  my ($nombre_usuario, $codigo_depto) = @_;
   my $ruta = 'administrador/Inventario/inventario.json';
   my $inventario = utilidades::leer_json::parsear_json_posiblemente_vacio($ruta);
   
@@ -17,7 +17,7 @@ sub consulta_medicamento {
   print "Código: "; chomp(my $codigo = <STDIN>); 
       administrador::Inventario::leer_inventario_json::identificar_codigo_nombre_disponible($codigo);
 
-  return interfaz_usuario::usuario::inicio_sesion_usuario_exitoso();
+  return interfaz_usuario::usuario::inicio_sesion_usuario_exitoso($nombre_usuario, $codigo_depto);
 }
 
 1;

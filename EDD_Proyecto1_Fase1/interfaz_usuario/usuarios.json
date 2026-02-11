@@ -3,12 +3,21 @@
       "contrasena" : "1234",
       "correo" : "admin@example.com",
       "tipo" : "admin",
-      "usuario" : "admin"
+      "usuario" : "admin",
+      "codigo_departamental" : ""
    },
    {
       "contrasena" : "a",
       "correo" : "a@example.com",
       "tipo" : "usuario",
-      "usuario" : "a"
-   }
+      "usuario" : "a",
+      "codigo_departamental" : "a"
+   },
+  {
+      "contrasena" : "b",
+      "correo" : "b@example.com",
+      "tipo" : "usuario",
+      "usuario" : "b",
+      "codigo_departamental" : "b"
+  }
 ]

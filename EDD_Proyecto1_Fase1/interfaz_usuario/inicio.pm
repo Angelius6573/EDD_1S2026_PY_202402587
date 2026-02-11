@@ -37,7 +37,8 @@ sub inicio_sesion {
   print "Inicio de Sesión\n";
     print "Usuario: "; chomp(my $usuario = <STDIN>);
     print "Contraseña: "; chomp(my $contrasena = <STDIN>);
-  utilidades::validar_usuarios::validar_usuario($usuario, $contrasena);
+    print "Código Departamental: "; chomp(my $codigo_departamental = <STDIN>);
+  utilidades::validar_usuarios::validar_usuario($usuario, $contrasena, $codigo_departamental);
     print "Usuario no identificado. Volviendo a inicio...\n";
   consultar_usuario();
 }
