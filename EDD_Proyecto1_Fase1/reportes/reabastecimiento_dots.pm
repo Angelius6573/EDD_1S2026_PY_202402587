@@ -33,7 +33,7 @@ sub generar_diagrama_solicitud_reabastecimiento {
     my $estado = $datos->{estado} // '';
 
     # Determinar color según el estado
-    my $color = 'lightcyan';
+    my $color;
     if ($estado eq 'Aprobado') {
       $color = 'green';
     } elsif ($estado eq 'Rechazado') {

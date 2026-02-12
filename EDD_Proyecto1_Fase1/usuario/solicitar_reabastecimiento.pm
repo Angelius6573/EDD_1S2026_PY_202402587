@@ -3,6 +3,8 @@ package usuario::solicitar_reabastecimiento;
 use strict;
 use warnings;
 
+use Time::Piece;
+
 use interfaz_usuario::usuario;
 use administrador::Inventario::leer_inventario_json;
 use usuario::reabastecimiento::formulario_reabastecimiento;
@@ -19,7 +21,9 @@ sub solicitud_medicamentos {
   
   my ($cantidad, $prioridad, $razon) = usuario::reabastecimiento::formulario_reabastecimiento::formulario();
 
-  usuario::reabastecimiento::operar_lista_cde::agregar($codigo, $cantidad, $prioridad, $razon, $codigo_depto);
+  my $fecha_solicitud = localtime->strftime("%Y/%m/%d");
+
+  usuario::reabastecimiento::operar_lista_cde::agregar($codigo, $cantidad, $prioridad, $razon, $codigo_depto, $fecha_solicitud);
 
   print "Datos guardados, a la espera de aprovación por administrador.\n";
   print "Volviendo al menú del usuario...\n";

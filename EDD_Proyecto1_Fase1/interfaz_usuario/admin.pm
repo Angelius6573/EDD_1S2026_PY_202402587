@@ -35,7 +35,7 @@ sub seleccion {
     when (2) {say administrador::Inventario::inventario::registrar_medicamento_masivo()}
     when (3) {say administrador::Proveedores::proveedores::gestionar_proveedor()}
     when (4) {say administrador::Proveedores::proveedores::registrar_entrega()}
-    when (5) {say administrador::Reabastecimiento::reabastecimiento::procesar_solicitudes()}
+    when (5) {say administrador::Reabastecimiento::reabastecimiento::verificacion()}
     when (9) {say interfaz_usuario::inicio::consultar_usuario()}
   }
 }

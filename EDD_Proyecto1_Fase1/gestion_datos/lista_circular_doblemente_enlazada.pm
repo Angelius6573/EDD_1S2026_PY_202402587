@@ -55,4 +55,64 @@ sub almacenar_array_simple {
   return \@datos;
 }
 
+# Método para eliminar la solicitud de la copia del administrador
+sub eliminar_por_posicion {
+  my ($self, $pos) = @_;
+  
+  return 0 unless defined $self->{cabeza};
+  return 0 if $pos < 0;
+  
+  my $actual = $self->{cabeza};
+  my $indice = 0;
+  
+  do {
+    if ($indice == $pos) {
+      # Caso: único nodo
+      if ($actual->{siguiente} == $actual) {
+        $self->{cabeza} = undef;
+        return 1;
+      }
+      
+      # Ajustar enlaces
+      $actual->{anterior}->{siguiente} = $actual->{siguiente};
+      $actual->{siguiente}->{anterior} = $actual->{anterior};
+      
+      # Si eliminamos la cabeza
+      if ($actual == $self->{cabeza}) {
+        $self->{cabeza} = $actual->{siguiente};
+      }
+      
+      return 1;
+    }
+    $actual = $actual->{siguiente};
+    $indice++;
+  } while ($actual != $self->{cabeza});
+  
+  return 0;  # Posición fuera de rango
+}
+
+sub modificar_general {
+  my ($self, $parametro_buscar, $termino_comprobar, $campo, $nuevo_valor) = @_;
+  
+  return 0 unless defined $self->{cabeza};
+  
+  my $actual = $self->{cabeza};
+  my $inicio = $actual;
+  
+  do {
+    # Verificar si los datos son un hash ref y tienen el código
+    if (ref($actual->{datos}) eq 'HASH' && 
+        defined $actual->{datos}->{$parametro_buscar} &&
+        $actual->{datos}->{$parametro_buscar} eq $termino_comprobar) {
+      
+      # Modificar el campo específico
+      $actual->{datos}->{$campo} = $nuevo_valor;
+      return 1;  # Éxito
+    }
+    $actual = $actual->{siguiente};
+  } while ($actual != $inicio);
+  
+  return 0;  # No encontrado
+}
+
 1;

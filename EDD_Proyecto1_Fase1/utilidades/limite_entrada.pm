@@ -22,6 +22,17 @@ sub comprobacion_menu {
   return $consulta; 
 }
 
+sub comprobacion_y_n {
+  my $consulta;
+  print "¿Desea aprobar la solicitud? (Y/N): "; chomp($consulta = <STDIN>);
+
+  while ( $consulta !~ /^[YN]$/ ) {
+    print "Ingrese un valor válido (Y/N): "; chomp($consulta = <STDIN>);
+  }
+
+  return $consulta;
+}
+
 sub ruta {
   my ($ruta, $ruta_d) = @_;
   chomp $ruta if defined $ruta;
