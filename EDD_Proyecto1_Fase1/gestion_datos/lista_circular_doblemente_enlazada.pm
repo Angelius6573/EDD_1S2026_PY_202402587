@@ -55,64 +55,85 @@ sub almacenar_array_simple {
   return \@datos;
 }
 
-# Método para eliminar la solicitud de la copia del administrador
-sub eliminar_por_posicion {
-  my ($self, $pos) = @_;
-  
-  return 0 unless defined $self->{cabeza};
-  return 0 if $pos < 0;
-  
-  my $actual = $self->{cabeza};
-  my $indice = 0;
-  
-  do {
-    if ($indice == $pos) {
-      # Caso: único nodo
-      if ($actual->{siguiente} == $actual) {
-        $self->{cabeza} = undef;
-        return 1;
-      }
-      
-      # Ajustar enlaces
-      $actual->{anterior}->{siguiente} = $actual->{siguiente};
-      $actual->{siguiente}->{anterior} = $actual->{anterior};
-      
-      # Si eliminamos la cabeza
-      if ($actual == $self->{cabeza}) {
-        $self->{cabeza} = $actual->{siguiente};
-      }
-      
-      return 1;
-    }
-    $actual = $actual->{siguiente};
-    $indice++;
-  } while ($actual != $self->{cabeza});
-  
-  return 0;  # Posición fuera de rango
-}
+sub cambiar_estado_multi_parametro {
+  my ($self, $parametros, $campo, $nuevo_valor) = @_;
 
-sub modificar_general {
-  my ($self, $parametro_buscar, $termino_comprobar, $campo, $nuevo_valor) = @_;
-  
   return 0 unless defined $self->{cabeza};
-  
+
   my $actual = $self->{cabeza};
   my $inicio = $actual;
-  
+
   do {
-    # Verificar si los datos son un hash ref y tienen el código
-    if (ref($actual->{datos}) eq 'HASH' && 
-        defined $actual->{datos}->{$parametro_buscar} &&
-        $actual->{datos}->{$parametro_buscar} eq $termino_comprobar) {
+    if ( ref($actual->{datos}) eq 'HASH' ) {
+      my $coincide = 1;
+
+      # Comprobamos que todos los parámetros coinciden
+      #! Importante: Consultar más acerca del "keys", es sumamente importante, si esto no existe
+      #              no procesa correctamente el cambio de información.
+      foreach my $clave ( keys %$parametros ) {
+        if ( !defined $actual->{datos}->{$clave} ||
+             !defined $parametros->{$clave} ||
+             $actual->{datos}->{$clave} ne $parametros->{$clave} ) {
+          $coincide = 0;
+          last;
+        }
+      }
       
-      # Modificar el campo específico
-      $actual->{datos}->{$campo} = $nuevo_valor;
-      return 1;  # Éxito
+      if ( $coincide ) {
+        $actual->{datos}->{$campo} = $nuevo_valor;
+        return 1;
+      }
     }
     $actual = $actual->{siguiente};
   } while ($actual != $inicio);
-  
-  return 0;  # No encontrado
+  return 0;
+}
+
+sub eliminar_multi_parametro {
+  my ($self, $parametros) = @_;
+
+  return 0 unless defined $self->{cabeza};
+
+  my $actual = $self->{cabeza};
+  my $inicio = $actual;
+
+  do {
+    if ( ref($actual->{datos}) eq 'HASH' ) {
+      my $coincide = 1;
+
+      # Verificar que todos los parámetros coincidan, al igual que con el cambio de estado
+      # el uso de keys es brutalmente necesario
+      foreach my $clave ( keys %$parametros ) {
+        if ( !defined $actual->{datos}->{$clave} ||
+             !defined $parametros->{$clave} ||
+             $actual->{datos}->{$clave} ne $parametros->{$clave} ) {
+          $coincide = 0;
+          last;
+        }
+      }
+      # Si todos los criterios coinciden, eliminar este nodo
+      if ( $coincide ) {
+        # Caso: único nodo en la lista
+        if ($actual->{siguiente} == $actual) {
+          $self->{cabeza} = undef;
+          return 1;
+        }
+
+        # Ajustar enlaces para eliminar el nodo
+        $actual->{anterior}->{siguiente} = $actual->{siguiente};
+        $actual->{siguiente}->{anterior} = $actual->{anterior};
+
+        # Si eliminamos la cabeza, actualizar referencia
+        if ($actual == $self->{cabeza}) {
+          $self->{cabeza} = $actual->{siguiente};
+        }
+
+        return 1;  # Éxito
+      }
+    }
+    $actual = $actual->{siguiente};
+  } while ($actual != $inicio);
+  return 0;
 }
 
 1;

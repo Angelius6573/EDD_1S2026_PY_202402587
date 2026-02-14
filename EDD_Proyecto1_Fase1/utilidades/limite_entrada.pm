@@ -23,8 +23,9 @@ sub comprobacion_menu {
 }
 
 sub comprobacion_y_n {
+  my ($mensaje) = @_;
   my $consulta;
-  print "¿Desea aprobar la solicitud? (Y/N): "; chomp($consulta = <STDIN>);
+  print "$mensaje"; chomp($consulta = <STDIN>);
 
   while ( $consulta !~ /^[YN]$/ ) {
     print "Ingrese un valor válido (Y/N): "; chomp($consulta = <STDIN>);

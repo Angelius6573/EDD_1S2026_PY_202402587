@@ -36,7 +36,7 @@ sub generar_diagrama_solicitud_reabastecimiento {
     my $color;
     if ($estado eq 'Aprobado') {
       $color = 'green';
-    } elsif ($estado eq 'Rechazado') {
+    } elsif ($estado eq 'Desaprobado') {
       $color = 'red';
     } elsif ($estado eq 'Pendiente') {
       $color = 'yellow';

@@ -1,0 +1,24 @@
+[
+   {
+      "cantidad" : "3",
+      "codigo" : "MED001",
+      "codigo_departamental" : "a",
+      "codigo_unico" : 1771041921,
+      "estado" : "Desaprobado",
+      "fecha_solicitud" : "2026/02/13",
+      "nombre" : "Glucophage",
+      "prioridad" : "Media",
+      "razon" : "Test"
+   },
+   {
+      "cantidad" : "15",
+      "codigo" : "MED001",
+      "codigo_departamental" : "a",
+      "codigo_unico" : "17710423264641138139",
+      "estado" : "Desaprobado",
+      "fecha_solicitud" : "2026/02/13",
+      "nombre" : "Glucophage",
+      "prioridad" : "Urgente",
+      "razon" : "Test num random"
+   }
+]

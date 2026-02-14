@@ -17,6 +17,7 @@ sub agregar {
   my $lista = gestion_datos::lista_circular_doblemente_enlazada->nuevo();
   my $lista_admin = gestion_datos::lista_circular_doblemente_enlazada->nuevo();
   my $lista_doblemente_enlazada = gestion_datos::lista_doblemente_enlazada->nuevo();
+  my $codigo_unico = time() . int( rand(10000) ) . $$;
 
   my $directorio = "administrador/Reabastecimiento/Inventario_Departamental/$codigo_depto";
   my $ruta = "administrador/Reabastecimiento/Inventario_Departamental/$codigo_depto/solicitudes_reabastecimiento.json";
@@ -53,7 +54,8 @@ sub agregar {
       razon => $razon,
       estado => "Pendiente",
       fecha_solicitud => $fecha_solicitud,
-      codigo_departamental => $codigo_depto
+      codigo_departamental => $codigo_depto,
+      codigo_unico => $codigo_unico
   });
 
   $lista_admin->insertar_final({
@@ -64,13 +66,35 @@ sub agregar {
       razon => $razon,
       estado => "Pendiente",
       fecha_solicitud => $fecha_solicitud,
-      codigo_departamental => $codigo_depto
+      codigo_departamental => $codigo_depto,
+      codigo_unico => $codigo_unico
   });
 
   my $datos = $lista->almacenar_array_simple();
   my $datos_admin = $lista_admin->almacenar_array_simple();
   utilidades::leer_json::guardar_json($ruta, $datos);
   utilidades::leer_json::guardar_json($copia_admin, $datos_admin);
+
+  my ($nombre_dot, $nombre_png, $nombre_svg) = reportes::nombre_archivos::nombre("Solicitud_Reabastecimiento", "solicitud_pendiente");
+  reportes::reabastecimiento_dots::generar_diagrama_solicitud_reabastecimiento($lista, $nombre_dot, $nombre_png, $nombre_svg);
+}
+
+sub agregar_tras_aprobar {
+  my ($codigo_depto) = @_;
+
+  my $lista = gestion_datos::lista_circular_doblemente_enlazada->nuevo();
+  my $lista_doblemente_enlazada = gestion_datos::lista_doblemente_enlazada->nuevo();
+
+  my $directorio = "administrador/Reabastecimiento/Inventario_Departamental/$codigo_depto";
+  my $ruta = "administrador/Reabastecimiento/Inventario_Departamental/$codigo_depto/solicitudes_reabastecimiento.json";
+
+  my $solicitudes_existentes = utilidades::leer_json::parsear_json_posiblemente_vacio($ruta);
+  foreach my $solicitud ( @$solicitudes_existentes ) {
+    $lista->insertar_final($solicitud);
+  }
+
+  my $datos = $lista->almacenar_array_simple();
+  utilidades::leer_json::guardar_json($ruta, $datos);
 
   my ($nombre_dot, $nombre_png, $nombre_svg) = reportes::nombre_archivos::nombre("Solicitud_Reabastecimiento", "solicitud_pendiente");
   reportes::reabastecimiento_dots::generar_diagrama_solicitud_reabastecimiento($lista, $nombre_dot, $nombre_png, $nombre_svg);

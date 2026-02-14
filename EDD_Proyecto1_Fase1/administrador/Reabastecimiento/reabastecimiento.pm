@@ -4,99 +4,49 @@ use strict;
 use warnings;
 use feature qw(say switch);
 
+use administrador::Reabastecimiento::reabastecimiento_modulos::mostrar_info;
+use utilidades::limite_entrada;
+use administrador::Reabastecimiento::reabastecimiento_modulos::aprobado;
+use administrador::Reabastecimiento::reabastecimiento_modulos::desaprobado;
+use administrador::Reabastecimiento::reabastecimiento_modulos::mostrar_info;
 use interfaz_usuario::admin;
-use administrador::Inventario::buscar_medicamento_codigo;
-use gestion_datos::lista_circular_doblemente_enlazada;
 
 sub procesar_solicitud {
   system("clear");
-  my $ruta = "administrador/Reabastecimiento/solicitudes_reabastecimiento.json";
-  my $datos = administrador::Inventario::buscar_medicamento_codigo::ver_primero($ruta); ## 1, 2 y 3
-
-  if ( !defined $datos ) {
-    print "Los datos no son válidos.\n";
-    return verificacion();
-  }
-
-  my $codigo = $datos->{codigo};
-
-  my $prioridad = $datos->{prioridad};
-  my $codigo_depto = $datos->{codigo_departamental};
-  my $nombre_med = $datos->{nombre};
-  my $cantidad = $datos->{cantidad};
-  my $fecha_solicitud = $datos->{fecha_solicitud};
-  
-  ## 4. Imprimir los datos
-  if ( defined $datos ) {
-    print "Solicitud de nivel: $prioridad \n";
-    print "Departamento solicitante: $codigo_depto \n";
-    print "Medicamento requerido: $nombre_med \n";
-    print "Cantidad requerida: $cantidad \n";
-    print "Fecha de solicitud: $fecha_solicitud \n\n";
-  }
-
-  ## 5. Solicitar confirmación
-  my $confirmacion = utilidades::limite_entrada::comprobacion_y_n();
-  print "$confirmacion";
-
+  my ($codigo, $prioridad, $codigo_depto, $nombre_med, $cantidad, $fecha_solicitud, $razon, $codigo_unico) = administrador::Reabastecimiento::reabastecimiento_modulos::mostrar_info::mostrar_info();
+  my $mensaje = "¿Desea aprobar la solicitud? (Y/N): ";
+  my $confirmacion = utilidades::limite_entrada::comprobacion_y_n($mensaje); ## 5. Solicitar confirmación
   given ($confirmacion) {
-    when ("Y") {say aprobado($codigo, $codigo_depto)}
-    when ("N") {say desaprobado($codigo_depto)}
+    when ("Y") {say administrador::Reabastecimiento::reabastecimiento_modulos::aprobado::aprobado(
+        $codigo,
+        $prioridad,
+        $codigo_depto,
+        $nombre_med,
+        $cantidad,
+        $fecha_solicitud,
+        $razon,
+        $codigo_unico)}
+    when ("N") {say administrador::Reabastecimiento::reabastecimiento_modulos::desaprobado::desaprobado(
+        $codigo,
+        $prioridad,
+        $codigo_depto,
+        $nombre_med,
+        $cantidad,
+        $fecha_solicitud,
+        $razon,
+        $codigo_unico)}
   }
 }
 
 sub verificacion {
   system("clear");
   print "Bienvenido administrador al módulo de aceptación de solicitudes de reabastecimiento\n";
-  while ( 1 ) {
-    print "¿Desea procesar la primera solicitud? (Y/N): "; chomp(my $consulta = <STDIN>);
-
-    return procesar_solicitud() if $consulta eq "Y";
-    return interfaz_usuario::admin::inicio_sesion_admin_exitoso() if $consulta eq "N";
-    print "Inválido, ingrese Y ó N\n";
+  my $mensaje = "¿Desea ver la solicitud? (Y/N): ";
+  my $verificacion = utilidades::limite_entrada::comprobacion_y_n($mensaje);
+  given ($verificacion) {
+    when ("Y") {say procesar_solicitud()}
+    when ("N") {say interfaz_usuario::admin::inicio_sesion_admin_exitoso()}
   }
-  return interfaz_usuario::admin::inicio_sesion_admin_exitoso();
-}
-
-sub aprobado {
-  my ($codigo, $codigo_depto) = @_;
-  my $lista_depto = gestion_datos::lista_circular_doblemente_enlazada->nuevo();
-  my $ruta_admin = "administrador/Reabastecimiento/solicitudes_reabastecimiento.json";
-  my $ruta_inv = "administrador/Inventario/inventario.json";
-
-  my $stock = administrador::Inventario::buscar_medicamento_codigo::en_general($ruta_inv);
-
-  cambiar_estado($codigo_depto, "Aprobado");
-
-  return verificacion();
-}
-
-sub desaprobado {
-  my ($codigo_depto) = @_;
-  cambiar_estado($codigo_depto, "Desaprobado");
-  return verificacion();
-}
-
-sub cambiar_estado {
-  my ($codigo_depto, $estado) = @_;
-
-  my $lista_depto = gestion_datos::lista_circular_doblemente_enlazada->nuevo();
-  my $ruta_depto = "administrador/Reabastecimiento/Inventario_Departamental/$codigo_depto/solicitudes_reabastecimiento.json";
-
-  $lista_depto = administrador::Inventario::buscar_medicamento_codigo::en_general_lista($ruta_depto, $lista_depto, "insertar_final");
-
-  if ( $lista_depto->modificar_general("codigo_departamental", $codigo_depto, "estado", $estado) ) {
-    my $datos_depto_nuevos = $lista_depto->almacenar_array_simple();
-    utilidades::leer_json::guardar_json($ruta_depto, $datos_depto_nuevos);
-    return 1;
-  } else {
-    print "Datos no encontrados...\n";
-    return verificacion();
-  }
-}
-
-sub eliminar_nodo {
-  my ($codigo, $codigo_depto) = @_;
 }
 
 1;

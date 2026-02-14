@@ -3,9 +3,9 @@ rankdir=TB;
 node [shape=box, style=filled];
 graph [nodesep=1.0, ranksep=1.5];
 
-sol0 [label="Número de solicitud: 1\nCódigo de medicamento: MED001\nCantidad: 15\nPrioridad: Urgente\nRazón: TEST\nEstado: Desaprobado", fillcolor=lightcyan];
-sol1 [label="Número de solicitud: 2\nCódigo de medicamento: MED003\nCantidad: 48\nPrioridad: Urgente\nRazón: TEST\nEstado: Pendiente", fillcolor=yellow];
-sol2 [label="Número de solicitud: 3\nCódigo de medicamento: MED003\nCantidad: 46\nPrioridad: Media\nRazón: Test Pendiente/Desaprovado\nEstado: Pendiente", fillcolor=yellow];
+sol0 [label="Número de solicitud: 1\nCódigo de medicamento: MED001\nCantidad: 1\nPrioridad: Urgente\nRazón: Test con codigo unico\nEstado: Pendiente", fillcolor=yellow];
+sol1 [label="Número de solicitud: 2\nCódigo de medicamento: MED002\nCantidad: 15\nPrioridad: Media\nRazón: Segundo test con codigo unico\nEstado: Pendiente", fillcolor=yellow];
+sol2 [label="Número de solicitud: 3\nCódigo de medicamento: MED001\nCantidad: 3\nPrioridad: Media\nRazón: Tercer test con codigo unico\nEstado: Pendiente", fillcolor=yellow];
 
 { rank=same; sol0; sol1; sol2; }
 

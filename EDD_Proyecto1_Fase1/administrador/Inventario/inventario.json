@@ -1,17 +1,6 @@
 [
    {
-      "cantidad" : "5",
-      "codigo" : "5",
-      "fecha_vencimiento" : "2026/02/01",
-      "laboratorio" : "0",
-      "nivel_minimo" : "4",
-      "nombre" : "3",
-      "precio_unitario" : "8",
-      "principio_activo" : "2",
-      "tiempo_reabastecer" : "4 dÃ­as"
-   },
-   {
-      "cantidad" : "860",
+      "cantidad" : "2",
       "codigo" : "MED001",
       "fecha_vencimiento" : "2026-11-15",
       "laboratorio" : "BioFarma",
@@ -22,7 +11,7 @@
       "tiempo_reabastecer" : "4 dÃ­as"
    },
    {
-      "cantidad" : "355",
+      "cantidad" : "20",
       "codigo" : "MED002",
       "fecha_vencimiento" : "2026-07-20",
       "laboratorio" : "GenericLab",
@@ -31,16 +20,5 @@
       "precio_unitario" : "6.30",
       "principio_activo" : "Ranitidina",
       "tiempo_reabastecer" : "4 dÃ­as"
-   },
-   {
-      "cantidad" : "430",
-      "codigo" : "MED003",
-      "fecha_vencimiento" : "2027-01-10",
-      "laboratorio" : "CardioMed",
-      "nivel_minimo" : "450",
-      "nombre" : "Cozaar",
-      "precio_unitario" : "8.20",
-      "principio_activo" : "Losartán",
-      "tiempo_reabastecer" : "3 dÃ­as"
    }
 ]
