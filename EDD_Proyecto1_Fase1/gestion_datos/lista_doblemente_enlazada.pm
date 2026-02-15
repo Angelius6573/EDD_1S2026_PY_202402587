@@ -78,4 +78,29 @@ sub modificar_cantidad {
   return 0;
 }
 
+# Método para ordenar la lista por un campo específico
+sub ordenar_por_campo {
+  my ($self, $campo) = @_;
+
+  return if !$self->{cabeza};  # Lista vacía
+
+  my $intercambiado;
+  do {
+    $intercambiado = 0;
+    my $actual = $self->{cabeza};
+
+    while ($actual && $actual->{siguiente}) {
+      # Comparar el campo del nodo actual con el siguiente
+      if ($actual->{datos}->{$campo} gt $actual->{siguiente}->{datos}->{$campo}) {
+        # Intercambiar los datos completos
+        my $temp = $actual->{datos};
+        $actual->{datos} = $actual->{siguiente}->{datos};
+        $actual->{siguiente}->{datos} = $temp;
+        $intercambiado = 1;
+      }
+      $actual = $actual->{siguiente};
+    }
+  } while ($intercambiado);  # Repetir hasta que no haya intercambios
+}
+
 1;

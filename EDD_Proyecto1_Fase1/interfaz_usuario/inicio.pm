@@ -22,7 +22,7 @@ sub consultar_usuario {
   4. Salir 
   5. Admin \n";
   my $consulta = utilidades::limite_entrada::comprobacion_menu(1, 5);
-  system("clear");
+  #system("clear");
   comprobar_entrada($consulta);
 }
 

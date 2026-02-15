@@ -14,8 +14,8 @@ sub comparar_cantidades {
     { factor => 1 , estado => "3 días"},
     { factor => 1.5 , estado => "4 días"},
     { factor => 2 , estado => "5 días"},
-    { factor => 2 , estado => "10 días"},
-    { factor => 3 , estado => "20 días"}
+    { factor => 3 , estado => "10 días"},
+    { factor => 4 , estado => "20 días"}
   );
 
   foreach my $rango ( @rangos ) {
