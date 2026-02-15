@@ -52,7 +52,7 @@ sub guardar_json {
                         ->canonical(1);
 
   open my $fh, '>', $ruta
-    or die "No se pudo abrir el archvio en $ruta \n";
+    or die "No se pudo abrir el archivo en $ruta \n";
 
   print $fh $aspecto->encode($datos);
   close $fh;

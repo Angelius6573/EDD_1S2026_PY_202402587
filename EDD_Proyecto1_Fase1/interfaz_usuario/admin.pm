@@ -9,6 +9,7 @@ use utilidades::leer_json;
 use administrador::Inventario::inventario;
 use administrador::Proveedores::proveedores;
 use administrador::Reabastecimiento::reabastecimiento;
+use administrador::Ver_Inventario::ver_inventario;
 
 sub inicio_sesion_admin_exitoso {
   print "Bienvenido nuevamente administrador \n";
@@ -36,6 +37,7 @@ sub seleccion {
     when (3) {say administrador::Proveedores::proveedores::gestionar_proveedor()}
     when (4) {say administrador::Proveedores::proveedores::registrar_entrega()}
     when (5) {say administrador::Reabastecimiento::reabastecimiento::verificacion()}
+    when (6) {say administrador::Ver_Inventario::ver_inventario::ver_inventario()}
     when (9) {say interfaz_usuario::inicio::consultar_usuario()}
   }
 }

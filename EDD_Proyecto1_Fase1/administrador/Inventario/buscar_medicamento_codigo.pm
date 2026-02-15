@@ -49,4 +49,20 @@ sub ver_primero {
   return undef;
 }
 
+sub contar_pendientes {
+  my ($ruta) = @_;
+  my $datos = utilidades::leer_json::parsear_json_posiblemente_vacio($ruta);
+  my $contador = 0;
+
+  return 0 unless defined $datos && ref($datos) eq 'ARRAY';
+  
+  foreach my $instancia ( @$datos ) {
+    if ( defined $instancia->{estado} && $instancia->{estado} eq "Pendiente" ) {
+      $contador++;
+    }
+  }
+
+  return $contador;
+}
+
 1;
