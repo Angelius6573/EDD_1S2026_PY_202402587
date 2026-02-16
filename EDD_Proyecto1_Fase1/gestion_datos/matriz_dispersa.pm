@@ -154,7 +154,7 @@ sub consultar_medicamento {
     }
   }
 
-  return undef unless defined $fila;  # Medicamento no encontrado
+  return () unless defined $fila;  # Medicamento no encontrado
 
   # Recorrer todos los laboratorios (columnas)
   my @resultados;
@@ -171,6 +171,32 @@ sub consultar_medicamento {
     }
   }
   return @resultados;
+}
+
+sub imprimir {
+  my ($self) = @_;
+  
+  # Encabezado con nombres de laboratorios
+  print "Medicamento\\Laboratorio | ";
+  foreach my $lab (@{$self->{nombres_columnas}}) {
+    printf "%-20s | ", $lab;
+  }
+  print "\n" . "-" x 100 . "\n";
+  
+  # Filas con nombres de medicamentos
+  for my $fila (0 .. $self->{filas} - 1) {
+    printf "%-25s | ", $self->{nombres_filas}[$fila];
+    
+    for my $columna (0 .. $self->{columnas} - 1) {
+      my $datos = $self->obtener($fila, $columna);
+      if ($datos->{precio} > 0 || $datos->{cantidad} > 0) {
+        printf "\$%.2f (%d unid) | ", $datos->{precio}, $datos->{cantidad};
+      } else {
+        printf "%-20s | ", "-";
+      }
+    }
+    print "\n";
+  }
 }
 
 1;

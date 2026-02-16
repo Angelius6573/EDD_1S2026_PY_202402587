@@ -1,0 +1,12 @@
+digraph entregas {
+charset="UTF-8";
+rankdir=LR;
+node [shape=box, style=filled];
+graph [nodesep=0.6, ranksep=1];
+
+prov [label="Empresa: 1\nContacto: 5\nNIT: 1", fillcolor=lightblue];
+
+e0 [label="Código: MED024\nCantidad: 15\nFecha: 2025/02/02\nFactura: 1596", fillcolor=gray90];
+prov -> e0;
+
+}

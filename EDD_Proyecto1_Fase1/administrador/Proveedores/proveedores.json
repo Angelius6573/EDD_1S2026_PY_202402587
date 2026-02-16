@@ -1,81 +1,25 @@
 [
    {
-      "Contacto" : "E-mail",
-      "Direccion" : "Ciudad de Guatemala",
-      "Empresa" : "Pruebas INC",
+      "Contacto" : "5",
+      "Direccion" : "EES",
+      "Empresa" : "1",
       "Entregas" : [
          {
-            "Cantidad" : "46",
-            "Codigo" : "MED002",
-            "Factura" : "45321",
-            "FechaDeEntrega" : "2026/04/06"
-         },
-         {
-            "Cantidad" : "40",
-            "Codigo" : "MED001",
-            "Factura" : "12345",
-            "FechaDeEntrega" : "2026/02/09"
-         },
-         {
-            "Cantidad" : "48",
-            "Codigo" : "MED001",
-            "Factura" : "15963",
-            "FechaDeEntrega" : "2026/03/10"
+            "Cantidad" : "15",
+            "Codigo" : "MED024",
+            "Factura" : "1596",
+            "FechaDeEntrega" : "2025/02/02"
          }
       ],
-      "NIT" : "1234-Test",
-      "Telefono" : "15963248"
-   },
-   {
-      "Contacto" : "TelÃ©fono",
-      "Direccion" : "Flores, PetÃ©n",
-      "Empresa" : "AsociaciÃ³n de Pruebas",
-      "Entregas" : [
-         {
-            "Cantidad" : "159",
-            "Codigo" : "MED003",
-            "Factura" : "75948",
-            "FechaDeEntrega" : "2026/01/06"
-         }
-      ],
-      "NIT" : "7536-Test",
-      "Telefono" : "75369849"
-   },
-   {
-      "Contacto" : "E-Mail",
-      "Direccion" : "Antigua Guatemala",
-      "Empresa" : "Pruebas Waos",
-      "Entregas" : [
-         {
-            "Cantidad" : "2",
-            "Codigo" : "MED001",
-            "Factura" : "78953",
-            "FechaDeEntrega" : "2027/06/29"
-         },
-         {
-            "Cantidad" : "75",
-            "Codigo" : "MED002",
-            "Factura" : "15932",
-            "FechaDeEntrega" : "2026/06/04"
-         }
-      ],
-      "NIT" : "4562-Test",
-      "Telefono" : "45612389"
-   },
-   {
-      "Contacto" : "3",
-      "Direccion" : "Ã±Ã±Ã±",
-      "Empresa" : "3",
-      "Entregas" : [],
       "NIT" : "1",
-      "Telefono" : "78956301"
+      "Telefono" : "12345678"
    },
    {
-      "Contacto" : "9",
-      "Direccion" : "5",
-      "Empresa" : "6",
+      "Contacto" : "159",
+      "Direccion" : "MMS",
+      "Empresa" : "waos",
       "Entregas" : [],
-      "NIT" : "5",
-      "Telefono" : "54981236"
+      "NIT" : "2",
+      "Telefono" : "15963247"
    }
 ]

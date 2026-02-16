@@ -3,6 +3,7 @@ package administrador::Inventario::buscar_medicamento_codigo;
 use strict;
 use warnings;
 use utilidades::leer_json;
+use interfaz_usuario::admin;
 
 sub por_codigo { # Método para hallar el nombre de un medicamento por su código
   my ($codigo) = @_;
@@ -14,6 +15,30 @@ sub por_codigo { # Método para hallar el nombre de un medicamento por su códig
   }
   
   return undef;  # No encontrado
+}
+
+sub obtener_lab_name {
+  my ($ruta) = @_;
+  my $inventario = utilidades::leer_json::parsear_json_posiblemente_vacio($ruta);
+
+  if (!defined $inventario || ref($inventario) ne 'ARRAY' || @$inventario == 0) {
+    warn "Advertencia: El inventario está vacío o no es válido.\n";
+    print "Presion Enter para continuar...";my $pausa = <STDIN>;
+    return interfaz_usuario::admin::inicio_sesion_admin_exitoso();  # Retornar referencias a arrays vacíos
+  }
+
+  my %nombres_u = ();
+  my %laboratorios_u = ();
+
+  foreach my $medicamento ( @$inventario ) {
+    $nombres_u{$medicamento->{nombre}} = 1;
+    $laboratorios_u{$medicamento->{laboratorio}} = 1;
+  }
+
+  my @nombres = keys %nombres_u;
+  my @laboratorios = keys %laboratorios_u;
+
+  return (\@nombres, \@laboratorios);
 }
 
 sub en_general_lista {

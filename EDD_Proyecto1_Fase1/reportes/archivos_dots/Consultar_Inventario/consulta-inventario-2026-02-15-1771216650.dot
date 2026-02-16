@@ -1,0 +1,43 @@
+digraph MatrizInventario {
+node [shape=plaintext];
+
+matriz [label=<
+<TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0">
+<TR>
+<TD BGCOLOR="lightblue"><B> Medicamento / Laboratorio</B></TD>
+<TD BGCOLOR="lightgreen"><B>GenericLab</B></TD>
+<TD BGCOLOR="lightgreen"><B>a</B></TD>
+<TD BGCOLOR="lightgreen"><B>BioFarma</B></TD>
+<TD BGCOLOR="lightgreen"><B>CardioMed</B></TD>
+</TR>
+<TR>
+<TD BGCOLOR="lightyellow"><B>Cozaar</B></TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="#ccffcc">Q 8.20<BR/> 430 unidades</TD>
+</TR>
+<TR>
+<TD BGCOLOR="lightyellow"><B>a</B></TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="#ffcccc">Q 5.00<BR/> 5 unidades</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+</TR>
+<TR>
+<TD BGCOLOR="lightyellow"><B>Glucophage</B></TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="#ccffcc">Q 3.90<BR/> 860 unidades</TD>
+<TD BGCOLOR="lightgray">-</TD>
+</TR>
+<TR>
+<TD BGCOLOR="lightyellow"><B>Zantac</B></TD>
+<TD BGCOLOR="#ccffcc">Q 6.30<BR/> 355 unidades</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+</TR>
+</TABLE>
+>];
+}

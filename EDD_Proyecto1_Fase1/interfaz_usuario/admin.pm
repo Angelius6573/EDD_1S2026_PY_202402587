@@ -10,6 +10,7 @@ use administrador::Inventario::inventario;
 use administrador::Proveedores::proveedores;
 use administrador::Reabastecimiento::reabastecimiento;
 use administrador::Ver_Inventario::ver_inventario;
+use administrador::Consultas::Consultar_Inventario;
 
 sub inicio_sesion_admin_exitoso {
   print "Bienvenido nuevamente administrador \n";
@@ -38,6 +39,7 @@ sub seleccion {
     when (4) {say administrador::Proveedores::proveedores::registrar_entrega()}
     when (5) {say administrador::Reabastecimiento::reabastecimiento::verificacion()}
     when (6) {say administrador::Ver_Inventario::ver_inventario::ver_inventario()}
+    when (7) {say administrador::Consultas::Consultar_Inventario::inicio()}
     when (9) {say interfaz_usuario::inicio::consultar_usuario()}
   }
 }

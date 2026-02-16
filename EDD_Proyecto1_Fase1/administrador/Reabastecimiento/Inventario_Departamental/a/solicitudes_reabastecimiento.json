@@ -20,5 +20,16 @@
       "nombre" : "Glucophage",
       "prioridad" : "Urgente",
       "razon" : "Test num random"
+   },
+   {
+      "cantidad" : "18",
+      "codigo" : "MED005",
+      "codigo_departamental" : "a",
+      "codigo_unico" : "17712203754721312827",
+      "estado" : "Aprobado",
+      "fecha_solicitud" : "2026/02/15",
+      "nombre" : "Ibuprofeno 400mg",
+      "prioridad" : "Alta",
+      "razon" : "Test"
    }
 ]
