@@ -1,35 +1,35 @@
 [
    {
-      "cantidad" : "3",
+      "cantidad" : "15983",
       "codigo" : "MED001",
       "codigo_departamental" : "a",
-      "codigo_unico" : 1771041921,
+      "codigo_unico" : "1771471767704895909",
       "estado" : "Desaprobado",
-      "fecha_solicitud" : "2026/02/13",
-      "nombre" : "Glucophage",
-      "prioridad" : "Media",
-      "razon" : "Test"
-   },
-   {
-      "cantidad" : "15",
-      "codigo" : "MED001",
-      "codigo_departamental" : "a",
-      "codigo_unico" : "17710423264641138139",
-      "estado" : "Desaprobado",
-      "fecha_solicitud" : "2026/02/13",
-      "nombre" : "Glucophage",
+      "fecha_solicitud" : "2026/02/18",
+      "nombre" : "Tylenol",
       "prioridad" : "Urgente",
-      "razon" : "Test num random"
+      "razon" : "TEST MED001 15983"
    },
    {
-      "cantidad" : "18",
+      "cantidad" : "148",
       "codigo" : "MED005",
       "codigo_departamental" : "a",
-      "codigo_unico" : "17712203754721312827",
+      "codigo_unico" : "1771471936263595909",
       "estado" : "Aprobado",
-      "fecha_solicitud" : "2026/02/15",
-      "nombre" : "Ibuprofeno 400mg",
+      "fecha_solicitud" : "2026/02/18",
+      "nombre" : "Glucophage",
       "prioridad" : "Alta",
-      "razon" : "Test"
+      "razon" : "TEST MED005 148"
+   },
+   {
+      "cantidad" : "13",
+      "codigo" : "MED009",
+      "codigo_departamental" : "a",
+      "codigo_unico" : "1771471975802795909",
+      "estado" : "Pendiente",
+      "fecha_solicitud" : "2026/02/18",
+      "nombre" : "Voltaren",
+      "prioridad" : "Baja",
+      "razon" : "TEST MED009 13"
    }
 ]
