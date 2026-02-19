@@ -52,8 +52,8 @@ sub consultar_medicamento {
         $medicamento->{cantidad};
     }
   } else {
-    print "\nNo hay datos para el medicamento solicitado.\n";
-    print "Volviendo al menú...\n";
+    print "No hay datos para el medicamento solicitado.\n";
+    print "Volviendo al menú...\n\n";
     utilidades::cerrar::cerrar();
     return opciones($matrix);
   }
@@ -68,7 +68,7 @@ sub reporte {
   my ($nombre_dot, $nombre_png, $nombre_svg) = reportes::nombre_archivos::nombre("Consultar_Inventario", "consulta-inventario");
   reportes::consultas_administrador_dot::generar_diagrama_matriz($matrix, $nombre_dot, $nombre_png, $nombre_svg);
   
-  print "Reportes generados correctamente.\n";
+  print "Reportes generados correctamente.\n\n";
   utilidades::cerrar::cerrar();
 
   return opciones($matrix);

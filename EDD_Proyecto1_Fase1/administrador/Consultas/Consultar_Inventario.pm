@@ -18,10 +18,10 @@ sub inicio {
 
   my ($n_cantidad, $l_cantidad) = administrador::Consultas::modulos::obtener_f_c::limites($nombres, $laboratorios);
 
-  my $matrix = gestion_datos::matriz_dispersa->nuevo($n_cantidad, $l_cantidad);
+  my $matrix = gestion_datos::matriz_dispersa->nuevo($l_cantidad, $n_cantidad);
 
-  $matrix->nombre_filas(@$nombres);
-  $matrix->nombre_columnas(@$laboratorios);
+  $matrix->nombre_filas(@$laboratorios);
+  $matrix->nombre_columnas(@$nombres);
 
   administrador::Consultas::modulos::llenar_matriz::llenar($matrix, $ruta);
 

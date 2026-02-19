@@ -149,8 +149,8 @@ sub consultar_medicamento {
 
   # Buscar índice del medicamento
   my $fila = undef;
-  for my $indice (0 .. $#{$self->{nombres_filas}}) {
-    if ($self->{nombres_filas}[$indice] eq $nombre_medicamento) {
+  for my $indice (0 .. $#{$self->{nombres_columnas}}) {
+    if ($self->{nombres_columnas}[$indice] eq $nombre_medicamento) {
       $fila = $indice;
       last;
     }
@@ -158,15 +158,15 @@ sub consultar_medicamento {
 
   return () unless defined $fila;  # Medicamento no encontrado
 
-  # Recorrer todos los laboratorios (columnas)
+  # Recorrer todos los laboratorios (filas)
   my @resultados;
-  for my $columna (0 .. $self->{columnas} - 1) {
-    my $datos = $self->obtener($fila, $columna);
+  for my $columna (0 .. $self->{filas} - 1) {
+    my $datos = $self->obtener($columna, $fila);
 
     # Solo incluir si hay datos (precio > 0 o cantidad > 0)
     if ($datos->{precio} > 0 || $datos->{cantidad} > 0) {
       push @resultados, {
-        laboratorio => $self->{nombres_columnas}[$columna],
+        laboratorio => $self->{nombres_filas}[$columna],
         precio => $datos->{precio},
         cantidad => $datos->{cantidad}
       };
@@ -179,7 +179,7 @@ sub imprimir {
   my ($self) = @_;
   
   # Encabezado con nombres de laboratorios
-  print "Medicamento\\Laboratorio | ";
+  print "Laboratorio \\ Nombre | ";
   foreach my $lab (@{$self->{nombres_columnas}}) {
     printf "%-20s | ", $lab;
   }

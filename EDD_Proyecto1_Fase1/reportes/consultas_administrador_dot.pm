@@ -24,7 +24,7 @@ sub generar_diagrama_matriz {
 
   # Encabezado con nombres de laboratorios
   print $fh "<TR>\n";
-  print $fh "<TD BGCOLOR=\"lightblue\"><B>Medicamento / Laboratorio</B></TD>\n";
+  print $fh "<TD BGCOLOR=\"lightblue\"><B> Laboratorio / Nombre </B></TD>\n";
 
   for my $idx_c (0 .. $columnas - 1) {
     my $lab = caracteres_especiales($matrix->{nombres_columnas}[$idx_c]);  #  Escapar HTML
@@ -94,7 +94,7 @@ sub colores {
 
     # Limitar el rango entre 0.2 y 4
     $factor = 0.2 if $factor < 0.2;
-    $factor = 4   if $factor > 4;
+    $factor = 4 if $factor > 4;
 
     # Normalizar a rango 0 → 1
     my $normal = ($factor - 0.2) / (4 - 0.2);
@@ -105,7 +105,7 @@ sub colores {
         # Rojo oscuro → Amarillo
         my $t = $normal / 0.5;
         $r = 139 + (255 - 139) * $t;   # 139 → 255
-        $g = 0   + (255 - 0)   * $t;   # 0   → 255
+        $g = 0 + (255 - 0) * $t;   # 0   → 255
         $b = 0;
     } else {
         # Amarillo → Verde oscuro
@@ -120,25 +120,25 @@ sub colores {
 
 # Generar imágenes con Graphviz
 sub generar_imagenes {
-  my ($dot_file, $png_file, $svg_file) = @_;
+  my ($ruta_dot, $ruta_png, $ruta_svg) = @_;
 
   # Generar PNG con charset UTF-8
-  my $cmd_png = "dot -Tpng -Gcharset=UTF-8 -Gdpi=150 '$dot_file' -o '$png_file' 2>&1";
+  my $cmd_png = "dot -Tpng -Gcharset=UTF-8 -Gdpi=150 '$ruta_dot' -o '$ruta_png' 2>&1";
   my $resultado_png = `$cmd_png`;
 
   if ($? == 0) {
-    # print "Imagen PNG generada en: $png_file\n";
+    # print "Imagen PNG generada en: $ruta_png\n";
   } else {
     warn "Falló la generación del reporte PNG\n";
     warn "Detalles: $resultado_png\n" if $resultado_png;
   }
 
   # Generar SVG con charset UTF-8
-  my $cmd_svg = "dot -Tsvg -Gcharset=UTF-8 '$dot_file' -o '$svg_file' 2>&1";
+  my $cmd_svg = "dot -Tsvg -Gcharset=UTF-8 '$ruta_dot' -o '$ruta_svg' 2>&1";
   my $resultado_svg = `$cmd_svg`;
 
   if ($? == 0) {
-    # print "Imagen SVG generada en: $svg_file\n";
+    # print "Imagen SVG generada en: $ruta_svg\n";
   } else {
     warn "Falló la generación del reporte SVG\n";
     warn "Detalles: $resultado_svg\n" if $resultado_svg;

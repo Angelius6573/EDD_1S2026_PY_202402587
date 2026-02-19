@@ -17,8 +17,8 @@ sub llenar {
     my $precio = $medicamento->{precio_unitario};
     my $cantidad_minima = $medicamento->{nivel_minimo};
 
-    my $idx_f = buscar_idx($nombre, $filas);
-    my $idx_c = buscar_idx($laboratorio, $columnas);
+    my $idx_f = buscar_idx($laboratorio, $filas);
+    my $idx_c = buscar_idx($nombre, $columnas);
 
     if ( defined $idx_f && defined $idx_c ) {
       $matrix->insertar($idx_f, $idx_c, $precio, $cantidad, $cantidad_minima);
