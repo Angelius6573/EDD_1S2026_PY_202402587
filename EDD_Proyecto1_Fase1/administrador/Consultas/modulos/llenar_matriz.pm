@@ -15,12 +15,13 @@ sub llenar {
     my $laboratorio = $medicamento->{laboratorio};
     my $cantidad = $medicamento->{cantidad};
     my $precio = $medicamento->{precio_unitario};
+    my $cantidad_minima = $medicamento->{nivel_minimo};
 
     my $idx_f = buscar_idx($nombre, $filas);
     my $idx_c = buscar_idx($laboratorio, $columnas);
 
     if ( defined $idx_f && defined $idx_c ) {
-      $matrix->insertar($idx_f, $idx_c, $precio, $cantidad);
+      $matrix->insertar($idx_f, $idx_c, $precio, $cantidad, $cantidad_minima);
     } else {
       warn "No se pudo insertar datos en la matriz dispersa...\n";
     }
