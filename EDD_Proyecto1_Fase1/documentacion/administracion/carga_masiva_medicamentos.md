@@ -58,12 +58,18 @@ Con lo hecho anteriormente, ya tenemos todos los datos almacenados en la lista, 
 ## Reportes de Graphviz
 Este apartado genera tres archivos, un archivo **.dot** asociado a graphviz con todas las instrucciones necesarias y apoyado por la lista doblemente enlazada para dar forma al gráfico, y dos archivos de imagen, un archivo **.png** por los requerimientos del proyecto y una imagen de formato vectorial **.svg** por razones de gusto del desarrollador, para ello se llama al método "**generar_diagrama_inventario()**" dentro de "[reportes/inventario_dots.pm](../../reportes/inventario_dots.pm)" y que se invoca de la siguiente manera:
 ```perl
-my $nombre_tiempo = strftime("%Y-%m-%d", localtime);
-my $numero_pseudo_aleatorio = time();
-my $name_dot = "reportes/archivos_dots/Inventario/inventario_$nombre_tiempo-$numero_pseudo_aleatorio.dot";
-my $name_png = "reportes/imagenes/Inventario/PNG/inventario_$nombre_tiempo-$numero_pseudo_aleatorio.png";
-my $name_svg = "reportes/imagenes/Inventario/SVG/inventario_$nombre_tiempo-$numero_pseudo_aleatorio.svg";
-  reportes::inventario_dots::generar_diagrama_inventario($lista, $name_dot, $name_png, $name_svg);
+sub generar_imagenes {
+  my ($dot_file, $png_file, $svg_file) = @_;
+  my $cmd_png = "dot -Tpng -Gcharset=UTF-8 -Gdpi=150 '$dot_file' -o '$png_file' 2>&1";
+  my $resultado_png = `$cmd_png`;
+
+  ...
+
+  my $cmd_svg = "dot -Tsvg -Gcharset=UTF-8 '$dot_file' -o '$svg_file' 2>&1";
+  my $resultado_svg = `$cmd_svg`;
+
+  ...
+}
 ```
 Este es un ejemplo del resultado generado:
 <p align="center">
