@@ -12,23 +12,23 @@
 <!-- sol0 -->
 <g id="node1" class="node">
 <title>sol0</title>
-<polygon fill="red" stroke="black" points="259.75,-111.5 0,-111.5 0,0 259.75,0 259.75,-111.5"/>
+<polygon fill="yellow" stroke="black" points="259.75,-111.5 0,-111.5 0,0 259.75,0 259.75,-111.5"/>
 <text xml:space="preserve" text-anchor="middle" x="129.88" y="-94.2" font-family="Times,serif" font-size="14.00">Número de solicitud: 1</text>
 <text xml:space="preserve" text-anchor="middle" x="129.88" y="-76.95" font-family="Times,serif" font-size="14.00">Código de medicamento: MED001</text>
-<text xml:space="preserve" text-anchor="middle" x="129.88" y="-59.7" font-family="Times,serif" font-size="14.00">Cantidad: 3</text>
-<text xml:space="preserve" text-anchor="middle" x="129.88" y="-42.45" font-family="Times,serif" font-size="14.00">Prioridad: Media</text>
-<text xml:space="preserve" text-anchor="middle" x="129.88" y="-25.2" font-family="Times,serif" font-size="14.00">Razón: Test</text>
-<text xml:space="preserve" text-anchor="middle" x="129.88" y="-7.95" font-family="Times,serif" font-size="14.00">Estado: Desaprobado</text>
+<text xml:space="preserve" text-anchor="middle" x="129.88" y="-59.7" font-family="Times,serif" font-size="14.00">Cantidad: 15983</text>
+<text xml:space="preserve" text-anchor="middle" x="129.88" y="-42.45" font-family="Times,serif" font-size="14.00">Prioridad: Urgente</text>
+<text xml:space="preserve" text-anchor="middle" x="129.88" y="-25.2" font-family="Times,serif" font-size="14.00">Razón: TEST MED001 15983</text>
+<text xml:space="preserve" text-anchor="middle" x="129.88" y="-7.95" font-family="Times,serif" font-size="14.00">Estado: Pendiente</text>
 </g>
 <!-- sol1 -->
 <g id="node2" class="node">
 <title>sol1</title>
 <polygon fill="yellow" stroke="black" points="591.75,-111.5 332,-111.5 332,0 591.75,0 591.75,-111.5"/>
 <text xml:space="preserve" text-anchor="middle" x="461.88" y="-94.2" font-family="Times,serif" font-size="14.00">Número de solicitud: 2</text>
-<text xml:space="preserve" text-anchor="middle" x="461.88" y="-76.95" font-family="Times,serif" font-size="14.00">Código de medicamento: MED001</text>
-<text xml:space="preserve" text-anchor="middle" x="461.88" y="-59.7" font-family="Times,serif" font-size="14.00">Cantidad: 15</text>
-<text xml:space="preserve" text-anchor="middle" x="461.88" y="-42.45" font-family="Times,serif" font-size="14.00">Prioridad: Urgente</text>
-<text xml:space="preserve" text-anchor="middle" x="461.88" y="-25.2" font-family="Times,serif" font-size="14.00">Razón: Test num random</text>
+<text xml:space="preserve" text-anchor="middle" x="461.88" y="-76.95" font-family="Times,serif" font-size="14.00">Código de medicamento: MED005</text>
+<text xml:space="preserve" text-anchor="middle" x="461.88" y="-59.7" font-family="Times,serif" font-size="14.00">Cantidad: 148</text>
+<text xml:space="preserve" text-anchor="middle" x="461.88" y="-42.45" font-family="Times,serif" font-size="14.00">Prioridad: Alta</text>
+<text xml:space="preserve" text-anchor="middle" x="461.88" y="-25.2" font-family="Times,serif" font-size="14.00">Razón: TEST MED005 148</text>
 <text xml:space="preserve" text-anchor="middle" x="461.88" y="-7.95" font-family="Times,serif" font-size="14.00">Estado: Pendiente</text>
 </g>
 <!-- sol0&#45;&gt;sol1 -->

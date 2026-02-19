@@ -69,7 +69,7 @@ sub generar_diagrama_matriz {
   generar_imagenes($ruta_dot, $ruta_png, $ruta_svg);
 }
 
-##! Escapar carácteres especiales para HTML en Graphviz
+##! Escapar caracteres especiales para HTML en Graphviz
 sub caracteres_especiales {
   my ($texto) = @_;
   return "" unless defined $texto;
@@ -87,7 +87,7 @@ sub caracteres_especiales {
 sub colores {
   my ($cantidad) = @_;
 
-  return "#ffcccc" if $cantidad < 50; # Rojo claro (crítico)
+  return "#ffcccc" if $cantidad < 50; # Crítico
   return "#ffffcc" if $cantidad < 100; # Amarillo claro (bajo)
   return "#ccffcc"; # Verde claro (normal)
 }
