@@ -34,21 +34,6 @@ sudo apt update
 sudo apt install perl libtext-csv-perl graphviz
 ```
 
-### RHEL y derivados (Fedora, Rocky Linux, AlmaLinux)
-```bash
-sudo dnf install perl perl-Text-CSV graphviz
-```
-
-### Alpine Linux y derivados (PorsmarketOS, Wolfi Linux)
-```bash
-sudo apk add perl perl-text-csv graphviz
-```
-
-### Gentoo y derivados (Chrome OS, Calculate Linux)
-```bash
-sudo emerge --ask dev-lang/perl dev-perl/Text-CSV media-gfx/graphviz
-```
-
 ## Instalación en MacOS
 Descarga del repositorio sin **Homebrew**
 ```bash
@@ -73,7 +58,7 @@ cpan Text::CSV
 
 ---
 <p align="center">
-Copyright (c) 2026 Angel Raúl Herrera Chilel.
+Copyright © 2026 Angel Raúl Herrera Chilel.
 </p>
 <p align="center">
 El contenido de terceros utilizado en este proyecto se emplea únicamente con fines educativos. Todos los derechos pertenecen a sus respectivos propietarios.
