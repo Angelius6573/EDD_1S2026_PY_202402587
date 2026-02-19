@@ -24,8 +24,7 @@ sub mostrar_info {
     my $estado_cantidad = administrador::Ver_Inventario::modulos::verificar_cantidad::verificar_cantidad($cantidad_minima, $cantidad_disponible);
     ## Verificar caducidad
     my $caducidad = administrador::Ver_Inventario::modulos::verificar_caducidad::verificar_caducidad($fecha_vencimiento);
-
-    
+ 
     printf("%-10s %-20s %-20s %-25s %-25s %-30s %-20s %-30s\n",
       $codigo, $nombre, $principio_activo, $cantidad_disponible, $cantidad_minima, $estado_cantidad, $fecha_vencimiento, $caducidad
     );

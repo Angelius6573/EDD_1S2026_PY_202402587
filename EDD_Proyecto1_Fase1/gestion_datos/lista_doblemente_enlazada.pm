@@ -111,55 +111,44 @@ sub eliminar_multi_parametro {
   my $actual = $self->{cabeza};
 
   while ($actual) {
-
     if ( ref($actual->{datos}) eq 'HASH' ) {
-
       my $coincide = 1;
 
       foreach my $clave (keys %$parametros) {
-
         if ( !defined $actual->{datos}->{$clave}
           || !defined $parametros->{$clave}
           || $actual->{datos}->{$clave} ne $parametros->{$clave} ) {
-
           $coincide = 0;
           last;
         }
       }
 
       if ($coincide) {
-
         # Caso 1: único nodo
         if ($actual == $self->{cabeza} && $actual == $self->{cola}) {
           $self->{cabeza} = undef;
           $self->{cola}   = undef;
         }
-
         # Caso 2: es cabeza
         elsif ($actual == $self->{cabeza}) {
           $self->{cabeza} = $actual->{siguiente};
           $self->{cabeza}->{anterior} = undef if $self->{cabeza};
         }
-
         # Caso 3: es cola
         elsif ($actual == $self->{cola}) {
           $self->{cola} = $actual->{anterior};
           $self->{cola}->{siguiente} = undef if $self->{cola};
         }
-
         # Caso 4: nodo intermedio
         else {
           $actual->{anterior}->{siguiente} = $actual->{siguiente};
           $actual->{siguiente}->{anterior} = $actual->{anterior};
         }
-
         return 1;  # eliminado correctamente
       }
     }
-
     $actual = $actual->{siguiente};
   }
-
   return 0; # no encontrado
 }
 
