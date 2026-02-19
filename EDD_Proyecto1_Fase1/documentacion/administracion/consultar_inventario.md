@@ -29,6 +29,7 @@ El sistema recorrerá las columnas identificando si el nombre ingresado por el a
 | Laboratorio | Precio | Cantidad |
 | - | - | - |
 | String | Int | Int |
+
 Si no existen datos para el nombre solicitado devolverá al administrador a su menú de forma segura.
 
 ## Reportes de Graphviz

@@ -1,8 +1,6 @@
 # Administración
 El usuario administrador, tras haber iniciado sesión llega a un menú con nueve opciones
 
-**Poner screenshot cuando tenga colores**
-
 ## Documentación Asociada
 | Módulo | README |
 | ------ | ------ |
@@ -15,5 +13,5 @@ El usuario administrador, tras haber iniciado sesión llega a un menú con nueve
 | Consultar Inventario | [Consultar Inventario](consultar_inventario.md) |
 
 ---
-### Regresar al menú principal
+## Regresar al menú principal
 ![<Regresar>](../../README.md)

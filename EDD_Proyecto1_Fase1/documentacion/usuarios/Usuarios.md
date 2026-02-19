@@ -1,7 +1,5 @@
-## Usuarios
+# Usuarios
 Un usuario normal es aquel que cuyas credenciales están validadas en [usuarios.json]('../../interfaz_usuario/usuarios.json') y tiene el tipo "**usuario**". Al iniciar sesión, este usuario podrá elegir una de cuatro opciones por cada vez que este en el menú de usuario.
-
-** Poner screenshot cuando haya colores **
 
 ## Documentación Asociada
 | Módulo | README |
@@ -11,5 +9,5 @@ Un usuario normal es aquel que cuyas credenciales están validadas en [usuarios.
 | Visualizar Historial de Solicitudes | [Visualizar Historial de Solicitudes](historial_solicitudes.md) |
 
 ---
-### Regresar al menú principal
+## Regresar al menú principal
 ![<Regresar>](../../README.md)
