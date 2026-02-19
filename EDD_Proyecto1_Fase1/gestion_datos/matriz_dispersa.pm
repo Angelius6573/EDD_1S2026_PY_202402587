@@ -11,7 +11,8 @@ sub nuevo {
     columnas => $columnas,
     datos => {},
     nombre_filas => [],
-    nombre_columnas => []
+    nombre_columnas => [],
+    cantidad_minima => []
   };
 
   bless $self, $clase;
@@ -39,7 +40,7 @@ sub nombre_columnas {
 }
 
 sub insertar {
-  my ($self, $fila, $columna, $precio, $cantidad) = @_;
+  my ($self, $fila, $columna, $precio, $cantidad, $cantidad_minima) = @_;
 
   if ( $fila < 0 || $fila >= $self->{filas} ) {
     die "Índice fuera del rango de la fila...\n";
@@ -57,7 +58,8 @@ sub insertar {
   } else {
     $self->{datos}{$idx} = {
       precio => $precio,
-      cantidad => $cantidad
+      cantidad => $cantidad,
+      cantidad_minima => $cantidad_minima
     };
   }
 }

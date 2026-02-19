@@ -24,9 +24,10 @@ sub inicio_sesion_admin_exitoso {
   5. Procesar solicitudes de reabastecimiento
   6. Visualizar inventario
   7. Consultar inventario
-  8. Cerrar sesión
+  8. Gestionar usuarios nuevos
+  9. Cerrar sesión
 ";
-  my $consulta = utilidades::limite_entrada::comprobacion_menu(1, 8);
+  my $consulta = utilidades::limite_entrada::comprobacion_menu(1, 9);
   return seleccion($consulta);
 }
 
@@ -40,7 +41,8 @@ sub seleccion {
     when (5) {say administrador::Reabastecimiento::reabastecimiento::verificacion()}
     when (6) {say administrador::Ver_Inventario::ver_inventario::ver_inventario()}
     when (7) {say administrador::Consultas::Consultar_Inventario::inicio()}
-    when (8) {say interfaz_usuario::inicio::consultar_usuario()}
+    when (8) {say administrador::Gestion_Usuarios::nuevo_usuario::nuevo_usuario()}
+    when (9) {say interfaz_usuario::inicio::consultar_usuario()}
   }
 }
 

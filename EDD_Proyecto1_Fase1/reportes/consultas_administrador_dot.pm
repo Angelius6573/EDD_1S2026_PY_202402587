@@ -44,14 +44,15 @@ sub generar_diagrama_matriz {
       my $datos = $matrix->obtener($idx_f, $idx_c);
       my $precio = $datos->{precio};
       my $cantidad = $datos->{cantidad};
+      my $cantidad_minima = $datos->{cantidad_minima};
 
       if ($precio > 0 || $cantidad > 0) {
         my $precio_formateado = sprintf("%.2f", $precio);
-        my $color = colores($cantidad);
-        print $fh "  <TD BGCOLOR=\"$color\">Q $precio_formateado<BR/>";
+        my $color = colores($cantidad, $cantidad_minima);
+        print $fh "<TD BGCOLOR=\"$color\">Q $precio_formateado<BR/>";
         print $fh "$cantidad unidades</TD>\n";
       } else {
-        print $fh "  <TD BGCOLOR=\"lightgray\">-</TD>\n";
+        print $fh "<TD BGCOLOR=\"lightgray\">-</TD>\n";
       }
     }
     print $fh "</TR>\n";
@@ -85,11 +86,36 @@ sub caracteres_especiales {
 
 # Función para asignar color según cantidad
 sub colores {
-  my ($cantidad) = @_;
+    my ($cantidad, $cantidad_minima) = @_;
 
-  return "#ffcccc" if $cantidad < 50; # Crítico
-  return "#ffffcc" if $cantidad < 100; # Amarillo claro (bajo)
-  return "#ccffcc"; # Verde claro (normal)
+    return "#7f0000" if $cantidad_minima == 0; # evitar división por cero
+
+    my $factor = $cantidad / $cantidad_minima;
+
+    # Limitar el rango entre 0.2 y 4
+    $factor = 0.2 if $factor < 0.2;
+    $factor = 4   if $factor > 4;
+
+    # Normalizar a rango 0 → 1
+    my $normal = ($factor - 0.2) / (4 - 0.2);
+
+    my ($r, $g, $b);
+
+    if ($normal <= 0.5) {
+        # Rojo oscuro → Amarillo
+        my $t = $normal / 0.5;
+        $r = 139 + (255 - 139) * $t;   # 139 → 255
+        $g = 0   + (255 - 0)   * $t;   # 0   → 255
+        $b = 0;
+    } else {
+        # Amarillo → Verde oscuro
+        my $t = ($normal - 0.5) / 0.5;
+        $r = 255 - (255 - 0) * $t;     # 255 → 0
+        $g = 255 - (255 - 100) * $t;   # 255 → 100
+        $b = 0;
+    }
+
+    return sprintf("#%02x%02x%02x", $r, $g, $b);
 }
 
 # Generar imágenes con Graphviz

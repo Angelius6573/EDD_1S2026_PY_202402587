@@ -11,11 +11,11 @@ sub por_codigo { # Método para hallar el nombre de un medicamento por su códig
   my ($codigo) = @_;
   my $ruta_inventario = 'administrador/Inventario/inventario.json';
   my $inventario = utilidades::leer_json::parsear_json_posiblemente_vacio($ruta_inventario);
-  
+
   foreach my $medicamento (@$inventario) {
     return $medicamento if $medicamento->{codigo} eq $codigo;
   }
-  
+
   return undef;  # No encontrado
 }
 
@@ -83,9 +83,28 @@ sub contar_pendientes {
   my $contador = 0;
 
   return 0 unless defined $datos && ref($datos) eq 'ARRAY';
-  
+
   foreach my $instancia ( @$datos ) {
     if ( defined $instancia->{estado} && $instancia->{estado} eq "Pendiente" ) {
+      $contador++;
+    }
+    if ( defined $instancia->{nombre} ) {
+      $contador++;
+    }
+  }
+
+  return $contador;
+}
+
+sub contar_pendientes_usuarios {
+  my ($ruta) = @_;
+  my $datos = utilidades::leer_json::parsear_json_posiblemente_vacio($ruta);
+  my $contador = 0;
+
+  return 0 unless defined $datos && ref($datos) eq 'ARRAY';
+
+  foreach my $instancia ( @$datos ) {
+    if ( defined $instancia->{nombre} ) {
       $contador++;
     }
   }

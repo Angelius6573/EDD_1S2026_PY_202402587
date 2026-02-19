@@ -12,6 +12,7 @@ use utilidades::limite_entrada;
 use utilidades::validar_usuarios;
 use administrador::Gestion_Usuarios::cambio_contrasena;
 use administrador::Gestion_Usuarios::nuevo_usuario;
+use interfaz_usuario::nuevo_usuario;
 
 sub consultar_usuario {
   system("clear");
@@ -54,16 +55,17 @@ sub inicio_sesion {
 
 sub crear_usuario {
   print "Servicio de creación de cuentas de usuario \n";
-    print "Nombre de usuario: "; chomp(my $nombre = <STDIN>);
-    print "Correo: "; chomp(my $correo = <STDIN>);
-    print "Nueva Contraseña: "; chomp(my $contrasena = <STDIN>);
+    print " Nombre de usuario: "; chomp(my $nombre = <STDIN>);
+    print " Correo: "; chomp(my $correo = <STDIN>);
+    print " Nueva Contraseña: "; chomp(my $contrasena = <STDIN>);
     my $confirmar_contrasena;
     do {
-      print "Confirme su contraseña por favor: "; chomp($confirmar_contrasena = <STDIN>);
+      print " Confirme su contraseña por favor: "; chomp($confirmar_contrasena = <STDIN>);
     } while ( $contrasena ne $confirmar_contrasena );
-    print "Mensaje para el administrador: "; chomp(my $mensaje = <STDIN>);
-  administrador::Gestion_Usuarios::nuevo_usuario::nuevo_usuario($nombre, $correo, $contrasena, $mensaje);
-  print "Su solicitud ha sido procesada, un administrador la confirmará pronto, gracias.\n";
+    print " Departamento: "; chomp(my $depto = <STDIN>);
+    interfaz_usuario::nuevo_usuario::nuevo_usuario($nombre, $correo, $contrasena, $depto);
+  print "Su solicitud ha sido procesada, un administrador la confirmará pronto, gracias.\n\n";
+  utilidades::cerrar::cerrar();
   consultar_usuario();
 }
 
@@ -75,9 +77,11 @@ sub recuperar_contrasenia {
   if ( administrador::Gestion_Usuarios::cambio_contrasena::validar_nueva_contrasena($nombre, $correo) ) {
     administrador::Gestion_Usuarios::cambio_contrasena::cambio_contrasena_exitoso($nombre, $correo);
     print "Cambio de contraseña exitoso. Regresando a inicio...\n";
+    utilidades::cerrar::cerrar();
     consultar_usuario();
   } else {
     print "Datos incorrectos, volviendo a inicio...\n";
+    utilidades::cerrar::cerrar();
     consultar_usuario();
   }
 }
