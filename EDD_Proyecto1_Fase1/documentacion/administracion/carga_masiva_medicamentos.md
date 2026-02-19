@@ -73,7 +73,7 @@ sub generar_imagenes {
 ```
 Este es un ejemplo del resultado generado:
 <p align="center">
-  <img src="../../assets/ejemplo_inventario.svg" alt="Ejemplo del Inventario en una Lista Doblemente Enlazada" width="1000">
+  <img src="../assets/ejemplo_inventario.svg" alt="Ejemplo del Inventario en una Lista Doblemente Enlazada" width="1000">
 </p>
 
 ---

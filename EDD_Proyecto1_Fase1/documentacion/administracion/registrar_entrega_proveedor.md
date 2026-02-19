@@ -66,7 +66,7 @@ Este es un ejemplo del resultado que se genera en el listado de los proveedores:
 </p>
 Este es un ejemplo del resultado que se genera para un proveedor y sus entregas:
 <p align="center">
-  <img src="../../assets/ejemplo_proveedor_entregas.svg" alt="Ejemplo de la Lista Circular Simple y las listas enlazadas simples con Tres Proveedores y 3, 1 y 2 entregas respectivamente" width="1000">
+  <img src="../assets/ejemplo_proveedor_entregas.svg" alt="Ejemplo de la Lista Circular Simple y las listas enlazadas simples con Tres Proveedores y 3, 1 y 2 entregas respectivamente" width="1000">
 </p>
 
 ---
