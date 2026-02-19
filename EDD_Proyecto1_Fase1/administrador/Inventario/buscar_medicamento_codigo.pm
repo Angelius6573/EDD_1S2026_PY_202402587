@@ -2,8 +2,10 @@
 package administrador::Inventario::buscar_medicamento_codigo;
 use strict;
 use warnings;
+
 use utilidades::leer_json;
 use interfaz_usuario::admin;
+use utilidades::cerrar;
 
 sub por_codigo { # Método para hallar el nombre de un medicamento por su código
   my ($codigo) = @_;
@@ -23,7 +25,7 @@ sub obtener_lab_name {
 
   if (!defined $inventario || ref($inventario) ne 'ARRAY' || @$inventario == 0) {
     warn "Advertencia: El inventario está vacío o no es válido.\n";
-    print "Presion Enter para continuar...";my $pausa = <STDIN>;
+    utilidades::cerrar::cerrar();
     return interfaz_usuario::admin::inicio_sesion_admin_exitoso();  # Retornar referencias a arrays vacíos
   }
 
@@ -47,6 +49,7 @@ sub en_general_lista {
 
   unless ($lista->can($metodo)) {
     warn "Error: El objeto no tiene el método '$metodo'\n";
+    utilidades::cerrar::cerrar();
     return $lista;
   }
 

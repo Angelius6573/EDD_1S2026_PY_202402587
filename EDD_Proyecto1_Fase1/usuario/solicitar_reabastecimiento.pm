@@ -9,13 +9,14 @@ use interfaz_usuario::usuario;
 use administrador::Inventario::leer_inventario_json;
 use usuario::reabastecimiento::formulario_reabastecimiento;
 use usuario::reabastecimiento::operar_lista_cde;
+use utilidades::cerrar;
 
 sub solicitud_medicamentos {
   my ($nombre_usuario, $codigo_depto) = @_;
   system("clear");
   print "Bienvenido $nombre_usuario al módulo para solicitar reabastecimiento de medicamentos.\n";
   print "Llene el siguiente formulario: \n";
-  print "Código del medicamento: "; chomp(my $codigo = <STDIN>);
+  print " Código del medicamento: "; chomp(my $codigo = <STDIN>);
 
   administrador::Inventario::leer_inventario_json::identificar_codigo_reabastecimiento($codigo, $nombre_usuario, $codigo_depto);
   
@@ -25,8 +26,8 @@ sub solicitud_medicamentos {
 
   usuario::reabastecimiento::operar_lista_cde::agregar($codigo, $cantidad, $prioridad, $razon, $codigo_depto, $fecha_solicitud);
 
-  print "Datos guardados, a la espera de aprovación por administrador.\n";
-  print "Volviendo al menú del usuario...\n";
+  print "Datos guardados, a la espera de aprobación por administrador. Volviendo al menú del usuario...\n\n";
+  utilidades::cerrar::cerrar();
   return interfaz_usuario::usuario::inicio_sesion_usuario_exitoso($nombre_usuario, $codigo_depto);
 }
 

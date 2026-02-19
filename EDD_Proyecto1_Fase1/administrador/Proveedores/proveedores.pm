@@ -9,6 +9,7 @@ use gestion_datos::lista_circular_simple;
 use gestion_datos::lista_simple;
 use administrador::Proveedores::formulario_proveedores;
 use administrador::Proveedores::formulario_entrega;
+use utilidades::cerrar;
 
 ## Variables globales
 my $lista_circular = gestion_datos::lista_circular_simple->nuevo();
@@ -20,7 +21,8 @@ sub gestionar_proveedor {
   print "Por favor llene el siguiente formulario: \n";
     administrador::Proveedores::formulario_proveedores::leer_json_proveedores($lista_circular);
     administrador::Proveedores::formulario_proveedores::formulario_nuevo_proveedor($lista_circular);
-  print "Proveedor registrado correctamente.\n";
+  print "Proveedor registrado correctamente. Regresando al menú del administrador...\n";
+  utilidades::cerrar::cerrar();
   return interfaz_usuario::admin::inicio_sesion_admin_exitoso();
 }
 
@@ -32,10 +34,12 @@ sub registrar_entrega {
 
   if ( !@$verificar_ruta ) {
     print "No hay proveedores registrados, por favor, use el registro de proveedores previamente.\n";
+    utilidades::cerrar::cerrar();
     return interfaz_usuario::admin::inicio_sesion_admin_exitoso();
   } else {
     print "Bienvenido administrador al área de registro de entregas.\n";
-    print "Por favor, ingrese el NIT del proveedor que va a gestionar: "; chomp(my $nit_comprobar = <STDIN>);
+    print "Por favor, ingrese el NIT del proveedor que va a gestionar:\n"; 
+    print " NIT: "; chomp(my $nit_comprobar = <STDIN>);
     
     administrador::Proveedores::formulario_proveedores::leer_json_proveedores($lista_circular); ## Leer el archivo proveedores.json
     my $proveedor = administrador::Proveedores::comprobaciones::buscar_proveedor_por_nit($lista_circular, $nit_comprobar);
@@ -54,12 +58,13 @@ sub registrar_entrega {
 
         return registrar_entrega() if $consulta eq "Y";
         return interfaz_usuario::admin::inicio_sesion_admin_exitoso() if $consulta eq "N";
-        print "Inválido, ingrese Y ó N\n";
+        print "   Inválido, ingrese Y ó N\n";
       }
     } else {
-      print "El NIT que ingreso no existe.\n";
+      print "El NIT que ingreso no existe.\n\n";
     }
   }
+  utilidades::cerrar::cerrar();
   return interfaz_usuario::admin::inicio_sesion_admin_exitoso();
 }
 

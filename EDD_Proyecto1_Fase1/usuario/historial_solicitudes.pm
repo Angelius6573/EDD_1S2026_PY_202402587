@@ -9,11 +9,12 @@ use utilidades::limite_entrada;
 use usuario::historial::ver_codigo;
 use usuario::historial::ver_todas;
 use usuario::historial::comprobaciones;
+use Term::ANSIColor;
 
 sub historial_solicitudes {
   my ($nombre_usuario, $codigo_depto) = @_;
   system("clear");
-  print "Bienvenido $nombre_usuario al apartado de consultas de su departamento $codigo_depto\n";
+  print "Bienvenido ", colored($nombre_usuario, "black"), " al apartado de consultas de su departamento \"$codigo_depto\"\n";
 
   my $reabastecimiento_depto = usuario::historial::comprobaciones::comprobar_existencia($nombre_usuario, $codigo_depto);
 

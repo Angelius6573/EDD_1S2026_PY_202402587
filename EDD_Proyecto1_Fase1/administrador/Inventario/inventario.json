@@ -253,7 +253,7 @@
       "tiempo_reabastecer" : "24 horas"
    },
    {
-      "cantidad" : 25,
+      "cantidad" : "10",
       "codigo" : "MED024",
       "fecha_vencimiento" : "2028-12-31",
       "laboratorio" : "LuxuryPharma",

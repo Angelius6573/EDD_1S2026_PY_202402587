@@ -51,9 +51,11 @@ sub generar_diagrama_inventario {
   }
   print $fh "}\n";
   close($fh);
-  print "Archivo DOT generado en: $ruta_dot\n";
+  # print "Archivo DOT generado en: $ruta_dot\n";
   generar_imagenes($ruta_dot, $ruta_png, $ruta_svg);
+  return 1;
 }
+
 sub caracteres_especiales {
   my ($texto) = @_;
   return "" unless defined $texto;
@@ -63,6 +65,7 @@ sub caracteres_especiales {
   $texto =~ s/\r//g;
   return $texto;
 }
+
 sub generar_imagenes {
   my ($dot_file, $png_file, $svg_file) = @_;
   my $cmd_png = "dot -Tpng -Gcharset=UTF-8 -Gdpi=150 '$dot_file' -o '$png_file' 2>&1";
@@ -82,4 +85,5 @@ sub generar_imagenes {
     warn "Detalles: $resultado_svg\n" if $resultado_svg;
   }
 }
+
 1;

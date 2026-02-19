@@ -8,6 +8,7 @@ use administrador::Ver_Inventario::modulos::ordenar_inventario;
 use administrador::Ver_Inventario::modulos::verificar_cantidad;
 use administrador::Ver_Inventario::modulos::mostrar_info;
 use utilidades::leer_json;
+use utilidades::cerrar;
 
 sub ver_inventario {
   system("clear");
@@ -22,12 +23,10 @@ sub ver_inventario {
     );
   print "-" x 180 . "\n";
   administrador::Ver_Inventario::modulos::mostrar_info::mostrar_info($actual);
-    
+ 
   print "\n";
-  print "Presione ENTER para continuar...";
-  my $pausa = <STDIN>;
+  utilidades::cerrar::cerrar();
 
-  print "Waos\n";
   return interfaz_usuario::admin::inicio_sesion_admin_exitoso();
 }
 

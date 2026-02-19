@@ -39,7 +39,7 @@ sub generar_diagrama_entregas {
   }
   print $fh "}\n";
   close($fh);
-  print "Archivo DOT generado en: $ruta_dot\n";
+  # print "Archivo DOT generado en: $ruta_dot\n";
   generar_imagenes($ruta_dot, $ruta_png, $ruta_svg);
 }
 sub caracteres_especiales {

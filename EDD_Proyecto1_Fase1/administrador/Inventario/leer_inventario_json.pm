@@ -11,6 +11,7 @@ use gestion_datos::lista_doblemente_enlazada;
 use utilidades::copiar_contenido_json;
 use reportes::inventario_dots;
 use reportes::nombre_archivos;
+use utilidades::cerrar;
 
 ## Las siguientes subrutinas se usan en las subrutina del registro de medicamentos del administrador,
 # en la identificación inicial del usuario para comprobar si el medicamento que quiere consultar existe
@@ -26,13 +27,13 @@ sub identificar_codigo_nombre_disponible {
 
   foreach my $medicamento ( @$datos ) {
     if ( $medicamento->{codigo} eq $validar || $medicamento->{nombre} eq $validar ) {
-      print "Nombre del medicamento: $medicamento->{nombre}\n";
-      print "Cantidad disponible: $medicamento->{cantidad}\n";
-      print "Tiempo de reabastecimiento: $medicamento->{tiempo_reabastecer}\n";
+      print " Nombre del medicamento: $medicamento->{nombre}\n";
+      print " Cantidad disponible: $medicamento->{cantidad}\n";
+      print " Tiempo de reabastecimiento: $medicamento->{tiempo_reabastecer}\n\n";
       return 1;
     }
   }
-  print "La información solicitada no existe. Regresando a menú del usuario...\n";
+  print "La información solicitada no existe. Regresando al menú del usuario...\n";
   return 0;
 }
 
@@ -47,8 +48,8 @@ sub identificar_codigo_reabastecimiento {
     }
   }
 
-  print "El medicamento solicitado no existe en el inventario.\n";
-  print "Regresando a menú de usuario...\n";
+  print "El medicamento solicitado no existe en el inventario. Regresando al menú de usuario...\n";
+  utilidades::cerrar::cerrar();
   interfaz_usuario::usuario::inicio_sesion_usuario_exitoso($nombre_usuario, $codigo_depto);
   return 0;
 }
@@ -64,7 +65,8 @@ sub identificar_codigo_registro_medicamentos {
         return 1;
     }
   }
-  print "El código no existe. Regresando al menú del administrador...\n";
+  print "El código ingresado no existe en el inventario. Regresando al menú del administrador...\n\n";
+  utilidades::cerrar::cerrar();
   interfaz_usuario::admin::inicio_sesion_admin_exitoso();
 }
 
@@ -91,6 +93,7 @@ sub agregar_cantidad {
     return 1;
   } else {
     print "No se pudo actualizar el inventario.\n";
+    utilidades::cerrar::cerrar();
     return 0;
   }
 }

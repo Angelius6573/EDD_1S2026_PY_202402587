@@ -13,6 +13,7 @@ use gestion_datos::lista_doblemente_enlazada;
 use reportes::inventario_dots;
 use reportes::nombre_archivos;
 use utilidades::comparar_cantidades;
+use utilidades::cerrar;
 
 sub registrar_medicamento { #Registro manual
   my $lista = gestion_datos::lista_doblemente_enlazada->nuevo(); # Creación de la lista, no global, sin dupeos
@@ -20,25 +21,25 @@ sub registrar_medicamento { #Registro manual
   system("clear");
   print "Bienvenido administrador al registro unitario de medicamentos.\n";
   print "Por favor llene el siguiente formulario: \n";
-  print "Código del medicamento: "; chomp(my $codigo_medicamento = <STDIN>);
-  print "Nombre comercial: "; chomp(my $nombre_comercial = <STDIN>);
-  print "Principio activo: "; chomp(my $principio_activo = <STDIN>);
-  print "Laboratorio fabricante: "; chomp(my $lab_fabricante = <STDIN>);
-  print "Precio del medicamento: "; chomp(my $precio = <STDIN>);
+  print " Código del medicamento: "; chomp(my $codigo_medicamento = <STDIN>);
+  print " Nombre comercial: "; chomp(my $nombre_comercial = <STDIN>);
+  print " Principio activo: "; chomp(my $principio_activo = <STDIN>);
+  print " Laboratorio fabricante: "; chomp(my $lab_fabricante = <STDIN>);
+  print " Precio del medicamento: "; chomp(my $precio = <STDIN>);
     while (!utilidades::validar_numeros::validar_float_positivo($precio)) {
-      print "Ingrese un formato de precio válido: "; chomp($precio = <STDIN>);
+      print "   Ingrese un formato de precio válido: "; chomp($precio = <STDIN>);
     }
-  print "Cantidad a registrar: "; chomp(my $cantidad = <STDIN>);
+  print " Cantidad a registrar: "; chomp(my $cantidad = <STDIN>);
     while (!utilidades::validar_numeros::validar_int_positivo($cantidad)) {
-      print "Ingrese una cantidad válida (Número entero): "; chomp($cantidad = <STDIN>);
+      print "   Ingrese una cantidad válida (Número entero): "; chomp($cantidad = <STDIN>);
     }
-  print "Fecha de vencimiento (Año/Mes/Día): "; chomp(my $fecha_vencimiento = <STDIN>);
+  print " Fecha de vencimiento (Año/Mes/Día): "; chomp(my $fecha_vencimiento = <STDIN>);
     while (!utilidades::fecha_regex::validar_fecha($fecha_vencimiento)) {
-      print "Ingrese un formato de fecha válido (Año/Mes/Día): "; chomp($fecha_vencimiento = <STDIN>);
+      print "   Ingrese un formato de fecha válido (Año/Mes/Día): "; chomp($fecha_vencimiento = <STDIN>);
     }
-  print "Cantidad mínima permitida en stock: "; chomp(my $cantidad_minima = <STDIN>);
+  print " Cantidad mínima permitida en stock: "; chomp(my $cantidad_minima = <STDIN>);
     while (!utilidades::validar_numeros::validar_int_positivo($cantidad_minima)) {
-      print "Ingrese una cantidad válida (Número entero): "; chomp($cantidad_minima = <STDIN>);
+      print "   Ingrese una cantidad válida (Número entero): "; chomp($cantidad_minima = <STDIN>);
     }
 
   my $tiempo_reabastecimiento = utilidades::comparar_cantidades::comparar_cantidades($cantidad, $cantidad_minima);
@@ -88,7 +89,8 @@ sub registrar_medicamento { #Registro manual
   my ($nombre_dot, $nombre_png, $nombre_svg) = reportes::nombre_archivos::nombre("Inventario", "inventario");
   reportes::inventario_dots::generar_diagrama_inventario($lista, $nombre_dot, $nombre_png, $nombre_svg);
 
-  print "Carga finalizada, regresando a interfaz de administrador...\n";
+  print "Carga finalizada, regresando a interfaz de administrador...\n\n";
+  utilidades::cerrar::cerrar();
   return interfaz_usuario::admin::inicio_sesion_admin_exitoso();
 }
 
@@ -99,7 +101,7 @@ sub registrar_medicamento_masivo { # Carga por archivos .csv
   my $ruta_d = 'administrador/Inventario/carga_masiva.csv';
   print "Bienvenido administrador, al entorno de carga masiva de datos por archivos .csv\n";
   print "Por favor ingrese la ruta local del archivo.\n";
-  print "Si no ingresa nada se usa la ruta \"$ruta_d\" \n";
+  print "Si no ingresa nada se usará la ruta por defecto: \"$ruta_d\" \n";
   print " Ruta: "; my $ruta = <STDIN>;
 
     ## !Urgente: Añadir método para validar si la ruta ingresada es válida
@@ -146,7 +148,8 @@ sub registrar_medicamento_masivo { # Carga por archivos .csv
   my ($nombre_dot, $nombre_png, $nombre_svg) = reportes::nombre_archivos::nombre("Inventario", "inventario");
   reportes::inventario_dots::generar_diagrama_inventario($lista, $nombre_dot, $nombre_png, $nombre_svg);
 
-  print "Carga finalizada, regresando a interfaz de administrador...\n";
+  print "Carga finalizada, regresando a interfaz de administrador...\n\n";
+  utilidades::cerrar::cerrar();
   return interfaz_usuario::admin::inicio_sesion_admin_exitoso();
 }
 

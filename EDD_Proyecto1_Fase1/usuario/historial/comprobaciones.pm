@@ -6,6 +6,7 @@ use warnings;
 use interfaz_usuario::usuario;
 use gestion_datos::lista_circular_doblemente_enlazada;
 use utilidades::leer_json;
+use utilidades::cerrar;
 
 sub comprobar_existencia {
   my ($usuario, $codigo_depto) = @_;
@@ -13,6 +14,7 @@ sub comprobar_existencia {
 
   if ( !-e $ruta ) {
     print "Su departamento no ha procesado solicitudes.\n";
+    utilidades::cerrar::cerrar();
     return interfaz_usuario::usuario::inicio_sesion_usuario_exitoso($usuario, $codigo_depto);
   }
 
@@ -20,6 +22,7 @@ sub comprobar_existencia {
 
   if ( ref($reabastecimiento_depto) eq 'ARRAY' && @$reabastecimiento_depto == 0 ) {
     print "Su departamento no ha procesado solicitudes.\n";
+    utilidades::cerrar::cerrar();
     return interfaz_usuario::usuario::inicio_sesion_usuario_exitoso($usuario, $codigo_depto);
   }
   return $reabastecimiento_depto;

@@ -6,6 +6,7 @@ use warnings;
 use interfaz_usuario::usuario;
 use usuario::historial::comprobaciones;
 use usuario::historial::ver_codigo;
+use utilidades::cerrar;
 
 sub ver_todas {
   my ($usuario, $codigo_depto, $reabastecimiento_depto) = @_;
@@ -29,8 +30,7 @@ sub ver_todas {
     $Solicitud++;
   }
 
-  print "Ingrese Enter para continuar...\n"; chomp(my $pausa = <STDIN>);
-
+  utilidades::cerrar::cerrar();
   return interfaz_usuario::usuario::inicio_sesion_usuario_exitoso($usuario, $codigo_depto);
 }
 

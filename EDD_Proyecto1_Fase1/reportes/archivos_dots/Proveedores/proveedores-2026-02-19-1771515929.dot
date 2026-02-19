@@ -1,0 +1,18 @@
+digraph proveedores {
+charset="UTF-8";
+rankdir=TB;
+node [shape=box, style=filled, fillcolor=gray90];
+graph [nodesep=1.2, ranksep=0.7];
+
+prov0 [label="Contacto: \nDirección: 5\nEmpresa: \nNIT: \nTeléfono: 45863215", fillcolor=lightblue];
+prov1 [label="Contacto: \nDirección: 2\nEmpresa: \nNIT: \nTeléfono: 15987431", fillcolor=lightblue];
+
+
+{rank=same; prov0; prov1; }
+
+
+prov0 -> prov1 [constraint=false];
+prov1 -> prov0 [constraint=false];
+
+prov0 -> prov1 [style=invis, weight=10];
+}

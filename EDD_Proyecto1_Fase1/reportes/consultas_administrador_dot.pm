@@ -63,7 +63,7 @@ sub generar_diagrama_matriz {
 
   close($fh);
 
-  print "Archivo DOT generado en: $ruta_dot\n";
+  # print "Archivo DOT generado en: $ruta_dot\n";
 
   # Generar imágenes con charset UTF-8
   generar_imagenes($ruta_dot, $ruta_png, $ruta_svg);
@@ -101,7 +101,7 @@ sub generar_imagenes {
   my $resultado_png = `$cmd_png`;
 
   if ($? == 0) {
-    print "Imagen PNG generada en: $png_file\n";
+    # print "Imagen PNG generada en: $png_file\n";
   } else {
     warn "Falló la generación del reporte PNG\n";
     warn "Detalles: $resultado_png\n" if $resultado_png;
@@ -112,7 +112,7 @@ sub generar_imagenes {
   my $resultado_svg = `$cmd_svg`;
 
   if ($? == 0) {
-    print "Imagen SVG generada en: $svg_file\n";
+    # print "Imagen SVG generada en: $svg_file\n";
   } else {
     warn "Falló la generación del reporte SVG\n";
     warn "Detalles: $resultado_svg\n" if $resultado_svg;

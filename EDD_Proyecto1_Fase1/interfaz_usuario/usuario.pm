@@ -12,6 +12,8 @@ use usuario::solicitar_reabastecimiento;
 
 sub inicio_sesion_usuario_exitoso {
   my ($nombre_usuario, $codigo_depto) = @_;
+
+  system("clear");
   print "Bienvenido nuevamente $nombre_usuario\n";
   print "Elige tu siguiente acción:
   1. Consultar disponibilidad de un producto

@@ -5,6 +5,7 @@ use warnings;
 use feature qw(say switch);
 
 use interfaz_usuario::admin;
+use utilidades::cerrar;
 
 use utilidades::leer_json;
 use utilidades::limite_entrada;
@@ -13,6 +14,7 @@ use administrador::Gestion_Usuarios::cambio_contrasena;
 use administrador::Gestion_Usuarios::nuevo_usuario;
 
 sub consultar_usuario {
+  system("clear");
   print "Bienvenido al servicio de gestión de datos EDD MEDTRACK \n";
   print "Diganos, ¿Qué desea hacer?";
   print "
@@ -39,12 +41,14 @@ sub comprobar_entrada {
 }
 
 sub inicio_sesion {
+  system("clear");
   print "Inicio de Sesión\n";
     print "Usuario: "; chomp(my $usuario = <STDIN>);
     print "Contraseña: "; chomp(my $contrasena = <STDIN>);
     print "Código Departamental: "; chomp(my $codigo_departamental = <STDIN>);
   utilidades::validar_usuarios::validar_usuario($usuario, $contrasena, $codigo_departamental);
     print "Usuario no identificado. Volviendo a inicio...\n";
+    utilidades::cerrar::cerrar();
   consultar_usuario();
 }
 

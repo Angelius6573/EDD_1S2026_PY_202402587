@@ -4,7 +4,7 @@ use strict;
 use warnings;
 
 sub cerrar {
-  print "Presione Enter para continuar...\n"; chomp(my $pausa = <STDIN>);
+  print "Presione Enter para continuar..."; chomp(my $pausa = <STDIN>);
 }
 
 1;
