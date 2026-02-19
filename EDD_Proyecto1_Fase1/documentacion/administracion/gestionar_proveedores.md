@@ -1,6 +1,7 @@
 # Gestionar Proveedores
 
-Si el usuario elige la opción 3 en el menú principal del administrador será redirigido a un formulario donde deberá llenar lo siguiente:
+Si el administrador elige la opción 3 será llevado a un formulario donde deberá llenar lo siguiente:
+
 | Información Ingresada | Tipo de Dato |
 | --------------- | --------------- |
 | NIT | String |
@@ -39,16 +40,23 @@ Al igual que con la carga de medicamentos, usamos el método "**almacenar_array_
 ## Reportes de Graphviz
 Este apartado genera tres archivos, un archivo **.dot** asociado a graphviz con todas las instrucciones necesarias y apoyado por la lista circular simple para dar forma al gráfico, y dos archivos de imagen, un archivo **.png** por los requerimientos del proyecto y una imagen de formato vectorial **.svg** por razones de gusto del desarrollador, para ello se llama al método "**generar_diagrama_inventario()**" dentro de "[reportes/proveedores_dots.pm](../../reportes/proveedores_dots.pm)" y que se invoca de la siguiente manera:
 ```Perl
-my $fecha = strftime("%Y-%m-%d", localtime);
-my $nombre_tiempo = time();
-my $dot_name = "reportes/archivos_dots/Proveedores/Proveedores_$fecha-$nombre_tiempo.dot";
-my $png_name = "reportes/imagenes/Proveedores/PNG/Proveedores_$fecha-$nombre_tiempo.png";
-my $svg_name = "reportes/imagenes/Proveedores/SVG/Proveedores_$fecha-$nombre_tiempo.svg";
-	reportes::proveedores_dots::generar_diagrama_proveedores($lista_circular, $dot_name, $png_name, $svg_name);
+sub generar_imagenes {
+  my ($ruta_dot, $ruta_png, $ruta_svg) = @_;
+
+  my $cmd_png = "dot -Tpng -Gcharset=UTF-8 -Gdpi=150 '$ruta_dot' -o '$ruta_png' 2>&1";
+  my $resultado_png = $cmd_png;
+
+  ...
+
+  my $cmd_svg = "dot -Tsvg -Gcharset=UTF-8 '$ruta_dot' -o '$ruta_svg' 2>&1";
+  my $resultado_svg = `$cmd_svg`;
+
+  ...
+}
 ```
 Este es un ejemplo del resultado generado:
 <p align="center">
-  <img src="../../assets/ejemplo_proveedores.svg" alt="Ejemplo de la Lista Circular Simple con Tres Proveedores" width="1000">
+  <img src="../assets/ejemplo_proveedores.svg" alt="Ejemplo de la Lista Circular Simple con Tres Proveedores" width="1000">
 </p>
 
 ---

@@ -1,6 +1,7 @@
 # Registrar Entrega de Proveedor
 
-Si el usuario elige la opción 4 en el menú principal del administrador será redirigido a un formulario donde deberá llenar lo siguiente:
+Si el administrador elige la opción 4 será llevado a un formulario donde deberá llenar lo siguiente:
+
 | Información Ingresada | Tipo de Dato |
 | --------------- | --------------- |
 | Código del Medicamento | String |

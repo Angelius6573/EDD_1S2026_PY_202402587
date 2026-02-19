@@ -1,6 +1,7 @@
 # Registrar Medicamento
 
-El usuario al elegir la opción 1 del menú del administrador será llevado a un formulario donde deberá llenar lo siguiente:
+El administrador al elegir la opción 1 será llevado a un formulario donde deberá llenar lo siguiente:
+
 | Información Ingresada | Tipo de Dato |
 | ---- | ---- |
 | Código del Medicamento | String |

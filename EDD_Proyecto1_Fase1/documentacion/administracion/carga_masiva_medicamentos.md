@@ -1,6 +1,6 @@
 # Carga Masiva de Medicamentos
 
-El usuario al elegir la opción 2 será llevado a un menú de carga para archivos **.csv**, al igual que en la carga individual de medicamentos, el archivo deberá contener los encabezados con los términos exactos presentados en la carga individual para hacer una asociación correcta.
+El administrador al elegir la opción 2 será llevado a un menú de carga para archivos **.csv**, al igual que en la carga individual de medicamentos, el archivo deberá contener los encabezados con los términos exactos presentados en la carga individual para hacer una asociación correcta.
 
 | codigo | nombre | principio_activo | laboratorio | precio_unitario | cantidad | fecha_vencimiento | nivel_minimo |
 | --- | --- | --- | --- | --- | --- | --- | --- |
