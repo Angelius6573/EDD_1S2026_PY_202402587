@@ -10,6 +10,12 @@ sub generar {
   my $ruta = 'administrador/Proveedores/proveedores.json';
   my $proveedores = utilidades::leer_json::parsear_json_posiblemente_vacio($ruta);
 
+  if ( !@$proveedores ) {
+    print "No hay proveedores registrados, por favor, use el registro de proveedores previamente.\n";
+    utilidades::cerrar::cerrar();
+    return interfaz_usuario::admin::inicio_sesion_admin_exitoso();
+  }
+
   foreach my $proveedor ( @$proveedores ) {
     $lista_circular->insertar_nuevo($proveedor);
   }

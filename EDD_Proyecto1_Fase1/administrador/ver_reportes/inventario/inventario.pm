@@ -9,6 +9,14 @@ sub generar {
   my $lista = gestion_datos::lista_doblemente_enlazada->nuevo();
   my $copia_inventario = [];
   my $ruta = 'administrador/Inventario/inventario.json';
+
+  my $comprobar_ruta = utilidades::leer_json::parsear_json_posiblemente_vacio($ruta);
+  if ( !@$comprobar_ruta ) {
+    print "No hay datos en el inventario, por favor, use el registro de inventario previamente.\n";
+    utilidades::cerrar::cerrar();
+    return interfaz_usuario::admin::inicio_sesion_admin_exitoso();
+  }
+
   my $metodo = "insertar_final";
   utilidades::copiar_contenido_json::copiar($copia_inventario, $ruta, $metodo, $lista);
 

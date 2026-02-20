@@ -22,6 +22,13 @@ sub generar {
   }
 
   my $solicitudes_existentes = utilidades::leer_json::parsear_json_posiblemente_vacio($ruta);
+
+  if ( !@$solicitudes_existentes ) {
+    print "No hay solicitudes pendientes\n";
+    utilidades::cerrar::cerrar();
+    return interfaz_usuario::admin::inicio_sesion_admin_exitoso();
+  }
+
   foreach my $solicitud ( @$solicitudes_existentes ) {
     $lista->insertar_final($solicitud);
   }
