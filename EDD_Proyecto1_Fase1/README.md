@@ -11,7 +11,7 @@ El Hospital General San Carlos necesita implementar el sistema **EDD MedTrack** 
 ## Documentación
 - [Administración](documentacion/administracion/Administrador.md)
 - [Usuarios](documentacion/usuarios/Usuarios.md)
-- [Reportes](documentacion/reportes/Reportes.md)
+- [Estructuras de Datos Lineales](documentacion/reportes/Reportes.md)
 
 ## Tecnología
 La **EDD MedTrack** esta enteramente desarrollada con el lenguaje de programación Perl, el entorno de desarrollo fue una computadora portátil con ArchLinux y NeoVim como IDE. El uso de librerías externas se redujo únicamente a dos, **Text::CSV** y **Graphviz**, que son útiles para la lectura de archivos **.csv** con mayor facilidad y a la generación de reportes gráficos respectivamente.
