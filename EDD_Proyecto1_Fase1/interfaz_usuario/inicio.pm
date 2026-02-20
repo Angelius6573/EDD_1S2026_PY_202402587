@@ -22,9 +22,8 @@ sub consultar_usuario {
   1. Iniciar sesión
   2. Crear usuario
   3. Recuperar contraseña
-  4. Salir 
-  5. Admin \n";
-  my $consulta = utilidades::limite_entrada::comprobacion_menu(1, 5);
+  4. Salir \n";
+  my $consulta = utilidades::limite_entrada::comprobacion_menu(1, 4);
   #system("clear");
   comprobar_entrada($consulta);
 }
@@ -37,7 +36,7 @@ sub comprobar_entrada {
     when (2) {say crear_usuario()}
     when (3) {say recuperar_contrasenia()}
     when (4) {say exit 0}
-    when (5) {say interfaz_usuario::admin::inicio_sesion_admin_exitoso()}
+    # when (5) {say interfaz_usuario::admin::inicio_sesion_admin_exitoso()}
   }
 }
 
