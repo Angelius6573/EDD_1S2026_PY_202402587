@@ -1,0 +1,7 @@
+digraph solicitudes_reabastecimiento {
+charset="UTF-8";
+rankdir=TB;
+node [shape=box, style=filled];
+graph [nodesep=1.0, ranksep=1.5];
+
+}

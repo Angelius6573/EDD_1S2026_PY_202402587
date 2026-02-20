@@ -1,0 +1,251 @@
+digraph MatrizInventario {
+charset="UTF-8";
+node [shape=plaintext];
+
+matriz [label=<
+<TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0">
+<TR>
+<TD BGCOLOR="lightblue"><B> Laboratorio / Nombre </B></TD>
+<TD BGCOLOR="lightgreen"><B>Klonopin</B></TD>
+<TD BGCOLOR="lightgreen"><B>Vasotec</B></TD>
+<TD BGCOLOR="lightgreen"><B>Amoxil</B></TD>
+<TD BGCOLOR="lightgreen"><B>Humulina R</B></TD>
+<TD BGCOLOR="lightgreen"><B>Proventil</B></TD>
+<TD BGCOLOR="lightgreen"><B>Glucophage</B></TD>
+<TD BGCOLOR="lightgreen"><B>Cipro</B></TD>
+<TD BGCOLOR="lightgreen"><B>Zocor</B></TD>
+<TD BGCOLOR="lightgreen"><B>Capoten</B></TD>
+<TD BGCOLOR="lightgreen"><B>Voltaren</B></TD>
+<TD BGCOLOR="lightgreen"><B>Advil</B></TD>
+<TD BGCOLOR="lightgreen"><B>Zantac</B></TD>
+<TD BGCOLOR="lightgreen"><B>Euthyrox</B></TD>
+<TD BGCOLOR="lightgreen"><B>Humulina N</B></TD>
+<TD BGCOLOR="lightgreen"><B>Prilosec</B></TD>
+<TD BGCOLOR="lightgreen"><B>Cozaar</B></TD>
+<TD BGCOLOR="lightgreen"><B>Lipitor</B></TD>
+<TD BGCOLOR="lightgreen"><B>Tylenol</B></TD>
+<TD BGCOLOR="lightgreen"><B>Zithromax</B></TD>
+</TR>
+<TR>
+<TD BGCOLOR="lightyellow"><B>EndocrinoLab</B></TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="#006400">Q 6.75<BR/>3500 unidades</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+</TR>
+<TR>
+<TD BGCOLOR="lightyellow"><B>LabFarma</B></TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="#006400">Q 12.30<BR/>3800 unidades</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="#006400">Q 5.75<BR/>3500 unidades</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="#006400">Q 2.50<BR/>5000 unidades</TD>
+<TD BGCOLOR="lightgray">-</TD>
+</TR>
+<TR>
+<TD BGCOLOR="lightyellow"><B>MediPharma</B></TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="#006400">Q 12.50<BR/>4863 unidades</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+</TR>
+<TR>
+<TD BGCOLOR="lightyellow"><B>AntibioLab</B></TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="#006400">Q 18.50<BR/>1800 unidades</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="#006400">Q 22.00<BR/>1500 unidades</TD>
+</TR>
+<TR>
+<TD BGCOLOR="lightyellow"><B>BioFarma</B></TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="#006400">Q 5.20<BR/>4500 unidades</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="#006400">Q 3.90<BR/>6000 unidades</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+</TR>
+<TR>
+<TD BGCOLOR="lightyellow"><B>NeuroPharma</B></TD>
+<TD BGCOLOR="#006400">Q 8.90<BR/>2000 unidades</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+</TR>
+<TR>
+<TD BGCOLOR="lightyellow"><B>DiabetPharma</B></TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="#006400">Q 135.00<BR/>750 unidades</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="#006400">Q 125.00<BR/>800 unidades</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+</TR>
+<TR>
+<TD BGCOLOR="lightyellow"><B>GenericLab</B></TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="#006400">Q 3.75<BR/>5500 unidades</TD>
+<TD BGCOLOR="#006400">Q 4.20<BR/>4500 unidades</TD>
+<TD BGCOLOR="#006400">Q 6.30<BR/>2800 unidades</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+</TR>
+<TR>
+<TD BGCOLOR="lightyellow"><B>RespiraLab</B></TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="#006400">Q 45.50<BR/>1200 unidades</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+</TR>
+<TR>
+<TD BGCOLOR="lightyellow"><B>CardioMed</B></TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="#006400">Q 4.10<BR/>3200 unidades</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="#006400">Q 8.20<BR/>4000 unidades</TD>
+<TD BGCOLOR="#006400">Q 15.80<BR/>2500 unidades</TD>
+<TD BGCOLOR="lightgray">-</TD>
+<TD BGCOLOR="lightgray">-</TD>
+</TR>
+</TABLE>
+>];
+}

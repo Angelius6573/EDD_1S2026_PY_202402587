@@ -1,0 +1,15 @@
+digraph solicitudes_reabastecimiento {
+charset="UTF-8";
+rankdir=TB;
+node [shape=box, style=filled];
+graph [nodesep=1.0, ranksep=1.5];
+
+sol0 [label="Número de solicitud: 1\nCódigo de medicamento: MED002\nCantidad: 15\nPrioridad: Alta\nRazón: Waos\nEstado: Pendiente", fillcolor=yellow];
+
+{rank=same; sol0; }
+
+sol0 -> sol0 [color=red, penwidth=2.0];
+
+sol0 -> sol0 [color=black, penwidth=1.5, constraint=false];
+
+}

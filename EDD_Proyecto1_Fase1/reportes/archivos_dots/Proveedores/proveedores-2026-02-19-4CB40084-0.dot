@@ -1,0 +1,17 @@
+digraph proveedores {
+charset="UTF-8";
+rankdir=TB;
+node [shape=box, style=filled, fillcolor=gray90];
+graph [nodesep=1.2, ranksep=0.7];
+
+prov0 [label="Contacto: w\nDirección: 11\nEmpresa: 15\nNIT: 123\nTeléfono: 12345678", fillcolor=lightblue];
+
+prov0_e0 [label="Código: MED002\nCantidad: 1863\nFecha de Entrega: 2026/08/23\nFactura: 1594", fillcolor=lightyellow];
+
+{rank=same; prov0; }
+
+prov0 -> prov0_e0;
+
+prov0 -> prov0 [constraint=false];
+
+}

@@ -1,0 +1,15 @@
+digraph proveedores {
+charset="UTF-8";
+rankdir=TB;
+node [shape=box, style=filled, fillcolor=gray90];
+graph [nodesep=1.2, ranksep=0.7];
+
+prov0 [label="Contacto: Waos\nDirección: JWS\nEmpresa: Test\nNIT: 12365\nTeléfono: 12596324", fillcolor=lightblue];
+
+
+{rank=same; prov0; }
+
+
+prov0 -> prov0 [constraint=false];
+
+}
