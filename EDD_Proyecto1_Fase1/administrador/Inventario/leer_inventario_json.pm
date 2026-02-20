@@ -33,7 +33,7 @@ sub identificar_codigo_nombre_disponible {
       return 1;
     }
   }
-  print "La información solicitada no existe. Regresando al menú del usuario...\n";
+  print "La información solicitada no existe. Regresando al menú del usuario...\n\n";
   return 0;
 }
 

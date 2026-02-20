@@ -1,41 +1,20 @@
 codigo,nombre,principio_activo,laboratorio,precio_unitario,cantidad,fecha_vencimiento,nivel_minimo
-MED001,Glucophage,Metformina,BioFarma,3.90,860,2026-11-15,600
-MED002,Zantac,Ranitidina,GenericLab,6.30,355,2026-07-20,350
-MED003,Cozaar,Losartán,CardioMed,8.20,430,2027-01-10,450
-MED004,Paracetamol 500mg,Acetaminofén,FarmaCorp,1.50,1200,2026-08-30,800
-MED005,Ibuprofeno 400mg,Ibuprofeno,GenericLab,2.75,450,2026-06-15,300
-MED006,Amoxicilina 500mg,Amoxicilina,BioFarma,5.80,180,2026-03-20,200
-MED007,Atorvastatina,Atorvastatina,CardioMed,12.50,90,2027-05-10,100
-MED008,Omeprazol 20mg,Omeprazol,FarmaCorp,3.20,650,2026-12-01,500
-MED009,Metformina XR,Metformina,GenericLab,4.50,320,2026-09-25,400
-MED010,Losartán 50mg,Losartán,CardioMed,7.80,280,2027-02-14,250
-MED011,Aspirina 100mg,Ácido acetilsalicílico,BioFarma,0.95,2500,2028-01-05,1500
-MED012,Glucophage,Metformina,GenericLab,3.50,420,2026-10-18,500
-MED013,Insulina Glargina,Insulina,DiabetCare,45.00,25,2026-04-10,50
-MED014,Levotiroxina 100mcg,Levotiroxina,EndocrineLab,8.90,175,2026-07-08,200
-MED015,Enalapril 10mg,Enalapril,CardioMed,2.30,890,2027-03-22,600
-MED016,Salbutamol Inhalador,Salbutamol,RespiraPharma,15.60,85,2026-05-30,100
-MED017,Cetirizina 10mg,Cetirizina,AllergyMeds,1.80,1450,2026-11-20,1000
-MED018,Diclofenaco Gel,Diclofenaco,FarmaCorp,6.70,220,2026-08-12,150
-MED019,Prednisona 5mg,Prednisona,GenericLab,3.40,380,2027-01-28,300
-MED020,Metoclopramida,Metoclopramida,DigestCare,2.10,540,2026-09-05,400
-MED021,Medicamento Caducado,Compuesto X,TestLab,10.00,100,2025-01-15,50
-MED022,Stock Crítico,Principio Y,BioFarma,8.50,5,2027-06-30,200
-MED023,SinStock,Compuesto Z,GenericLab,12.00,0,2026-12-31,100
-MED024,Precio Alto,Ingrediente Activo,LuxuryPharma,999.99,10,2028-12-31,5
-MED025,Precio Bajo,Ingrediente Común,BudgetMeds,0.01,5000,2026-06-01,3000
-MED026,Cantidad Masiva,Vitamina C,VitaLife,0.50,99999,2027-08-15,50000
-MED027,Vence Mañana,Medicamento Urgente,FastExpire,25.00,30,2026-02-16,20
-MED028,Vence Hoy,Medicamento Crítico,FastExpire,20.00,15,2026-02-15,10
-MED029,Nombre Muy Largo Para Probar Límites del Sistema y Ver Si Hay Truncamiento,Principio Activo Muy Largo,LabConNombreLargo,7.50,200,2026-10-10,150
-MED030,Ñoño Médico Ü,Ácido Málico,LabEñe,5.00,100,2026-12-25,80
-MED031,Med-Con-Guiones,Anti-Inflamatorio,Pharma-Tech,9.80,150,2027-04-18,100
-MED032,Med.Con.Puntos,Analgesico.Especial,Corp.Medical,11.20,75,2026-08-22,50
-MED033,Glucophage,Metformina,BioFarma,4.20,350,2027-02-10,400
-MED034,Paracetamol 500mg,Acetaminofén,BioFarma,1.75,800,2026-09-12,600
-MED035,Paracetamol 500mg,Acetaminofén,GenericLab,1.20,950,2026-07-05,700
-MED036,Ibuprofeno 400mg,Ibuprofeno,BioFarma,3.00,320,2026-05-20,250
-MED037,Ibuprofeno 400mg,Ibuprofeno,CardioMed,2.50,480,2026-06-28,300
-MED038,Cantidad=MínimoExacto,Principio Igual,TestLab,5.00,100,2026-11-11,100
-MED039,Debajo del 20 Porciento,Principio Bajo,TestLab,6.00,18,2027-01-01,100
-MED040,Medicamento Normal Final,Principio Normal,GenericLab,7.25,500,2026-10-30,350
+MED001,Tylenol,Paracetamol,LabFarma,2.50,5000,2026-12-31,500
+MED002,Amoxil,Amoxicilina,MediPharma,12.50,3000,2026-08-15,300
+MED003,Advil,Ibuprofeno,GenericLab,4.20,4500,2026-10-20,450
+MED004,Prilosec,Omeprazol,LabFarma,5.75,3500,2026-09-30,400
+MED005,Glucophage,Metformina,BioFarma,3.90,6000,2026-11-15,600
+MED006,Zantac,Ranitidina,GenericLab,6.30,2800,2026-07-20,350
+MED007,Cozaar,Losartán,CardioMed,8.20,4000,2027-01-10,450
+MED008,Lipitor,Atorvastatina,CardioMed,15.80,2500,2026-10-05,300
+MED009,Voltaren,Diclofenaco,GenericLab,3.75,5500,2026-08-25,500
+MED010,Cipro,Ciprofloxacino,AntibioLab,18.50,1800,2026-12-20,250
+MED011,Zithromax,Azitromicina,AntibioLab,22.00,1500,2026-11-30,200
+MED012,Capoten,Captopril,CardioMed,4.10,3200,2027-02-15,400
+MED013,Humulina N,Insulina NPH,DiabetPharma,125.00,800,2026-06-30,100
+MED014,Humulina R,Insulina Humana,DiabetPharma,135.00,750,2026-06-30,100
+MED015,Proventil,Salbutamol,RespiraLab,45.50,1200,2026-10-15,150
+MED016,Zocor,Simvastatina,LabFarma,12.30,3800,2026-12-10,400
+MED017,Vasotec,Enalapril,BioFarma,5.20,4500,2027-01-05,500
+MED018,Klonopin,Clonazepam,NeuroPharma,8.90,2000,2026-09-10,250
+MED019,Euthyrox,Levotiroxina,EndocrinoLab,6.75,3500,2026-11-20,400

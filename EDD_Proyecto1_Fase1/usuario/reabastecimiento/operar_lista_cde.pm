@@ -4,6 +4,7 @@ use strict;
 use warnings;
 use File::Path qw(make_path);
 use JSON::PP;
+use Data::UUID;
 
 use gestion_datos::lista_circular_doblemente_enlazada;
 use utilidades::copiar_contenido_json;
@@ -17,7 +18,8 @@ sub agregar {
   my $lista = gestion_datos::lista_circular_doblemente_enlazada->nuevo();
   my $lista_admin = gestion_datos::lista_circular_doblemente_enlazada->nuevo();
   my $lista_doblemente_enlazada = gestion_datos::lista_doblemente_enlazada->nuevo();
-  my $codigo_unico = time() . int( rand(10000) ) . $$;
+  my $ug = Data::UUID->new;
+  my $codigo_unico = $ug->create_str;
 
   my $directorio = "administrador/Reabastecimiento/Inventario_Departamental/$codigo_depto";
   my $ruta = "administrador/Reabastecimiento/Inventario_Departamental/$codigo_depto/solicitudes_reabastecimiento.json";
