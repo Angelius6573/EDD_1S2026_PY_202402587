@@ -1,0 +1,23 @@
+[
+   {
+      "codigo_departamental" : "",
+      "contrasena" : "1234",
+      "correo" : "admin@example.com",
+      "tipo" : "admin",
+      "usuario" : "admin"
+   },
+   {
+      "codigo_departamental" : "a",
+      "contrasena" : "a",
+      "correo" : "a@example.com",
+      "tipo" : "usuario",
+      "usuario" : "a"
+   },
+   {
+      "codigo_departamental" : "b",
+      "contrasena" : "b",
+      "correo" : "b@example.com",
+      "tipo" : "usuario",
+      "usuario" : "b"
+   }
+]
