@@ -62,6 +62,21 @@ sub almacenar_array_simple {
   return \@datos;
 }
 
+# Método para buscar un elemento por código exacto
+# Retorna el hash de datos del nodo o undef si no existe
+sub buscar_por_codigo {
+    my ($self, $codigo) = @_;
+    my $actual = $self->{cabeza};
+    while ($actual) {
+        if (defined $actual->{datos}->{codigo} &&
+            $actual->{datos}->{codigo} eq $codigo) {
+            return $actual->{datos};
+        }
+        $actual = $actual->{siguiente};
+    }
+    return undef;
+}
+
 # Método para buscar el elemento cuyo código coincida y modificar su cantidad
 # Esto es para modificar el inventario.json desde el formulario de nueva entrega
 sub modificar_cantidad {
