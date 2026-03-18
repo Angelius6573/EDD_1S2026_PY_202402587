@@ -2,6 +2,8 @@
 package utilidades::copiar_contenido_json;
 use strict;
 use warnings;
+use FindBin;
+use lib $FindBin::Bin;
 
 use utilidades::leer_json;
 

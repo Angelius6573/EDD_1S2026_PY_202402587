@@ -3,61 +3,103 @@ package utilidades::leer_json;
 use strict;
 use warnings;
 use JSON::PP;
+use Encode qw(decode encode);
 
 sub parsear_json {
-  my ($ruta) = @_;
+    my ($ruta) = @_;
+    open my $fh, '<:raw', $ruta
+      or die "No se pudo abrir el archivo '$ruta': $!\n";
+    local $/;
+    my $bytes = <$fh>;
+    close $fh;
 
-  open my $fh, '<', $ruta
-    or die "No se pudo abrir el archivo en $ruta \n";
+    # Intentar decodificar como UTF-8, si falla, asumir Latin-1
+    my $texto;
+    eval { $texto = decode( 'UTF-8', $bytes, Encode::FB_CROAK ); };
+    if ($@) {
 
-  local $/;
-  my $texto_en_json = <$fh>;
-  close $fh;
+        # Si falla UTF-8, intentar con Latin-1
+        $texto = decode( 'ISO-8859-1', $bytes );
+    }
 
-  my $datos = decode_json($texto_en_json);
-  return $datos;
+    my $datos = decode_json($texto);
+    return $datos;
 }
 
 sub parsear_json_posiblemente_vacio {
-  my ($ruta) = @_;
+    my ($ruta) = @_;
 
-  return [] unless -e $ruta; ## Hace una llamada al sistema para comprobar si el archivo existe.
-  return [] if -z $ruta; ## Comprueba el tamaño del json solo consultando sus metadatos, si es 0 devuelve []
+    return [] unless -e $ruta;
+    return [] if -z $ruta;
 
-  open my $fh, '<', $ruta or return [];
-  local $/;
-  my $texto_en_json = <$fh>;
-  close $fh;
+    open my $fh, '<:raw', $ruta or return [];
+    local $/;
+    my $bytes = <$fh>;
+    close $fh;
 
-  return [] unless defined $texto_en_json && $texto_en_json =~ /\S/;
+    return [] unless defined $bytes && $bytes =~ /\S/;
 
-  my $datos;
-  eval {
-    $datos = decode_json($texto_en_json);
-  };
+    my $texto;
+    eval { $texto = decode( 'UTF-8', $bytes, Encode::FB_CROAK ); };
+    if ($@) {
+        $texto = decode( 'ISO-8859-1', $bytes );
+    }
 
-  if ( $@ || !defined $datos || ref $datos ne 'ARRAY' ) {
+    my $datos;
+    eval { $datos = decode_json($texto) };
+    return [] if $@;
+
+    if ( ref($datos) eq 'ARRAY' ) {
+        return $datos;
+    }
+
+    for my $clave (qw(usuarios proveedor equipos suministros inventario)) {
+        return $datos->{$clave} if ref( $datos->{$clave} ) eq 'ARRAY';
+    }
+
     return [];
-  } # Doble comprobación, no debería permitir pasar un JSON vacío
-
-  return $datos;
 }
 
 sub guardar_json {
-  my ($ruta, $datos) = @_;
+    my ( $ruta, $datos ) = @_;
 
-  my $aspecto = JSON::PP->new
-                        ->utf8
-                        ->pretty
-                        ->canonical(1);
+    ( my $dir = $ruta ) =~ s|/[^/]+$||;
+    if ( $dir && !-d $dir ) {
+        require File::Path;
+        File::Path::make_path($dir);
+    }
 
-  open my $fh, '>', $ruta
-    or die "No se pudo abrir el archivo en $ruta \n";
+    my $json = JSON::PP->new->utf8->pretty->canonical(1);
 
-  print $fh $aspecto->encode($datos);
-  close $fh;
+    open my $fh, '>:encoding(UTF-8)', $ruta
+      or die "No se pudo escribir '$ruta': $!\n";
+    print $fh $json->encode($datos);
+    close $fh;
+    return 1;
+}
 
-  return 1;
+# Función auxiliar para convertir un archivo a UTF-8 si es necesario
+sub asegurar_utf8 {
+    my ($ruta) = @_;
+    return unless -e $ruta;
+
+    open my $fh, '<:raw', $ruta or return;
+    local $/;
+    my $bytes = <$fh>;
+    close $fh;
+
+    my $texto;
+    eval { $texto = decode( 'UTF-8', $bytes, Encode::FB_CROAK ); };
+    if ($@) {
+
+        # No es UTF-8, convertir
+        $texto = decode( 'ISO-8859-1', $bytes );
+        open my $fh2, '>:encoding(UTF-8)', $ruta or return;
+        print $fh2 $texto;
+        close $fh2;
+        return 1;
+    }
+    return 0;
 }
 
 1;
