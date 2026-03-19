@@ -1,25 +1,13 @@
 #!/usr/bin/perl
+#  Stub de compatibilidad — en Fase 2 la consulta
+#  de disponibilidad se realiza desde
+#  interfaz::ventana_usuario (tabs de Medicamentos,
+#  Equipos y Suministros con búsqueda en las
+#  estructuras AVL/BST/BTree/ListaDoble).
 package usuario::consultar_disponibilidad;
 use strict;
 use warnings;
 
-use interfaz_usuario::usuario;
-use administrador::Inventario::leer_inventario_json;
-use utilidades::cerrar;
-
-sub consulta_medicamento {
-  my ($nombre_usuario, $codigo_depto) = @_;
-  my $ruta = 'administrador/Inventario/inventario.json';
-  my $inventario = utilidades::leer_json::parsear_json_posiblemente_vacio($ruta);
-  
-  system("clear");
-  print "Bienvenido $nombre_usuario al módulo de consulta de disponibilidad de medicamentos.\n";
-  print "Por favor ingrese el código del médicamento que desea consultar.\n";
-  print " Código: "; chomp(my $codigo = <STDIN>); 
-      administrador::Inventario::leer_inventario_json::identificar_codigo_nombre_disponible($codigo);
-
-  utilidades::cerrar::cerrar();
-  return interfaz_usuario::usuario::inicio_sesion_usuario_exitoso($nombre_usuario, $codigo_depto);
-}
+sub consulta_medicamento { return 0 }
 
 1;
