@@ -3,7 +3,7 @@ package utilidades::leer_json;
 use strict;
 use warnings;
 use JSON::PP;
-use Encode qw(decode encode);
+use Encode qw(decode);
 
 sub parsear_json {
     my ($ruta) = @_;
@@ -13,22 +13,13 @@ sub parsear_json {
     my $bytes = <$fh>;
     close $fh;
 
-    # Intentar decodificar como UTF-8, si falla, asumir Latin-1
-    my $texto;
-    eval { $texto = decode( 'UTF-8', $bytes, Encode::FB_CROAK ); };
-    if ($@) {
-
-        # Si falla UTF-8, intentar con Latin-1
-        $texto = decode( 'ISO-8859-1', $bytes );
-    }
-
+    my $texto = _decodificar_utf8($bytes);
     my $datos = decode_json($texto);
     return $datos;
 }
 
 sub parsear_json_posiblemente_vacio {
     my ($ruta) = @_;
-
     return [] unless -e $ruta;
     return [] if -z $ruta;
 
@@ -36,24 +27,33 @@ sub parsear_json_posiblemente_vacio {
     local $/;
     my $bytes = <$fh>;
     close $fh;
-
     return [] unless defined $bytes && $bytes =~ /\S/;
 
-    my $texto;
-    eval { $texto = decode( 'UTF-8', $bytes, Encode::FB_CROAK ); };
-    if ($@) {
-        $texto = decode( 'ISO-8859-1', $bytes );
-    }
-
+    my $texto = _decodificar_utf8($bytes);
     my $datos;
     eval { $datos = decode_json($texto) };
     return [] if $@;
 
+    # Si es array, devolver directamente
     if ( ref($datos) eq 'ARRAY' ) {
         return $datos;
     }
 
-    for my $clave (qw(usuarios proveedor equipos suministros inventario)) {
+    # Si es hash con clave 'proveedor', extraer medicamentos de las entregas
+    if ( ref($datos) eq 'HASH' && ref( $datos->{proveedor} ) eq 'ARRAY' ) {
+        my @medicamentos;
+        for my $prov ( @{ $datos->{proveedor} } ) {
+            for my $item ( @{ $prov->{entrega} // [] } ) {
+                if ( $item->{tipo} eq 'MEDICAMENTO' ) {
+                    push @medicamentos, $item;
+                }
+            }
+        }
+        return \@medicamentos;
+    }
+
+    # Buscar otras claves conocidas
+    for my $clave (qw(usuarios equipos suministros inventario)) {
         return $datos->{$clave} if ref( $datos->{$clave} ) eq 'ARRAY';
     }
 
@@ -78,28 +78,25 @@ sub guardar_json {
     return 1;
 }
 
-# Función auxiliar para convertir un archivo a UTF-8 si es necesario
-sub asegurar_utf8 {
-    my ($ruta) = @_;
-    return unless -e $ruta;
+sub _decodificar_utf8 {
+    my ($bytes) = @_;
 
-    open my $fh, '<:raw', $ruta or return;
-    local $/;
-    my $bytes = <$fh>;
-    close $fh;
+    # Eliminar BOM si existe
+    if ( $bytes =~ /^\xEF\xBB\xBF/ ) {
+        substr( $bytes, 0, 3 ) = '';
+    }
 
     my $texto;
     eval { $texto = decode( 'UTF-8', $bytes, Encode::FB_CROAK ); };
     if ($@) {
-
-        # No es UTF-8, convertir
-        $texto = decode( 'ISO-8859-1', $bytes );
-        open my $fh2, '>:encoding(UTF-8)', $ruta or return;
-        print $fh2 $texto;
-        close $fh2;
-        return 1;
+        eval { $texto = decode( 'UTF-8', $bytes, Encode::FB_DEFAULT ); };
+        if ($@) {
+            $bytes =~ s/[^\x09\x0A\x0D\x20-\x7E\xA0-\xFF]//g;
+            $texto = decode( 'UTF-8', $bytes, Encode::FB_DEFAULT );
+        }
     }
-    return 0;
+
+    return $texto;
 }
 
 1;
