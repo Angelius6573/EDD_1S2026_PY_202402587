@@ -52,4 +52,4 @@ my $nodo = {
 ---
 
 ## Regresar al menú principal
-[<Regresar>](../../README.md)
+[← Volver al README principal](../../README.md)
