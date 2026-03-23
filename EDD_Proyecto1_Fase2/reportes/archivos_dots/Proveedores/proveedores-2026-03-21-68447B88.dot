@@ -1,8 +1,0 @@
-digraph proveedores {
-charset="UTF-8";
-rankdir=TB;
-node [shape=box, style=filled, fillcolor=gray90];
-graph [nodesep=1.2, ranksep=0.7];
-
-  vacio [label="(Sin proveedores registrados)", fillcolor="#f3f4f6"];
-}

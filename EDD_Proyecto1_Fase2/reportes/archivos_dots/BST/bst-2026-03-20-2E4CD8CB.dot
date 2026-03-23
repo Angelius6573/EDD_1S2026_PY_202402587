@@ -1,8 +1,0 @@
-digraph BST_Equipos {
-  charset="UTF-8";
-  node [shape=box, style=filled, fillcolor="#ede9fe", color="#6d28d9", fontcolor="#1e1b4b", fontsize=9, width=2];
-  edge [color="#7c3aed", arrowsize=0.7];
-  graph [nodesep=0.6, ranksep=0.7];
-
-  ngestion_datos__bst__nodo_HASH_0x564ee9648a20_ [label="Waos [RAÍZ]\nSSSD\nXD\nStock: 486", fillcolor="#4c1d95", fontcolor=white, color="#1e1b4b"];
-}
