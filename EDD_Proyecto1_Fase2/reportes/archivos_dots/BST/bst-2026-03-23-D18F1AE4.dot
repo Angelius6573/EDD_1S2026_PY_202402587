@@ -1,0 +1,16 @@
+digraph BST_Equipos {
+  charset="UTF-8";
+  node [shape=box, style=filled, fillcolor="#ede9fe", color="#6d28d9", fontcolor="#1e1b4b", fontsize=9, width=2];
+  edge [color="#7c3aed", arrowsize=0.7];
+  graph [nodesep=0.6, ranksep=0.7];
+
+  ngestion_datos__bst__nodo_HASH_0x55b6952636e0_ [label="EQU-EQU-001 [RAÍZ]\nMonitor de Signos Vitales\nMediTechGT\nStock: 10", fillcolor="#4c1d95", fontcolor=white, color="#1e1b4b"];
+  ngestion_datos__bst__nodo_HASH_0x55b6952636e0_ -> ngestion_datos__bst__nodo_HASH_0x55b695263c78_ [label=">"];
+  ngestion_datos__bst__nodo_HASH_0x55b695263c78_ [label="EQU-EQU-002\nElectrocardiografo 12 Derivaciones\nMediTechGT\nStock: 5", fillcolor="#ede9fe", fontcolor="#1e1b4b", color="#6d28d9"];
+  ngestion_datos__bst__nodo_HASH_0x55b695263c78_ -> ngestion_datos__bst__nodo_HASH_0x55b695264050_ [label=">"];
+  ngestion_datos__bst__nodo_HASH_0x55b695264050_ [label="EQU-EQU-003\nBomba de Infusion Volumetrica\nBuenaVidaGT\nStock: 20", fillcolor="#ede9fe", fontcolor="#1e1b4b", color="#6d28d9"];
+  ngestion_datos__bst__nodo_HASH_0x55b695264050_ -> ngestion_datos__bst__nodo_HASH_0x55b695264428_ [label=">"];
+  ngestion_datos__bst__nodo_HASH_0x55b695264428_ [label="EQU-EQU-004\nTensiometro Manual Aneroide\nBuenaVidaGT\nStock: 20", fillcolor="#ede9fe", fontcolor="#1e1b4b", color="#6d28d9"];
+  ngestion_datos__bst__nodo_HASH_0x55b695264428_ -> ngestion_datos__bst__nodo_HASH_0x55b695264800_ [label=">"];
+  ngestion_datos__bst__nodo_HASH_0x55b695264800_ [label="Waos [hoja]\nSSSD\nXD\nStock: 486", fillcolor="#c4b5fd", fontcolor="#1e1b4b", color="#7c3aed"];
+}

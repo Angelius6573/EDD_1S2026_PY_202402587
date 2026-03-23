@@ -1,0 +1,8 @@
+digraph BTree_Suministros {
+  charset="UTF-8";
+  node [shape=record, style=filled, fontsize=9, color="#6d28d9", fontcolor="#1e1b4b"];
+  edge [color="#7c3aed", arrowsize=0.7];
+  graph [nodesep=0.5, ranksep=0.8];
+
+  vacio [label="(vacío)", fillcolor="#f3f4f6"];
+}

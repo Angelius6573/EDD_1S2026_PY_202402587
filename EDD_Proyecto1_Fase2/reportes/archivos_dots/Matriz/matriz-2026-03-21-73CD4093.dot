@@ -1,0 +1,41 @@
+digraph Matriz_Proveedores_Fabricantes {
+  charset="UTF-8";
+  rankdir=TB;
+  graph [nodesep=0.8, ranksep=1.0];
+
+  # Proveedores (filas)
+  { rank=same;
+    fila_0 [label="MedSupplies Guatemala", shape=box, style=filled, fillcolor="#ddd6fe", color="#6d28d9", fontcolor="#1e1b4b", fontsize=10];
+    fila_1 [label="FarmaDistrib S.A.", shape=box, style=filled, fillcolor="#ddd6fe", color="#6d28d9", fontcolor="#1e1b4b", fontsize=10];
+  }
+
+  # Fabricantes (columnas)
+  { rank=same;
+    col_0 [label="Ansell Healthcare", shape=box, style=filled, fillcolor="#c4b5fd", color="#4c1d95", fontcolor="#1e1b4b", fontsize=10];
+    col_1 [label="Becton Dickinson", shape=box, style=filled, fillcolor="#c4b5fd", color="#4c1d95", fontcolor="#1e1b4b", fontsize=10];
+    col_2 [label="Laboratorios Cofasa", shape=box, style=filled, fillcolor="#c4b5fd", color="#4c1d95", fontcolor="#1e1b4b", fontsize=10];
+    col_3 [label="Laboratorios Gador", shape=box, style=filled, fillcolor="#c4b5fd", color="#4c1d95", fontcolor="#1e1b4b", fontsize=10];
+    col_4 [label="Laboratorios Lancasco", shape=box, style=filled, fillcolor="#c4b5fd", color="#4c1d95", fontcolor="#1e1b4b", fontsize=10];
+    col_5 [label="Philips Medical", shape=box, style=filled, fillcolor="#c4b5fd", color="#4c1d95", fontcolor="#1e1b4b", fontsize=10];
+  }
+
+  # Valores (cantidad entregada por proveedor a fabricante)
+  val_0_0 [label="Q0\n2000 uds.", shape=circle, style=filled, fillcolor="#ede9fe", color="#7c3aed", fontcolor="#1e1b4b", fontsize=9, width=1.2];
+  fila_0 -> val_0_0 [color="#7c3aed", arrowsize=0.6];
+  col_0  -> val_0_0 [color="#a78bfa", arrowsize=0.6, style=dashed];
+  val_0_2 [label="Q0\n500 uds.", shape=circle, style=filled, fillcolor="#ede9fe", color="#7c3aed", fontcolor="#1e1b4b", fontsize=9, width=1.2];
+  fila_0 -> val_0_2 [color="#7c3aed", arrowsize=0.6];
+  col_2  -> val_0_2 [color="#a78bfa", arrowsize=0.6, style=dashed];
+  val_0_4 [label="Q0\n1000 uds.", shape=circle, style=filled, fillcolor="#ede9fe", color="#7c3aed", fontcolor="#1e1b4b", fontsize=9, width=1.2];
+  fila_0 -> val_0_4 [color="#7c3aed", arrowsize=0.6];
+  col_4  -> val_0_4 [color="#a78bfa", arrowsize=0.6, style=dashed];
+  val_0_5 [label="Q0\n5 uds.", shape=circle, style=filled, fillcolor="#ede9fe", color="#7c3aed", fontcolor="#1e1b4b", fontsize=9, width=1.2];
+  fila_0 -> val_0_5 [color="#7c3aed", arrowsize=0.6];
+  col_5  -> val_0_5 [color="#a78bfa", arrowsize=0.6, style=dashed];
+  val_1_1 [label="Q0\n3000 uds.", shape=circle, style=filled, fillcolor="#ede9fe", color="#7c3aed", fontcolor="#1e1b4b", fontsize=9, width=1.2];
+  fila_1 -> val_1_1 [color="#7c3aed", arrowsize=0.6];
+  col_1  -> val_1_1 [color="#a78bfa", arrowsize=0.6, style=dashed];
+  val_1_3 [label="Q0\n750 uds.", shape=circle, style=filled, fillcolor="#ede9fe", color="#7c3aed", fontcolor="#1e1b4b", fontsize=9, width=1.2];
+  fila_1 -> val_1_3 [color="#7c3aed", arrowsize=0.6];
+  col_3  -> val_1_3 [color="#a78bfa", arrowsize=0.6, style=dashed];
+}

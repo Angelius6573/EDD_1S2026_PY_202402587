@@ -22,11 +22,11 @@ sub crear_tab {
     my ($ctx) = @_;
 
     my $hpaned = Gtk3::Paned->new('horizontal');
-    $hpaned->set_position(350);
+    $hpaned->set_position(320);
 
-    my $vbox_izq = Gtk3::Box->new( 'vertical', 12 );
+    my $vbox_izq = Gtk3::Box->new( 'vertical', 10 );
     $vbox_izq->set_margin_start(12);
-    $vbox_izq->set_margin_end(12);
+    $vbox_izq->set_margin_end(8);
     $vbox_izq->set_margin_top(12);
     $vbox_izq->set_margin_bottom(12);
 
@@ -36,50 +36,39 @@ sub crear_tab {
     $vbox_izq->pack_start( $lbl_titulo, FALSE, FALSE, 0 );
 
     my $vbox_der = Gtk3::Box->new( 'vertical', 0 );
-    $vbox_der->set_margin_start(8);
-    $vbox_der->set_margin_end(8);
 
-    my $lbl_imagen =
-      Gtk3::Label->new('Seleccione un reporte y presione Generar');
-    $lbl_imagen->get_style_context()->add_class('valor-label');
-    $lbl_imagen->set_halign('center');
-    $lbl_imagen->set_valign('center');
+    my $frame_visor = Gtk3::Frame->new('Vista Previa del Reporte');
+    $frame_visor->set_shadow_type('etched-in');
+    $frame_visor->set_vexpand(TRUE);
+    $frame_visor->set_hexpand(TRUE);
 
-    my $imagen = Gtk3::Image->new();
-    my $sc_img = Gtk3::ScrolledWindow->new();
-    $sc_img->set_policy( 'automatic', 'automatic' );
-    $sc_img->set_vexpand(TRUE);
-    $sc_img->set_hexpand(TRUE);
+    my $inner_visor = Gtk3::Box->new( 'vertical', 0 );
+    $inner_visor->set_margin_start(4);
+    $inner_visor->set_margin_end(4);
+    $inner_visor->set_margin_top(4);
+    $inner_visor->set_margin_bottom(4);
+
+    my $scrolled = Gtk3::ScrolledWindow->new();
+    $scrolled->set_policy( 'automatic', 'automatic' );
+    $scrolled->set_vexpand(TRUE);
+    $scrolled->set_hexpand(TRUE);
 
     my $viewport = Gtk3::Viewport->new( undef, undef );
-    my $img_box  = Gtk3::Box->new( 'vertical', 0 );
-    $img_box->pack_start( $lbl_imagen, TRUE, TRUE, 0 );
-    $img_box->pack_start( $imagen,     TRUE, TRUE, 0 );
-    $viewport->add($img_box);
-    $sc_img->add($viewport);
-    $vbox_der->pack_start( $sc_img, TRUE, TRUE, 0 );
+    my $imagen   = Gtk3::Image->new();
 
-    my $mostrar_imagen = sub {
-        my ($ruta_png) = @_;
-        if ( $ruta_png && -e $ruta_png ) {
-            eval {
-                my $pixbuf = Gtk3::Gdk::Pixbuf->new_from_file($ruta_png);
-                my $scaled = $pixbuf->scale_simple( 800, 600, 'bilinear' );
-                $imagen->set_from_pixbuf($scaled);
-                $lbl_imagen->set_text('');
-            };
-            if ($@) {
-                $lbl_imagen->set_text("Error al cargar imagen: $@");
-            }
-        }
-        else {
-            $lbl_imagen->set_text(
-"No se pudo generar el reporte.\nVerifique que Graphviz (dot) este instalado."
-            );
-            $imagen->clear();
-        }
-        $vbox_der->show_all();
-    };
+    $viewport->add($imagen);
+    $scrolled->add($viewport);
+
+    my $lbl_info =
+      Gtk3::Label->new('Seleccione un reporte y presione "Generar"');
+    $lbl_info->get_style_context()->add_class('valor-label');
+    $lbl_info->set_halign('center');
+    $lbl_info->set_valign('center');
+
+    $inner_visor->pack_start( $lbl_info, TRUE, TRUE, 0 );
+    $inner_visor->pack_start( $scrolled, TRUE, TRUE, 0 );
+    $frame_visor->add($inner_visor);
+    $vbox_der->pack_start( $frame_visor, TRUE, TRUE, 0 );
 
     my @reportes = (
         [ 'Arbol AVL — Personal Medico',  sub { _generar_avl($ctx) } ],
@@ -93,8 +82,35 @@ sub crear_tab {
         ],
     );
 
-    my $ruta_actual_png = '';
     my $ruta_actual_svg = '';
+
+    my $mostrar_imagen = sub {
+        my ($ruta_svg) = @_;
+        if ( $ruta_svg && -e $ruta_svg ) {
+            eval {
+                my $pixbuf = Gtk3::Gdk::Pixbuf->new_from_file($ruta_svg);
+                $imagen->set_from_pixbuf($pixbuf);
+                $lbl_info->set_text('');
+                $scrolled->show_all();
+                $lbl_info->hide();
+                $imagen->show();
+            };
+            if ($@) {
+                $lbl_info->set_text(
+"Error al cargar imagen: $@\nVerifique que el archivo SVG es valido."
+                );
+                $lbl_info->show();
+                $imagen->hide();
+            }
+        }
+        else {
+            $lbl_info->set_text(
+"No se pudo generar el reporte.\nVerifique que Graphviz (dot) este instalado."
+            );
+            $lbl_info->show();
+            $imagen->hide();
+        }
+    };
 
     for my $r (@reportes) {
         my ( $nombre, $gen_cb ) = @$r;
@@ -114,26 +130,23 @@ sub crear_tab {
         $lbl_r->set_hexpand(TRUE);
         $lbl_r->get_style_context()->add_class('valor-label');
 
-        my $font_desc = Pango::FontDescription->from_string('Sans 10');
-        $lbl_r->override_font($font_desc);
-
         my $btn_gen =
           interfaz::admin::common::boton( 'Generar', 'boton-primario' );
-        $btn_gen->set_size_request( 100, 32 );
+        $btn_gen->set_size_request( 90, 28 );
 
         $btn_gen->signal_connect(
             clicked => sub {
                 my ( $png, $svg ) = $gen_cb->();
-                $ruta_actual_png = $png // '';
-                $ruta_actual_svg = $svg // '';
-                if ( $png && -e $png ) {
-                    $mostrar_imagen->($png);
+                if ( $svg && -e $svg ) {
+                    $ruta_actual_svg = $svg;
+                    $mostrar_imagen->($svg);
                 }
                 else {
-                    $lbl_imagen->set_text(
+                    $lbl_info->set_text(
 "No se pudo generar el reporte.\nVerifique que Graphviz (dot) este instalado."
                     );
-                    $imagen->clear();
+                    $lbl_info->show();
+                    $imagen->hide();
                 }
             }
         );
@@ -154,31 +167,22 @@ sub crear_tab {
     $hb_ext->set_margin_top(8);
     $hb_ext->set_margin_bottom(8);
 
-    my $lbl_ext = Gtk3::Label->new('Abrir en visor externo (Inkscape)');
+    my $lbl_ext = Gtk3::Label->new('Abrir con Inkscape (edicion avanzada)');
     $lbl_ext->set_halign('start');
     $lbl_ext->set_hexpand(TRUE);
     $lbl_ext->get_style_context()->add_class('valor-label');
 
     my $btn_ext = interfaz::admin::common::boton( 'Abrir', 'boton-secundario' );
-    $btn_ext->set_size_request( 100, 32 );
+    $btn_ext->set_size_request( 90, 28 );
 
     $btn_ext->signal_connect(
         clicked => sub {
             if ( $ruta_actual_svg && -e $ruta_actual_svg ) {
-
-                # Intentar abrir con Inkscape, si falla usar xdg-open
                 my $cmd       = "inkscape '$ruta_actual_svg' &";
                 my $resultado = system($cmd);
                 if ( $resultado != 0 ) {
-
-                    # Si Inkscape no está instalado, usar xdg-open
                     system("xdg-open '$ruta_actual_svg' &");
                 }
-            }
-            elsif ( $ruta_actual_png && -e $ruta_actual_png ) {
-
-                # Fallback a PNG si SVG no existe
-                system("xdg-open '$ruta_actual_png' &");
             }
             else {
                 interfaz::admin::common::msg_info("Genere un reporte primero.");
@@ -193,7 +197,7 @@ sub crear_tab {
 
     my $scroll_izq = Gtk3::ScrolledWindow->new();
     $scroll_izq->set_policy( 'never', 'automatic' );
-    $scroll_izq->set_size_request( 380, -1 );
+    $scroll_izq->set_size_request( 350, -1 );
     $scroll_izq->add($vbox_izq);
 
     $hpaned->pack1( $scroll_izq, FALSE, FALSE );

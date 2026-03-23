@@ -1,0 +1,34 @@
+digraph AVL_PersonalMedico {
+  charset="UTF-8";
+  node [shape=circle, style=filled, fillcolor="#ede9fe", color="#6d28d9", fontcolor="#1e1b4b", fontsize=10];
+  edge [color="#7c3aed", arrowsize=0.7];
+  graph [nodesep=0.5, ranksep=0.8];
+
+  ngestion_datos__avl__nodo_HASH_0x557a1c32cd30_ [label="COL-30002\nLic. Carmen Alejandra Ponce López\nTIPO-03\nDEP-MED", fillcolor="#7c3aed", fontcolor=white, color="#4c1d95"];
+  ngestion_datos__avl__nodo_HASH_0x557a1c32cd30_ -> ngestion_datos__avl__nodo_HASH_0x557a1c32c880_ [label="I"];
+  ngestion_datos__avl__nodo_HASH_0x557a1c32c880_ [label="COL-20001\nDr. Alejandro Javier Morales Ríos\nTIPO-02\nDEP-CIR", fillcolor="#ede9fe", fontcolor="#1e1b4b", color="#6d28d9"];
+  ngestion_datos__avl__nodo_HASH_0x557a1c32c880_ -> ngestion_datos__avl__nodo_HASH_0x557a1c31a390_ [label="I"];
+  ngestion_datos__avl__nodo_HASH_0x557a1c31a390_ [label="COL-10002\nDra. Sofía Alejandra Ramírez Cruz\nTIPO-01\nDEP-MED", fillcolor="#ede9fe", fontcolor="#1e1b4b", color="#6d28d9"];
+  ngestion_datos__avl__nodo_HASH_0x557a1c31a390_ -> ngestion_datos__avl__nodo_HASH_0x557a1b97a0e0_ [label="I"];
+  ngestion_datos__avl__nodo_HASH_0x557a1b97a0e0_ [label="COL-10001\nDr. Carlos Andrés Méndez Torres\nTIPO-01\nDEP-MED", fillcolor="#ede9fe", fontcolor="#1e1b4b", color="#6d28d9"];
+  ngestion_datos__avl__nodo_HASH_0x557a1c31a390_ -> ngestion_datos__avl__nodo_HASH_0x557a1c32c898_ [label="D"];
+  ngestion_datos__avl__nodo_HASH_0x557a1c32c898_ [label="COL-10003\nDr. Roberto Emilio Castillo Vega\nTIPO-01\nDEP-MED", fillcolor="#ede9fe", fontcolor="#1e1b4b", color="#6d28d9"];
+  ngestion_datos__avl__nodo_HASH_0x557a1c32c880_ -> ngestion_datos__avl__nodo_HASH_0x557a1c32ccb8_ [label="D"];
+  ngestion_datos__avl__nodo_HASH_0x557a1c32ccb8_ [label="COL-20003\nDr. Fernando José Alvarado Sánchez\nTIPO-02\nDEP-MED", fillcolor="#ede9fe", fontcolor="#1e1b4b", color="#6d28d9"];
+  ngestion_datos__avl__nodo_HASH_0x557a1c32ccb8_ -> ngestion_datos__avl__nodo_HASH_0x557a1c32cd48_ [label="I"];
+  ngestion_datos__avl__nodo_HASH_0x557a1c32cd48_ [label="COL-20002\nDra. Valentina Beatriz Herrera Juárez\nTIPO-02\nDEP-CIR", fillcolor="#ede9fe", fontcolor="#1e1b4b", color="#6d28d9"];
+  ngestion_datos__avl__nodo_HASH_0x557a1c32ccb8_ -> ngestion_datos__avl__nodo_HASH_0x557a1c32cce8_ [label="D"];
+  ngestion_datos__avl__nodo_HASH_0x557a1c32cce8_ [label="COL-30001\nLic. María Elena González Ruiz\nTIPO-03\nDEP-FAR", fillcolor="#ede9fe", fontcolor="#1e1b4b", color="#6d28d9"];
+  ngestion_datos__avl__nodo_HASH_0x557a1c32cd30_ -> ngestion_datos__avl__nodo_HASH_0x557a1c32d228_ [label="D"];
+  ngestion_datos__avl__nodo_HASH_0x557a1c32d228_ [label="COL-40002\nTec. Sandra Patricia Gómez Xicol\nTIPO-04\nDEP-LAB", fillcolor="#ede9fe", fontcolor="#1e1b4b", color="#6d28d9"];
+  ngestion_datos__avl__nodo_HASH_0x557a1c32d228_ -> ngestion_datos__avl__nodo_HASH_0x557a1c32d3c0_ [label="I"];
+  ngestion_datos__avl__nodo_HASH_0x557a1c32d3c0_ [label="COL-30004\nLic. Jorge Luis Monroy Castro\nTIPO-03\nDEP-FAR", fillcolor="#ede9fe", fontcolor="#1e1b4b", color="#6d28d9"];
+  ngestion_datos__avl__nodo_HASH_0x557a1c32d3c0_ -> ngestion_datos__avl__nodo_HASH_0x557a1c32d3d8_ [label="I"];
+  ngestion_datos__avl__nodo_HASH_0x557a1c32d3d8_ [label="COL-30003\nLic. Rosa Miriam Ajú Pérez\nTIPO-03\nDEP-CIR", fillcolor="#ede9fe", fontcolor="#1e1b4b", color="#6d28d9"];
+  ngestion_datos__avl__nodo_HASH_0x557a1c32d3c0_ -> ngestion_datos__avl__nodo_HASH_0x557a1c32d360_ [label="D"];
+  ngestion_datos__avl__nodo_HASH_0x557a1c32d360_ [label="COL-40001\nTec. Luis Fernando Morales Salazar\nTIPO-04\nDEP-LAB", fillcolor="#ede9fe", fontcolor="#1e1b4b", color="#6d28d9"];
+  ngestion_datos__avl__nodo_HASH_0x557a1c32d228_ -> ngestion_datos__avl__nodo_HASH_0x557a1c32d378_ [label="D"];
+  ngestion_datos__avl__nodo_HASH_0x557a1c32d378_ [label="COL-50001\nLic. Pedro Antonio Herrera Caal\nTIPO-05\nDEP-ADM", fillcolor="#ede9fe", fontcolor="#1e1b4b", color="#6d28d9"];
+  ngestion_datos__avl__nodo_HASH_0x557a1c32d378_ -> ngestion_datos__avl__nodo_HASH_0x557a1c32d2e8_ [label="D"];
+  ngestion_datos__avl__nodo_HASH_0x557a1c32d2e8_ [label="COL-50002\nLic. Gabriela Fernanda Castillo Ajú\nTIPO-05\nDEP-ADM", fillcolor="#ede9fe", fontcolor="#1e1b4b", color="#6d28d9"];
+}
