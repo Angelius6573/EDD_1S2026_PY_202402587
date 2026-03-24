@@ -1,6 +1,0 @@
-digraph inventario {
-charset="UTF-8";
-rankdir=LR;
-node [shape=box, style=filled, width=2, height=1];
-graph [nodesep=0.5, ranksep=1, splines=true, overlap=false];
-}

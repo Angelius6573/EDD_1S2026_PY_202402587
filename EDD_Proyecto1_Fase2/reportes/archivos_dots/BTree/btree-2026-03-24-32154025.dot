@@ -1,9 +1,0 @@
-digraph BTree_Suministros {
-  charset="UTF-8";
-  node [shape=record, style=filled, fontsize=9, color="#6d28d9", fontcolor="#1e1b4b"];
-  edge [color="#7c3aed", arrowsize=0.7];
-  graph [nodesep=0.5, ranksep=0.8];
-
-  btnode_0 [label="{<p0> | SUM-SUM-001\nGuantes de Nitrilo Talla M\nStock:60000 | <p1> | SUM-SUM-002\nMascarilla Quirurgica\nStock:40000 | <p2> | SUM-SUM-003\nJeringas 10ml con Aguja\nStock:25000 | <p3>}", fillcolor="#fef08a", color="#ca8a04"];
-  # Ocupación: 3/3
-}
