@@ -1,0 +1,47 @@
+[
+   {
+      "cantidad" : "6",
+      "codigo" : "EQU-005",
+      "fabricante" : "TEST",
+      "fecha_ingreso" : "2026-09-04",
+      "nivel_minimo" : "15",
+      "nombre" : "Test ",
+      "precio_unitario" : "152.8"
+   },
+   {
+      "cantidad" : 10,
+      "codigo" : "EQU-EQU-001",
+      "fabricante" : "MediTechGT",
+      "fecha_ingreso" : "2026-03-10",
+      "nivel_minimo" : 2,
+      "nombre" : "Monitor de Signos Vitales",
+      "precio_unitario" : 4500
+   },
+   {
+      "cantidad" : 5,
+      "codigo" : "EQU-EQU-002",
+      "fabricante" : "MediTechGT",
+      "fecha_ingreso" : "2026-03-10",
+      "nivel_minimo" : 1,
+      "nombre" : "ElectrocardiÃ³grafo 12 Derivaciones",
+      "precio_unitario" : 6200
+   },
+   {
+      "cantidad" : 20,
+      "codigo" : "EQU-EQU-003",
+      "fabricante" : "BuenaVidaGT",
+      "fecha_ingreso" : "2026-03-10",
+      "nivel_minimo" : 5,
+      "nombre" : "Bomba de InfusiÃ³n VolumÃ©trica",
+      "precio_unitario" : 1800
+   },
+   {
+      "cantidad" : 20,
+      "codigo" : "EQU-EQU-004",
+      "fabricante" : "BuenaVidaGT",
+      "fecha_ingreso" : "2026-03-12",
+      "nivel_minimo" : 4,
+      "nombre" : "TensiÃ³metro Manual Aneroide",
+      "precio_unitario" : 180
+   }
+]
