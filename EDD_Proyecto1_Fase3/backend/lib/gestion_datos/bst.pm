@@ -45,7 +45,6 @@ sub _insertar {
         $n->{derecha} = $self->_insertar( $n->{derecha}, %d );
     }
     else {
-        # Duplicado: actualizar datos
         $n->{$_} = $d{$_}
           for
           qw(nombre fabricante precio_unitario cantidad fecha_ingreso nivel_minimo);
@@ -91,8 +90,6 @@ sub _eliminar {
     else {
         return $n->{derecha}   unless defined $n->{izquierda};
         return $n->{izquierda} unless defined $n->{derecha};
-
-        # Dos hijos: sucesor en orden
         my $suc = $self->_min_nodo( $n->{derecha} );
         $n->{$_} = $suc->{$_}
           for
@@ -148,10 +145,7 @@ sub a_lista {
     return \@lista;
 }
 
-sub esta_vacio {
-    my ($self) = @_;
-    return !defined $self->{raiz};
-}
+sub esta_vacio { !defined $_[0]->{raiz} }
 
 sub cargar_desde_array {
     my ( $self, $arr ) = @_;
@@ -189,7 +183,6 @@ sub a_array_json {
     return \@arr;
 }
 
-# Para el reporte DOT — detectar si es raíz o hoja
 sub es_hoja {
     my ( $self, $n ) = @_;
     return !defined $n->{izquierda} && !defined $n->{derecha};

@@ -78,23 +78,16 @@ sub _rebalancear_post_op {
     $self->_actualizar_altura($n);
     my $b = $self->_balance($n);
 
-    # Izquierda-Izquierda
     if ( $b > 1 && $self->_balance( $n->{izquierda} ) >= 0 ) {
         return $self->_rotar_derecha($n);
     }
-
-    # Izquierda-Derecha
     if ( $b > 1 && $self->_balance( $n->{izquierda} ) < 0 ) {
         $n->{izquierda} = $self->_rotar_izquierda( $n->{izquierda} );
         return $self->_rotar_derecha($n);
     }
-
-    # Derecha-Derecha
     if ( $b < -1 && $self->_balance( $n->{derecha} ) <= 0 ) {
         return $self->_rotar_izquierda($n);
     }
-
-    # Derecha-Izquierda
     if ( $b < -1 && $self->_balance( $n->{derecha} ) > 0 ) {
         $n->{derecha} = $self->_rotar_derecha( $n->{derecha} );
         return $self->_rotar_izquierda($n);
@@ -119,7 +112,6 @@ sub _insertar {
         $n->{derecha} = $self->_insertar( $n->{derecha}, %d );
     }
     else {
-        # Duplicado: actualizar todos los campos
         $n->{$_} = $d{$_}
           for qw(nombre tipo departamento especialidad contrasena);
         return $n;
@@ -163,11 +155,8 @@ sub _eliminar {
         $n->{derecha} = $self->_eliminar( $n->{derecha}, $colegio );
     }
     else {
-        # Nodo encontrado
         return $n->{derecha}   unless defined $n->{izquierda};
         return $n->{izquierda} unless defined $n->{derecha};
-
-        # Dos hijos: sustituir con sucesor en orden
         my $suc = $self->_min_nodo( $n->{derecha} );
         $n->{$_} = $suc->{$_}
           for qw(colegio nombre tipo departamento especialidad contrasena);
@@ -222,10 +211,7 @@ sub a_lista {
     return \@lista;
 }
 
-sub esta_vacio {
-    my ($self) = @_;
-    return !defined $self->{raiz};
-}
+sub esta_vacio { !defined $_[0]->{raiz} }
 
 sub cargar_desde_array {
     my ( $self, $arr ) = @_;
