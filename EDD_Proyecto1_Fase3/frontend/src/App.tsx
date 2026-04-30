@@ -19,6 +19,10 @@ import Inventory from "./pages/user/Inventory";
 import Collaboration from "./pages/user/Collaboration";
 import Chat from "./pages/user/Chat";
 import History from "./pages/user/History";
+import CargaMasiva from "./pages/admin/CargaMasiva";
+import RequestInsumo from "./pages/user/RequestInsumo";
+import AdminInventory from "./pages/admin/AdminInventory";
+import CargarRelaciones from "./pages/admin/CargarRelaciones";
 
 function App() {
   return (
@@ -41,6 +45,9 @@ function App() {
             <Route path="usuarios-pendientes" element={<PendingUsers />} />
             <Route path="solicitudes" element={<AdminRequests />} />
             <Route path="reportes" element={<AdminReports />} />
+            <Route path="carga-masiva" element={<CargaMasiva />} />
+            <Route path="inventario" element={<AdminInventory />} />
+            <Route path="cargar-relaciones" element={<CargarRelaciones />} />
           </Route>
 
           {/* User Routes */}
@@ -60,6 +67,7 @@ function App() {
             <Route path="colaboracion" element={<Collaboration />} />
             <Route path="chat" element={<Chat />} />
             <Route path="historial" element={<History />} />
+            <Route path="solicitar" element={<RequestInsumo />} />
           </Route>
 
           <Route path="/" element={<Navigate to="/login" />} />

@@ -1,35 +1,83 @@
 [
-  {
-    "codigo": "MED-001",
-    "nombre": "Amoxicilina 500mg",
-    "principio_activo": "Amoxicilina",
-    "laboratorio": "Laboratorios Cofasa",
-    "fabricante": "Laboratorios Cofasa",
-    "precio_unitario": 2.50,
-    "cantidad": 500,
-    "fecha_vencimiento": "2027-06-30",
-    "nivel_minimo": 50
-  },
-  {
-    "codigo": "MED-002",
-    "nombre": "Paracetamol 500mg",
-    "principio_activo": "Paracetamol",
-    "laboratorio": "Laboratorios Lancasco",
-    "fabricante": "Laboratorios Lancasco",
-    "precio_unitario": 1.20,
-    "cantidad": 1000,
-    "fecha_vencimiento": "2026-12-31",
-    "nivel_minimo": 100
-  },
-  {
-    "codigo": "MED-003",
-    "nombre": "Omeprazol 20mg",
-    "principio_activo": "Omeprazol",
-    "laboratorio": "Laboratorios Farmindustria",
-    "fabricante": "Laboratorios Farmindustria",
-    "precio_unitario": 3.20,
-    "cantidad": 400,
-    "fecha_vencimiento": "2027-08-15",
-    "nivel_minimo": 40
-  }
+   {
+      "cantidad" : 24500,
+      "codigo" : "MED-001",
+      "fabricante" : "Laboratorios Cofasa",
+      "fecha_vencimiento" : "2027-06-30",
+      "laboratorio" : "Laboratorios Cofasa",
+      "nivel_minimo" : 50,
+      "nombre" : "Amoxicilina 500mg",
+      "precio_unitario" : 2.5,
+      "principio_activo" : "Amoxicilina"
+   },
+   {
+      "cantidad" : 37000,
+      "codigo" : "MED-002",
+      "fabricante" : "Laboratorios Lancasco",
+      "fecha_vencimiento" : "2026-12-31",
+      "laboratorio" : "Laboratorios Lancasco",
+      "nivel_minimo" : 100,
+      "nombre" : "Paracetamol 500mg",
+      "precio_unitario" : 1.2,
+      "principio_activo" : "Paracetamol"
+   },
+   {
+      "cantidad" : 18400,
+      "codigo" : "MED-003",
+      "fabricante" : "Laboratorios Farmindustria",
+      "fecha_vencimiento" : "2027-08-15",
+      "laboratorio" : "Laboratorios Farmindustria",
+      "nivel_minimo" : 40,
+      "nombre" : "Omeprazol 20mg",
+      "precio_unitario" : 3.2,
+      "principio_activo" : "Omeprazol"
+   },
+   {
+      "cantidad" : 30000,
+      "codigo" : "MED-004",
+      "fabricante" : "GenericLab",
+      "fecha_vencimiento" : "2027-04-25",
+      "laboratorio" : "GenericLab",
+      "nivel_minimo" : 1000,
+      "nombre" : "Omeprazol 20mg",
+      "precio_unitario" : 1.1,
+      "principio_activo" : "Omeprazol",
+      "tipo" : "MEDICAMENTO"
+   },
+   {
+      "cantidad" : 9000,
+      "codigo" : "MED-005",
+      "fabricante" : "FarmacentroGT",
+      "fecha_vencimiento" : "2027-02-14",
+      "laboratorio" : "FarmacentroGT",
+      "nivel_minimo" : 300,
+      "nombre" : "Azitromicina 500mg",
+      "precio_unitario" : 3.4,
+      "principio_activo" : "Azitromicina",
+      "tipo" : "MEDICAMENTO"
+   },
+   {
+      "cantidad" : 45000,
+      "codigo" : "MED-006",
+      "fabricante" : "GenericLab",
+      "fecha_vencimiento" : "2027-12-31",
+      "laboratorio" : "GenericLab",
+      "nivel_minimo" : 1500,
+      "nombre" : "Paracetamol 500mg",
+      "precio_unitario" : 0.75,
+      "principio_activo" : "Paracetamol",
+      "tipo" : "MEDICAMENTO"
+   },
+   {
+      "cantidad" : 12000,
+      "codigo" : "MED-007",
+      "fabricante" : "FarmacentroGT",
+      "fecha_vencimiento" : "2027-07-20",
+      "laboratorio" : "FarmacentroGT",
+      "nivel_minimo" : 400,
+      "nombre" : "Diclofenaco 75mg Inyectable",
+      "precio_unitario" : 3.2,
+      "principio_activo" : "Diclofenaco SÃ³dico",
+      "tipo" : "MEDICAMENTO"
+   }
 ]

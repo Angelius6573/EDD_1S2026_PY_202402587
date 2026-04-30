@@ -1,0 +1,8 @@
+digraph MerkleTree {
+  node [shape=box, fontname=Courier];
+  node0 [label="efb669f4ece02f5f"];
+  node1 [label="02bd44fa8686d402"];
+  node0 -> node1;
+  node2 [label="93eb5f5b74d1a679"];
+  node0 -> node2;
+}

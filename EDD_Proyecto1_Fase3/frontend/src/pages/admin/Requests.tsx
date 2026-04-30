@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { api, Solicitud } from "../../../services/api";
 import toast from "react-hot-toast";
-import { CheckCircle, Package } from "lucide-react";
+import { CheckCircle, Package, XCircle } from "lucide-react";
 
 export default function AdminRequests() {
   const [solicitudes, setSolicitudes] = useState<Solicitud[]>([]);
   const [loading, setLoading] = useState(true);
   const [aprobando, setAprobando] = useState<string | null>(null);
+  const [rechazando, setRechazando] = useState<string | null>(null);
 
   useEffect(() => {
     cargarSolicitudes();
@@ -33,6 +34,19 @@ export default function AdminRequests() {
       toast.error(error.response?.data?.error || "Error al aprobar solicitud");
     } finally {
       setAprobando(null);
+    }
+  };
+
+  const handleRechazar = async (uuid: string) => {
+    setRechazando(uuid);
+    try {
+      await api.rechazarSolicitud(uuid);
+      toast.success("Solicitud rechazada");
+      cargarSolicitudes();
+    } catch (error: any) {
+      toast.error(error.response?.data?.error || "Error al rechazar solicitud");
+    } finally {
+      setRechazando(null);
     }
   };
 
@@ -82,6 +96,9 @@ export default function AdminRequests() {
                   Departamento
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Solicitante
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Motivo
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -97,7 +114,7 @@ export default function AdminRequests() {
                 ? (
                   <tr>
                     <td
-                      colSpan={7}
+                      colSpan={8}
                       className="px-6 py-8 text-center text-gray-500"
                     >
                       <Package className="h-12 w-12 mx-auto text-gray-400 mb-2" />
@@ -126,20 +143,33 @@ export default function AdminRequests() {
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
                         {solicitud.departamento}
                       </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
+                        {solicitud.solicitante}
+                      </td>
                       <td className="px-6 py-4 text-sm text-gray-600 max-w-xs truncate">
                         {solicitud.motivo}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                         {solicitud.fecha}
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm">
+                      <td className="px-6 py-4 whitespace-nowrap text-sm space-x-2">
                         <button
                           onClick={() =>
                             handleAprobar(solicitud.uuid)}
                           disabled={aprobando === solicitud.uuid}
-                          className="text-green-600 hover:text-green-800 mr-3"
+                          className="text-green-600 hover:text-green-800 disabled:opacity-50"
+                          title="Aprobar"
                         >
                           <CheckCircle size={20} />
+                        </button>
+                        <button
+                          onClick={() =>
+                            handleRechazar(solicitud.uuid)}
+                          disabled={rechazando === solicitud.uuid}
+                          className="text-red-600 hover:text-red-800 disabled:opacity-50"
+                          title="Rechazar"
+                        >
+                          <XCircle size={20} />
                         </button>
                       </td>
                     </tr>

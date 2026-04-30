@@ -2,12 +2,14 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 import {
   BarChart3,
+  Clipboard,
   ClipboardList,
   LayoutDashboard,
   LogOut,
   MessageCircle,
   Package,
   ShoppingCart,
+  Upload,
   UserCircle,
   Users,
 } from "lucide-react";
@@ -32,6 +34,13 @@ export default function Navbar() {
     },
     { path: "/admin/solicitudes", icon: ShoppingCart, label: "Solicitudes" },
     { path: "/admin/reportes", icon: BarChart3, label: "Reportes" },
+    { path: "/admin/carga-masiva", icon: Upload, label: "Carga Masiva" },
+    { path: "/admin/inventario", icon: Package, label: "Inventario" },
+    {
+      path: "/admin/cargar-relaciones",
+      icon: Users,
+      label: "Cargar Relaciones",
+    },
   ];
 
   const userLinks = [
@@ -41,6 +50,7 @@ export default function Navbar() {
     { path: "/user/colaboracion", icon: Users, label: "Colaboración" },
     { path: "/user/chat", icon: MessageCircle, label: "Chat" },
     { path: "/user/historial", icon: ClipboardList, label: "Historial" },
+    { path: "/user/solicitar", icon: Clipboard, label: "Solicitar Insumo" },
   ];
 
   const links = isAdmin ? adminLinks : userLinks;

@@ -9,49 +9,60 @@ use Time::Piece;
 sub normalizar_utf8 {
     my ($texto) = @_;
     return '' unless defined $texto;
-    if ( utf8::is_utf8($texto) || utf8::valid($texto) ) {
-        utf8::decode($texto) if !utf8::is_utf8($texto);
+
+    # Si ya es UTF-8 interno, retornar
+    if ( utf8::is_utf8($texto) ) {
         return $texto;
     }
-    my $encodings = [ 'UTF-8', 'ISO-8859-1', 'cp1252', 'Latin-1' ];
-    foreach my $enc (@$encodings) {
-        my $decoded;
-        eval { $decoded = decode( $enc, $texto, Encode::FB_CROAK ); };
-        return $decoded if !$@ && defined $decoded;
+
+    # Intentar decodificar
+    my $decoded;
+    eval { $decoded = decode( 'UTF-8', $texto, Encode::FB_CROAK ); };
+    if ( !$@ ) {
+        utf8::decode($decoded);
+        return $decoded;
     }
-    $texto =~ s/[^\x20-\x7E\xA0-\xFF]//g;
+
+    # Fallback: eliminar caracteres no ASCII y retornar como está
+    $texto =~ s/[^\x20-\x7E]//g;
     return $texto;
 }
 
 sub limpiar_campo {
     my ( $valor, $campo, $tipo ) = @_;
     $tipo //= '';
-    if ( !defined $valor ) {
-        return undef;
-    }
+
+    return undef unless defined $valor;
+
+    # Normalizar texto si es necesario
     if ( ref($valor) eq '' ) {
+        $valor = normalizar_utf8($valor);
         $valor =~ s/^\s+|\s+$//g;
         if ( $valor eq '' ) {
             return undef;
         }
     }
+
     if ( $tipo eq 'cantidad' || $tipo eq 'nivel_minimo' ) {
         if ( $valor !~ /^\d+$/ ) {
             return undef;
         }
         return $valor + 0;
     }
+
     if ( $tipo eq 'precio' ) {
         if ( $valor !~ /^\d+(?:\.\d+)?$/ ) {
             return undef;
         }
         return $valor + 0;
     }
+
     if ( $tipo eq 'fecha' ) {
         my $sep;
         if    ( $valor =~ /^\d{4}-\d{2}-\d{2}$/ )   { $sep = '%Y-%m-%d'; }
         elsif ( $valor =~ /^\d{4}\/\d{2}\/\d{2}$/ ) { $sep = '%Y/%m/%d'; }
         else                                        { return undef; }
+
         my $fecha;
         eval { $fecha = Time::Piece->strptime( $valor, $sep ); };
         if ( $@ || !defined $fecha ) {
@@ -62,12 +73,15 @@ sub limpiar_campo {
         }
         return $valor;
     }
+
     if ( $tipo eq 'codigo' ) {
-        if ( $valor !~ /^[A-Z]{3,4}-\d+$/i ) {
+        $valor =~ s/^[A-Z]{3,4}-//i;
+        if ( $valor !~ /^\d+$/ ) {
             return undef;
         }
-        return uc($valor);
+        return $valor;
     }
+
     if ( $tipo eq 'tipo_producto' ) {
         my $uc = uc($valor);
         if ( $uc ne 'MEDICAMENTO' && $uc ne 'EQUIPO' && $uc ne 'SUMINISTRO' ) {
@@ -75,21 +89,25 @@ sub limpiar_campo {
         }
         return $uc;
     }
+
     if ( $tipo eq 'texto' ) {
         if ( $valor eq '' ) {
             return undef;
         }
         return $valor;
     }
+
     return $valor;
 }
 
 sub validar_campos_obligatorios {
     my ( $item, $campos_obligatorios ) = @_;
     my @faltantes;
+
     foreach my $campo (@$campos_obligatorios) {
         my $valor    = $item->{$campo};
         my $faltante = 0;
+
         if ( !defined $valor ) {
             $faltante = 1;
         }
@@ -102,8 +120,10 @@ sub validar_campos_obligatorios {
         elsif ( ref($valor) eq 'HASH' ) {
             $faltante = 1 if scalar( keys %$valor ) == 0;
         }
+
         push @faltantes, $campo if $faltante;
     }
+
     return @faltantes;
 }
 

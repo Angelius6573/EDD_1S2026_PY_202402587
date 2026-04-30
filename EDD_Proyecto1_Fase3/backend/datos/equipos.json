@@ -1,29 +1,38 @@
 [
-  {
-    "codigo": "EQU-001",
-    "nombre": "Monitor de Signos Vitales",
-    "fabricante": "Philips Medical",
-    "precio_unitario": 8500.00,
-    "cantidad": 5,
-    "fecha_ingreso": "2026-01-15",
-    "nivel_minimo": 1
-  },
-  {
-    "codigo": "EQU-002",
-    "nombre": "Electrocardiografo 12 Derivaciones",
-    "fabricante": "GE Healthcare",
-    "precio_unitario": 12500.00,
-    "cantidad": 3,
-    "fecha_ingreso": "2026-02-28",
-    "nivel_minimo": 1
-  },
-  {
-    "codigo": "EQU-003",
-    "nombre": "Tensiometro Manual Aneroide",
-    "fabricante": "BuenaVidaGT",
-    "precio_unitario": 180.00,
-    "cantidad": 20,
-    "fecha_ingreso": "2026-03-12",
-    "nivel_minimo": 4
-  }
+   {
+      "cantidad" : 45,
+      "codigo" : "EQU-001",
+      "fabricante" : "Philips Medical",
+      "fecha_ingreso" : "2026-01-15",
+      "nivel_minimo" : 1,
+      "nombre" : "Monitor de Signos Vitales",
+      "precio_unitario" : 8500
+   },
+   {
+      "cantidad" : 23,
+      "codigo" : "EQU-002",
+      "fabricante" : "GE Healthcare",
+      "fecha_ingreso" : "2026-02-28",
+      "nivel_minimo" : 1,
+      "nombre" : "Electrocardiografo 12 Derivaciones",
+      "precio_unitario" : 12500
+   },
+   {
+      "cantidad" : 100,
+      "codigo" : "EQU-003",
+      "fabricante" : "BuenaVidaGT",
+      "fecha_ingreso" : "2026-03-12",
+      "nivel_minimo" : 4,
+      "nombre" : "Tensiometro Manual Aneroide",
+      "precio_unitario" : 180
+   },
+   {
+      "cantidad" : 80,
+      "codigo" : "EQU-004",
+      "fabricante" : "BuenaVidaGT",
+      "fecha_ingreso" : "2026-03-12",
+      "nivel_minimo" : 4,
+      "nombre" : "TensiÃ³metro Manual Aneroide",
+      "precio_unitario" : 180
+   }
 ]

@@ -10,6 +10,18 @@ use utilidades::validar_json;
 sub procesar_archivo {
     my ( $ruta, $ctx ) = @_;
 
+    # Verificar que ctx tenga las claves necesarias
+    unless ( $ctx && ref($ctx) eq 'HASH' ) {
+        return "Error: Contexto invalido o no definido";
+    }
+
+    # Inicializar proveedores si no existe
+    unless ( $ctx->{prov} ) {
+        require gestion_datos::lista_circular_doblemente_enlazada;
+        $ctx->{prov} =
+          gestion_datos::lista_circular_doblemente_enlazada->nuevo();
+    }
+
     my ( $datos, $error ) = _leer_json_con_encoding($ruta);
     if ($error) {
         return "Error leyendo JSON: $error";
@@ -19,76 +31,135 @@ sub procesar_archivo {
         return "Error: El archivo JSON esta vacio o no contiene datos validos";
     }
 
-    return "Error: el JSON no contiene la estructura 'proveedor'."
-      unless ref( $datos->{proveedor} ) eq 'ARRAY';
+    # Verificar si tiene la estructura 'proveedor' o es un array directo
+    my @items_a_procesar;
+    my @proveedores_a_guardar;
+
+    if ( ref($datos) eq 'ARRAY' ) {
+
+        # Es un array directo de items (sin proveedor)
+        @items_a_procesar = @$datos;
+    }
+    elsif ( ref( $datos->{proveedor} ) eq 'ARRAY' ) {
+
+        # Es la estructura con proveedor
+        for my $prov ( @{ $datos->{proveedor} } ) {
+            my $prov_validacion = _validar_proveedor($prov);
+            if ( $prov_validacion->{error} ) {
+                warn "PROVEEDOR ignorado: $prov_validacion->{error}\n";
+                next;
+            }
+
+            my @entregas_prov;
+            for my $item ( @{ $prov->{entrega} // [] } ) {
+                my $item_validacion = _validar_item($item);
+                if ( $item_validacion->{error} ) {
+                    warn "ITEM ignorado: $item_validacion->{error}\n";
+                    next;
+                }
+                push @entregas_prov,    $item_validacion->{datos};
+                push @items_a_procesar, $item_validacion->{datos};
+            }
+
+            if (@entregas_prov) {
+                push @proveedores_a_guardar,
+                  {
+                    nit           => $prov_validacion->{datos}{nit},
+                    nombre        => $prov_validacion->{datos}{nombre},
+                    telefono      => $prov_validacion->{datos}{telefono}  // '',
+                    direccion     => $prov_validacion->{datos}{direccion} // '',
+                    fecha_entrega => $prov_validacion->{datos}{fecha_entrega}
+                      // '',
+                    numero_factura => $prov_validacion->{datos}{numero_factura}
+                      // '',
+                    entregas => \@entregas_prov
+                  };
+            }
+        }
+    }
+    else {
+        return
+"Error: el JSON no contiene la estructura esperada (array o proveedor[])";
+    }
 
     my ( $ok, $err, $total ) = ( 0, 0, 0 );
     my @advertencias;
 
-    for my $prov ( @{ $datos->{proveedor} } ) {
-        my $prov_validacion = _validar_proveedor($prov);
+    # Procesar items
+    for my $item (@items_a_procesar) {
+        $total++;
 
-        if ( $prov_validacion->{error} ) {
-            push @advertencias, "PROVEEDOR ignorado: $prov_validacion->{error}";
-            next;
+        my $tipo   = $item->{tipo}   // '';
+        my $codigo = $item->{codigo} // '';
+
+        if ( $tipo eq 'MEDICAMENTO' ) {
+            if ( $codigo !~ /^MED-/i ) {
+                $codigo = "MED-" . $codigo;
+            }
+            $item->{codigo} = uc($codigo);
+
+            my $existente = $ctx->{med}->buscar_por_codigo( $item->{codigo} );
+            if ($existente) {
+                $existente->{cantidad} += $item->{cantidad};
+                push @advertencias,
+                  "ITEM actualizado (suma stock): $item->{codigo}";
+            }
+            else {
+                $ctx->{med}->insertar_final($item);
+            }
+            $ok++;
         }
-
-        my @entregas_prov;
-
-        for my $item ( @{ $prov->{entrega} // [] } ) {
-            $total++;
-            my $item_validacion = _validar_item($item);
-
-            if ( $item_validacion->{error} ) {
-                push @advertencias, "ITEM ignorado: $item_validacion->{error}";
-                $err++;
-                next;
+        elsif ( $tipo eq 'EQUIPO' ) {
+            if ( $codigo !~ /^EQU-/i ) {
+                $codigo = "EQU-" . $codigo;
             }
+            $item->{codigo} = uc($codigo);
 
-            my $item_limpio = $item_validacion->{datos};
-
-            if ( $item_limpio->{tipo} eq 'MEDICAMENTO' ) {
-                my $cod_completo = "MED-" . $item_limpio->{codigo};
-                $item_limpio->{codigo} = $cod_completo;
-                $ctx->{med}->insertar_final($item_limpio);
-                push @entregas_prov, $item_limpio;
-                $ok++;
+            my $existente = $ctx->{bst}->buscar( $item->{codigo} );
+            if ($existente) {
+                $existente->{cantidad} += $item->{cantidad};
+                push @advertencias,
+                  "ITEM actualizado (suma stock): $item->{codigo}";
             }
-            elsif ( $item_limpio->{tipo} eq 'EQUIPO' ) {
-                my $cod_completo = "EQU-" . $item_limpio->{codigo};
-                $item_limpio->{codigo} = $cod_completo;
-                $ctx->{bst}->insertar(%$item_limpio);
-                push @entregas_prov, $item_limpio;
-                $ok++;
+            else {
+                $ctx->{bst}->insertar(%$item);
             }
-            elsif ( $item_limpio->{tipo} eq 'SUMINISTRO' ) {
-                my $cod_completo = "SUM-" . $item_limpio->{codigo};
-                $item_limpio->{codigo} = $cod_completo;
-                $ctx->{btree}->insertar(%$item_limpio);
-                push @entregas_prov, $item_limpio;
-                $ok++;
-            }
+            $ok++;
         }
+        elsif ( $tipo eq 'SUMINISTRO' ) {
+            if ( $codigo !~ /^SUM-/i ) {
+                $codigo = "SUM-" . $codigo;
+            }
+            $item->{codigo} = uc($codigo);
 
-        if (@entregas_prov) {
-            $ctx->{prov}->insertar_final(
-                {
-                    nit            => $prov_validacion->{datos}{nit},
-                    nombre         => $prov_validacion->{datos}{nombre},
-                    telefono       => $prov_validacion->{datos}{telefono},
-                    direccion      => $prov_validacion->{datos}{direccion},
-                    fecha_entrega  => $prov_validacion->{datos}{fecha_entrega},
-                    numero_factura => $prov_validacion->{datos}{numero_factura},
-                    entregas       => \@entregas_prov
-                }
-            );
+            my $existente = $ctx->{btree}->buscar( $item->{codigo} );
+            if ($existente) {
+                $existente->{cantidad} += $item->{cantidad};
+                push @advertencias,
+                  "ITEM actualizado (suma stock): $item->{codigo}";
+            }
+            else {
+                $ctx->{btree}->insertar(%$item);
+            }
+            $ok++;
         }
+        else {
+            push @advertencias,
+              "ITEM ignorado: Tipo desconocido '$tipo' para $codigo";
+            $err++;
+        }
+    }
+
+    # Guardar proveedores
+    for my $prov (@proveedores_a_guardar) {
+        $ctx->{prov}->insertar_final($prov);
     }
 
     _guardar_estructuras($ctx);
 
-    my $resumen =
-"Carga completada:\n  $ok insertados\n  $err ignorados\n  Total procesados: $total";
+    my $resumen = sprintf(
+"Carga completada:\n  %d insertados/actualizados\n  %d ignorados\n  Total procesados: %d",
+        $ok, $err, $total );
     if (@advertencias) {
         $resumen .= "\n\nAdvertencias:\n" . join( "\n", @advertencias );
     }
@@ -113,42 +184,28 @@ sub _leer_json_con_encoding {
         substr( $bytes, 0, 3 ) = '';
     }
 
-    my $texto;
-    my $decodificado = 0;
+    my $texto = '';
 
-    eval {
-        $texto        = decode( 'UTF-8', $bytes, Encode::FB_CROAK );
-        $decodificado = 1;
-    };
+    # Intentar decodificar UTF-8 con manejo de errores
+    eval { $texto = decode( 'UTF-8', $bytes, Encode::FB_DEFAULT ); };
+    if ($@) {
+        eval { $texto = decode( 'ISO-8859-1', $bytes, Encode::FB_DEFAULT ); };
+    }
+    if ( $@ || $texto eq '' ) {
 
-    if ( !$decodificado ) {
-        eval {
-            $texto        = decode( 'UTF-8', $bytes, Encode::FB_DEFAULT );
-            $decodificado = 1;
-        };
+        # Último recurso: eliminar caracteres no ASCII
+        $bytes =~ s/[^\x20-\x7E\n\r\t]//g;
+        $texto = $bytes;
     }
 
-    if ( !$decodificado ) {
-        eval {
-            $texto        = decode( 'ISO-8859-1', $bytes );
-            $decodificado = 1;
-        };
-    }
-
-    if ( !$decodificado ) {
-        return ( undef,
-            "No se pudo decodificar el archivo (codificacion desconocida)" );
-    }
-
+    # Limpiar caracteres problemáticos
     $texto =~ s/[\x{2013}\x{2014}]/-/g;
     $texto =~ s/[\x{2018}\x{2019}]/'/g;
     $texto =~ s/[\x{201C}\x{201D}]/"/g;
     $texto =~ s/[\x00-\x08\x0B\x0C\x0E-\x1F]//g;
 
-  # Nota: $texto ya es un string Perl interno (decodificado de UTF-8).
-  # decode_json() espera bytes crudos, por lo que causaría doble decodificacion.
-  # Se usa JSON::PP->decode() sin la bandera ->utf8, que acepta strings Perl.
-    my $json = JSON::PP->new->allow_nonref->relaxed;
+    # Decodificar JSON
+    my $json = JSON::PP->new->allow_nonref->relaxed->utf8(0);
     my $datos;
     eval { $datos = $json->decode($texto) };
     if ($@) {
@@ -160,148 +217,127 @@ sub _leer_json_con_encoding {
 
 sub _validar_proveedor {
     my ($prov) = @_;
-
     my $result = { datos => {}, error => undef };
 
-    my $nit =
-      utilidades::validar_json::limpiar_campo( $prov->{nit}, 'nit', 'texto' );
-    unless ( defined $nit ) {
+    my $nit = $prov->{nit} // '';
+    $nit =~ s/^\s+|\s+$//g;
+    if ( $nit eq '' ) {
         $result->{error} = "NIT invalido o vacio";
         return $result;
     }
     $result->{datos}{nit} = $nit;
 
-    my $nombre =
-      utilidades::validar_json::limpiar_campo( $prov->{nombre}, 'nombre',
-        'texto' );
-    unless ( defined $nombre ) {
+    my $nombre = $prov->{nombre} // '';
+    $nombre =~ s/^\s+|\s+$//g;
+    if ( $nombre eq '' ) {
         $result->{error} = "Nombre del proveedor invalido o vacio";
         return $result;
     }
     $result->{datos}{nombre} = $nombre;
 
-    my $telefono =
-      utilidades::validar_json::limpiar_campo( $prov->{telefono}, 'telefono',
-        'texto' );
-    $result->{datos}{telefono} = defined $telefono ? $telefono : '';
+    my $telefono = $prov->{telefono} // '';
+    $telefono =~ s/^\s+|\s+$//g;
+    $result->{datos}{telefono} = $telefono;
 
-    my $direccion =
-      utilidades::validar_json::limpiar_campo( $prov->{direccion}, 'direccion',
-        'texto' );
-    $result->{datos}{direccion} = defined $direccion ? $direccion : '';
+    my $direccion = $prov->{direccion} // '';
+    $direccion =~ s/^\s+|\s+$//g;
+    $result->{datos}{direccion} = $direccion;
 
-    my $fecha_entrega =
-      utilidades::validar_json::limpiar_campo( $prov->{fecha_entrega},
-        'fecha_entrega', 'fecha' );
-    $result->{datos}{fecha_entrega} =
-      defined $fecha_entrega ? $fecha_entrega : '';
+    my $fecha_entrega = $prov->{fecha_entrega} // '';
+    $fecha_entrega =~ s/^\s+|\s+$//g;
+    $result->{datos}{fecha_entrega} = $fecha_entrega;
 
-    my $numero_factura =
-      utilidades::validar_json::limpiar_campo( $prov->{numero_factura},
-        'numero_factura', 'texto' );
-    $result->{datos}{numero_factura} =
-      defined $numero_factura ? $numero_factura : '';
+    my $numero_factura = $prov->{numero_factura} // '';
+    $numero_factura =~ s/^\s+|\s+$//g;
+    $result->{datos}{numero_factura} = $numero_factura;
 
     return $result;
 }
 
 sub _validar_item {
     my ($item) = @_;
-
     my $result = { datos => {}, error => undef };
 
-    my $tipo = utilidades::validar_json::limpiar_campo( $item->{tipo}, 'tipo',
-        'tipo_producto' );
-    unless ( defined $tipo ) {
+    my $tipo = $item->{tipo} // '';
+    $tipo = uc($tipo);
+    unless ( $tipo eq 'MEDICAMENTO'
+        || $tipo eq 'EQUIPO'
+        || $tipo eq 'SUMINISTRO' )
+    {
         $result->{error} =
           "Tipo invalido (debe ser MEDICAMENTO, EQUIPO o SUMINISTRO)";
         return $result;
     }
     $result->{datos}{tipo} = $tipo;
 
-    my $codigo =
-      utilidades::validar_json::limpiar_campo( $item->{codigo}, 'codigo',
-        'codigo' );
-    unless ( defined $codigo ) {
-        $result->{error} = "Codigo invalido (formato: XXX-001)";
+    my $codigo = $item->{codigo} // '';
+    $codigo =~ s/^\s+|\s+$//g;
+    if ( $codigo eq '' ) {
+        $result->{error} = "Codigo invalido o vacio";
         return $result;
     }
+
+    # Limpiar prefijos existentes para normalizar
+    $codigo =~ s/^(MED|EQU|SUM)-//i;
     $result->{datos}{codigo} = $codigo;
 
-    my $nombre =
-      utilidades::validar_json::limpiar_campo( $item->{nombre}, 'nombre',
-        'texto' );
-    unless ( defined $nombre ) {
+    my $nombre = $item->{nombre} // '';
+    $nombre =~ s/^\s+|\s+$//g;
+    if ( $nombre eq '' ) {
         $result->{error} = "Nombre invalido o vacio";
         return $result;
     }
     $result->{datos}{nombre} = $nombre;
 
-    my $cantidad =
-      utilidades::validar_json::limpiar_campo( $item->{cantidad}, 'cantidad',
-        'cantidad' );
-    unless ( defined $cantidad ) {
+    my $cantidad = $item->{cantidad} // 0;
+    if ( $cantidad !~ /^\d+$/ || $cantidad <= 0 ) {
         $result->{error} = "Cantidad invalida (debe ser numero positivo)";
         return $result;
     }
-    $result->{datos}{cantidad} = $cantidad;
+    $result->{datos}{cantidad} = $cantidad + 0;
 
-    my $precio =
-      utilidades::validar_json::limpiar_campo( $item->{precio_unitario},
-        'precio_unitario', 'precio' );
-    unless ( defined $precio ) {
+    my $precio = $item->{precio_unitario} // 0;
+    if ( $precio !~ /^\d+(?:\.\d+)?$/ || $precio < 0 ) {
         $result->{error} =
-          "Precio unitario invalido (debe ser numero positivo)";
+          "Precio unitario invalido (debe ser numero no negativo)";
         return $result;
     }
-    $result->{datos}{precio_unitario} = $precio;
+    $result->{datos}{precio_unitario} = $precio + 0;
 
-    my $nivel_minimo =
-      utilidades::validar_json::limpiar_campo( $item->{nivel_minimo},
-        'nivel_minimo', 'cantidad' );
-    unless ( defined $nivel_minimo ) {
-        $result->{error} = "Nivel minimo invalido (debe ser numero positivo)";
+    my $nivel_minimo = $item->{nivel_minimo} // 0;
+    if ( $nivel_minimo !~ /^\d+$/ || $nivel_minimo < 0 ) {
+        $result->{error} =
+          "Nivel minimo invalido (debe ser numero no negativo)";
         return $result;
     }
-    $result->{datos}{nivel_minimo} = $nivel_minimo;
+    $result->{datos}{nivel_minimo} = $nivel_minimo + 0;
 
-    my $fabricante =
-      utilidades::validar_json::limpiar_campo( $item->{fabricante},
-        'fabricante', 'texto' );
-    $result->{datos}{fabricante} = defined $fabricante ? $fabricante : '';
+    my $fabricante = $item->{fabricante} // '';
+    $fabricante =~ s/^\s+|\s+$//g;
+    $result->{datos}{fabricante} = $fabricante;
 
     if ( $tipo eq 'MEDICAMENTO' ) {
-        my $principio =
-          utilidades::validar_json::limpiar_campo( $item->{principio_activo},
-            'principio_activo', 'texto' );
-        $result->{datos}{principio_activo} =
-          defined $principio ? $principio : '';
+        my $principio = $item->{principio_activo} // '';
+        $principio =~ s/^\s+|\s+$//g;
+        $result->{datos}{principio_activo} = $principio;
 
-        my $laboratorio =
-          utilidades::validar_json::limpiar_campo( $item->{laboratorio},
-            'laboratorio', 'texto' );
-        $result->{datos}{laboratorio} =
-          defined $laboratorio ? $laboratorio : ( $fabricante // '' );
+        my $laboratorio = $item->{laboratorio} // $fabricante;
+        $laboratorio =~ s/^\s+|\s+$//g;
+        $result->{datos}{laboratorio} = $laboratorio;
 
-        my $fecha_vencimiento =
-          utilidades::validar_json::limpiar_campo( $item->{fecha_vencimiento},
-            'fecha_vencimiento', 'fecha' );
-        $result->{datos}{fecha_vencimiento} =
-          defined $fecha_vencimiento ? $fecha_vencimiento : '';
+        my $fecha_vencimiento = $item->{fecha_vencimiento} // '';
+        $fecha_vencimiento =~ s/^\s+|\s+$//g;
+        $result->{datos}{fecha_vencimiento} = $fecha_vencimiento;
     }
     elsif ( $tipo eq 'EQUIPO' ) {
-        my $fecha_ingreso =
-          utilidades::validar_json::limpiar_campo( $item->{fecha_ingreso},
-            'fecha_ingreso', 'fecha' );
-        $result->{datos}{fecha_ingreso} =
-          defined $fecha_ingreso ? $fecha_ingreso : '';
+        my $fecha_ingreso = $item->{fecha_ingreso} // '';
+        $fecha_ingreso =~ s/^\s+|\s+$//g;
+        $result->{datos}{fecha_ingreso} = $fecha_ingreso;
     }
     elsif ( $tipo eq 'SUMINISTRO' ) {
-        my $fecha_vencimiento =
-          utilidades::validar_json::limpiar_campo( $item->{fecha_vencimiento},
-            'fecha_vencimiento', 'fecha' );
-        $result->{datos}{fecha_vencimiento} =
-          defined $fecha_vencimiento ? $fecha_vencimiento : '';
+        my $fecha_vencimiento = $item->{fecha_vencimiento} // '';
+        $fecha_vencimiento =~ s/^\s+|\s+$//g;
+        $result->{datos}{fecha_vencimiento} = $fecha_vencimiento;
     }
 
     return $result;
@@ -310,17 +346,25 @@ sub _validar_item {
 sub _guardar_estructuras {
     my ($ctx) = @_;
 
-    require utilidades::leer_json;
+    require utilidades::leer_json if $ctx->{bst};
 
-    utilidades::leer_json::guardar_json( 'datos/equipos.json',
-        $ctx->{bst}->a_array_json() );
-    utilidades::leer_json::guardar_json( 'datos/suministros.json',
-        $ctx->{btree}->a_array_json() );
-    utilidades::leer_json::guardar_json( 'datos/proveedores.json',
-        $ctx->{prov}->almacenar_array_simple() );
-
-    my $inventario = $ctx->{med}->almacenar_array_simple();
-    utilidades::leer_json::guardar_json( 'datos/inventario.json', $inventario );
+    if ( $ctx->{bst} ) {
+        utilidades::leer_json::guardar_json( 'datos/equipos.json',
+            $ctx->{bst}->a_array_json() );
+    }
+    if ( $ctx->{btree} ) {
+        utilidades::leer_json::guardar_json( 'datos/suministros.json',
+            $ctx->{btree}->a_array_json() );
+    }
+    if ( $ctx->{prov} ) {
+        utilidades::leer_json::guardar_json( 'datos/proveedores.json',
+            $ctx->{prov}->almacenar_array_simple() );
+    }
+    if ( $ctx->{med} ) {
+        my $inventario = $ctx->{med}->almacenar_array_simple();
+        utilidades::leer_json::guardar_json( 'datos/inventario.json',
+            $inventario );
+    }
 }
 
 1;

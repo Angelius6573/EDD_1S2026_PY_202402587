@@ -8,6 +8,7 @@ const apiClient = axios.create({
   },
 });
 
+// ---------- Interfaces ----------
 export interface User {
   colegio: string;
   nombre: string;
@@ -90,8 +91,9 @@ export interface Conversacion {
   timestamp: number;
 }
 
+// ---------- API Service ----------
 export const api = {
-  // Auth
+  // ==================== Autenticación ====================
   login: async (colegio: string, contrasena: string) => {
     const response = await apiClient.post("/api/login", {
       colegio,
@@ -110,7 +112,7 @@ export const api = {
     return response.data;
   },
 
-  // Admin
+  // ==================== Administrador ====================
   getUsuariosPendientes: async () => {
     const response = await apiClient.get("/api/admin/usuarios-pendientes");
     return response.data;
@@ -136,7 +138,34 @@ export const api = {
     return response.data;
   },
 
-  // User Profile
+  // ==================== Carga Masiva ====================
+  cargarInventario: async (file: File) => {
+    const formData = new FormData();
+    formData.append("file", file);
+    const response = await apiClient.post(
+      "/api/admin/cargar-inventario",
+      formData,
+      {
+        headers: { "Content-Type": "multipart/form-data" },
+      },
+    );
+    return response.data;
+  },
+
+  cargarUsuarios: async (file: File) => {
+    const formData = new FormData();
+    formData.append("file", file);
+    const response = await apiClient.post(
+      "/api/admin/cargar-usuarios",
+      formData,
+      {
+        headers: { "Content-Type": "multipart/form-data" },
+      },
+    );
+    return response.data;
+  },
+
+  // ==================== Usuario / Perfil ====================
   getPerfil: async () => {
     const response = await apiClient.get("/api/user/perfil");
     return response.data;
@@ -147,7 +176,7 @@ export const api = {
     return response.data;
   },
 
-  // Inventory
+  // ==================== Inventario ====================
   getInventarioMedicamentos: async (filtro?: string) => {
     const response = await apiClient.get("/api/user/inventario-medicamentos", {
       params: { filtro: filtro || "" },
@@ -169,7 +198,7 @@ export const api = {
     return response.data;
   },
 
-  // Requests
+  // ==================== Solicitudes de Insumo ====================
   solicitarInsumo: async (
     data: { tipo: string; codigo: string; cantidad: number; motivo: string },
   ) => {
@@ -182,7 +211,7 @@ export const api = {
     return response.data;
   },
 
-  // Collaboration
+  // ==================== Colaboración ====================
   getColaboradores: async () => {
     const response = await apiClient.get("/api/colaboracion/colaboradores");
     return response.data;
@@ -196,7 +225,9 @@ export const api = {
   enviarSolicitudColaboracion: async (colegioDestino: string) => {
     const response = await apiClient.post(
       "/api/colaboracion/enviar-solicitud",
-      { colegio_destino: colegioDestino },
+      {
+        colegio_destino: colegioDestino,
+      },
     );
     return response.data;
   },
@@ -204,6 +235,13 @@ export const api = {
   getSolicitudesRecibidas: async () => {
     const response = await apiClient.get(
       "/api/colaboracion/solicitudes-recibidas",
+    );
+    return response.data;
+  },
+
+  getSolicitudesEnviadas: async () => {
+    const response = await apiClient.get(
+      "/api/colaboracion/solicitudes-enviadas",
     );
     return response.data;
   },
@@ -222,7 +260,7 @@ export const api = {
     return response.data;
   },
 
-  // Chat
+  // ==================== Chat ====================
   enviarMensaje: async (receptor: string, contenido: string) => {
     const response = await apiClient.post("/api/chat/enviar", {
       receptor,
@@ -243,7 +281,7 @@ export const api = {
     return response.data;
   },
 
-  // Reports
+  // ==================== Reportes ====================
   getReporteGrafo: async () => {
     const response = await apiClient.get("/api/reportes/grafo");
     return response.data;
@@ -263,6 +301,87 @@ export const api = {
     const response = await apiClient.get("/api/reportes/compresion");
     return response.data;
   },
+
+  getReporteMatriz: async () => {
+    const response = await apiClient.get("/api/reportes/matriz");
+    return response.data;
+  },
+
+  getReporteMerkle: async () => {
+    const response = await apiClient.get("/api/reportes/merkle");
+    return response.data;
+  },
+
+  // ==================== Admin Inventory CRUD ====================
+  getAdminMedicamentos: async () => {
+    const res = await apiClient.get("/api/admin/medicamentos");
+    return res.data;
+  },
+  createAdminMedicamento: async (data: unknown) => {
+    const res = await apiClient.post("/api/admin/medicamentos", data);
+    return res.data;
+  },
+  updateAdminMedicamento: async (codigo: string, data: unknown) => {
+    const res = await apiClient.put(`/api/admin/medicamentos/${codigo}`, data);
+    return res.data;
+  },
+  deleteAdminMedicamento: async (codigo: string) => {
+    const res = await apiClient.delete(`/api/admin/medicamentos/${codigo}`);
+    return res.data;
+  },
+  getAdminEquipos: async () => {
+    const res = await apiClient.get("/api/admin/equipos");
+    if (Array.isArray(res.data)) {
+      return { equipos: res.data };
+    }
+    if (res.data && typeof res.data === "object" && "equipos" in res.data) {
+      return res.data;
+    }
+    return { equipos: [] };
+  },
+  createAdminEquipo: async (data: unknown) => {
+    const res = await apiClient.post("/api/admin/equipos", data);
+    return res.data;
+  },
+  updateAdminEquipo: async (codigo: string, data: unknown) => {
+    const res = await apiClient.put(`/api/admin/equipos/${codigo}`, data);
+    return res.data;
+  },
+  deleteAdminEquipo: async (codigo: string) => {
+    const res = await apiClient.delete(`/api/admin/equipos/${codigo}`);
+    return res.data;
+  },
+  // Suministros
+  getAdminSuministros: async () => {
+    const res = await apiClient.get("/api/admin/suministros");
+    return res.data;
+  },
+  createAdminSuministro: async (data: unknown) => {
+    const res = await apiClient.post("/api/admin/suministros", data);
+    return res.data;
+  },
+  updateAdminSuministro: async (codigo: string, data: unknown) => {
+    const res = await apiClient.put(`/api/admin/suministros/${codigo}`, data);
+    return res.data;
+  },
+  deleteAdminSuministro: async (codigo: string) => {
+    const res = await apiClient.delete(`/api/admin/suministros/${codigo}`);
+    return res.data;
+  },
+  // Rechazar solicitud
+  rechazarSolicitud: async (uuid: string) => {
+    const res = await apiClient.post("/api/admin/rechazar-solicitud", { uuid });
+    return res.data;
+  },
+  cargarRelaciones: async (file: File) => {
+    const formData = new FormData();
+    formData.append("file", file);
+    const res = await apiClient.post("/api/admin/cargar-relaciones", formData, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
+    return res.data;
+  },
+  // Similar para equipos y suministros (get, create, update, delete)
 };
 
 export default api;

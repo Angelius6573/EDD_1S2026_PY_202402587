@@ -1,3 +1,21 @@
-digraph G {
+graph G {
   node [shape=circle, style=filled];
+  "COL-20002" [label="COL-20002\nDra. Valentina Beatriz Herrera Juárez", fillcolor="#7aa2f7"];
+  "COL-10002" [label="COL-10002\nDra. Sofía Alejandra Ramírez Cruz", fillcolor="#86efac"];
+  "COL-30004" [label="COL-30004\nLic. Jorge Luis Monroy Castro", fillcolor="#c084fc"];
+  "COL-40001" [label="COL-40001\nTec. Luis Fernando Morales Salazar", fillcolor="#fde047"];
+  "COL-30001" [label="COL-30001\nLic. María Elena González Ruiz", fillcolor="#c084fc"];
+  "COL-50001" [label="COL-50001\nLic. Pedro Antonio Herrera Caal", fillcolor="#fca5a5"];
+  "COL-30003" [label="COL-30003\nLic. Rosa Miriam Ajú Pérez", fillcolor="#7aa2f7"];
+  "COL-40002" [label="COL-40002\nTec. Sandra Patricia Gómez Xicol", fillcolor="#fde047"];
+  "COL-30002" [label="COL-30002\nLic. Carmen Alejandra Ponce López", fillcolor="#86efac"];
+  "COL-50002" [label="COL-50002\nLic. Gabriela Fernanda Castillo Ajú", fillcolor="#fca5a5"];
+  "COL-10003" [label="COL-10003\nDr. Roberto Emilio Castillo Vega", fillcolor="#86efac"];
+  "COL-20001" [label="COL-20001\nDr. Alejandro Javier Morales Ríos", fillcolor="#7aa2f7"];
+  "COL-10001" [label="COL-10001\nAna Ramirez", fillcolor="#86efac"];
+  "COL-20003" [label="COL-20003\nDr. Fernando José Alvarado Sánchez", fillcolor="#86efac"];
+  "COL-20002" -- "COL-40001";
+  "COL-10001" -- "COL-20001";
+  "COL-10003" -- "COL-20003";
+  "COL-10001" -- "COL-30001";
 }

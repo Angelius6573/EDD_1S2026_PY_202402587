@@ -126,4 +126,32 @@ sub responder_solicitud {
     return { success => 1 };
 }
 
+sub solicitudes_enviadas {
+    my ($ctx) = @_;
+    my $user = _usuario_actual($ctx);
+    return { error => 'No autenticado' } unless $user;
+
+    my $relaciones = persistencia::relaciones::cargar_relaciones();
+    my @enviadas;
+
+    for my $rel (@$relaciones) {
+        if (   $rel->{estado} eq 'PENDIENTE'
+            && $rel->{colegio_a} eq $user->{colegio} )
+        {
+            my $nodo = $ctx->{grafo}->obtener_nodo( $rel->{colegio_b} );
+            if ($nodo) {
+                push @enviadas,
+                  {
+                    colegio      => $rel->{colegio_b},
+                    nombre       => $nodo->{nombre},
+                    departamento => $nodo->{departamento} // '',
+                    especialidad => $nodo->{especialidad} // ''
+                  };
+            }
+        }
+    }
+
+    return { solicitudes => \@enviadas };
+}
+
 1;
