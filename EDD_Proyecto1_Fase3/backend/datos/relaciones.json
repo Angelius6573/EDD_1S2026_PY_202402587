@@ -1,0 +1,27 @@
+[
+  {
+    "colegio_a": "COL-10001",
+    "colegio_b": "COL-20001",
+    "estado": "ACTIVA"
+  },
+  {
+    "colegio_a": "COL-10001",
+    "colegio_b": "COL-30001",
+    "estado": "ACTIVA"
+  },
+  {
+    "colegio_a": "COL-20001",
+    "colegio_b": "COL-30002",
+    "estado": "PENDIENTE"
+  },
+  {
+    "colegio_a": "COL-20002",
+    "colegio_b": "COL-40001",
+    "estado": "ACTIVA"
+  },
+  {
+    "colegio_a": "COL-99001",
+    "colegio_b": "COL-10002",
+    "estado": "PENDIENTE"
+  }
+]

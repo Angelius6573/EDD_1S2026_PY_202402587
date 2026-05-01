@@ -29,11 +29,26 @@ sub parsear_json_posiblemente_vacio {
     my $texto = _decodificar_utf8($bytes);
     my $datos;
     eval { $datos = decode_json($texto) };
-    return [] if $@;
 
+    if ($@) {
+        warn "Error decodificando JSON en $ruta: $@";
+        return [];
+    }
+
+    # Caso 1: array directo
     if ( ref($datos) eq 'ARRAY' ) {
         return $datos;
     }
+
+    # Caso 2: hash con clave "usuarios"
+    if (   ref($datos) eq 'HASH'
+        && exists $datos->{usuarios}
+        && ref( $datos->{usuarios} ) eq 'ARRAY' )
+    {
+        return $datos->{usuarios};
+    }
+
+    # Caso 3: estructura de proveedor (para inventario)
     if ( ref($datos) eq 'HASH' && ref( $datos->{proveedor} ) eq 'ARRAY' ) {
         my @medicamentos;
         for my $prov ( @{ $datos->{proveedor} } ) {
@@ -45,9 +60,12 @@ sub parsear_json_posiblemente_vacio {
         }
         return \@medicamentos;
     }
-    for my $clave (qw(usuarios equipos suministros inventario)) {
+
+    # Otras claves
+    for my $clave (qw(equipos suministros inventario)) {
         return $datos->{$clave} if ref( $datos->{$clave} ) eq 'ARRAY';
     }
+    warn "No se pudo interpretar el archivo $ruta como array conocido";
     return [];
 }
 
@@ -72,11 +90,17 @@ sub _decodificar_utf8 {
         substr( $bytes, 0, 3 ) = '';
     }
     my $texto;
+
+    # Intentar como UTF-8 estricto
     eval { $texto = decode( 'UTF-8', $bytes, Encode::FB_CROAK ); };
     if ($@) {
-        eval { $texto = decode( 'UTF-8', $bytes, Encode::FB_DEFAULT ); };
+
+        # Fallback: intentar como ISO-8859-1 (Latin1)
+        eval { $texto = decode( 'ISO-8859-1', $bytes, Encode::FB_CROAK ); };
         if ($@) {
-            $bytes =~ s/[^\x09\x0A\x0D\x20-\x7E\xA0-\xFF]//g;
+
+            # Último recurso: eliminar caracteres no ASCII
+            $bytes =~ s/[^\x20-\x7E]//g;
             $texto = decode( 'UTF-8', $bytes, Encode::FB_DEFAULT );
         }
     }

@@ -47,22 +47,24 @@ my %PERMISOS_DEPARTAMENTO = (
 );
 
 my $usuarios_data =
-  utilidades::leer_json::parsear_json_posiblemente_vacio('datos/usuarios.json');
+  utilidades::leer_json::parsear_json_posiblemente_vacio(
+    './datos/usuarios.json');
 $avl->cargar_desde_array($usuarios_data);
 my $equipos_data =
-  utilidades::leer_json::parsear_json_posiblemente_vacio('datos/equipos.json');
+  utilidades::leer_json::parsear_json_posiblemente_vacio(
+    './datos/equipos.json');
 $bst->cargar_desde_array($equipos_data);
 my $suministros_data = utilidades::leer_json::parsear_json_posiblemente_vacio(
-    'datos/suministros.json');
+    './datos/suministros.json');
 $btree->cargar_desde_array($suministros_data);
 my $inventario_data = utilidades::leer_json::parsear_json_posiblemente_vacio(
-    'datos/inventario.json');
+    './datos/inventario.json');
 
 for my $item (@$inventario_data) {
     $medicamentos->insertar_final($item);
 }
 my $proveedores_data = utilidades::leer_json::parsear_json_posiblemente_vacio(
-    'datos/proveedores.json');
+    './datos/proveedores.json');
 my $lista_prov = gestion_datos::lista_circular_doblemente_enlazada->nuevo();
 for my $prov (@$proveedores_data) {
     $lista_prov->insertar_final($prov);
@@ -295,6 +297,13 @@ get '/api/reportes/compresion' => sub {
     my $c      = shift;
     my $result = api::reportes::reporte_compresion( $c->ctx );
     $c->render( json => $result );
+};
+
+get '/debug/usuarios' => sub {
+    my $c = shift;
+    my @lista;
+    $c->ctx->{avl}->en_orden( sub { push @lista, $_[0] } );
+    $c->render( json => { usuarios => \@lista } );
 };
 
 any '/' => sub {
