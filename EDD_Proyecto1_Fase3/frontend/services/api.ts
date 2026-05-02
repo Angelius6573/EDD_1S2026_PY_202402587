@@ -329,21 +329,16 @@ export const api = {
     const res = await apiClient.delete(`/api/admin/medicamentos/${codigo}`);
     return res.data;
   },
+  // ==================== Admin CRUD Equipos ====================
   getAdminEquipos: async () => {
     const res = await apiClient.get("/api/admin/equipos");
-    if (Array.isArray(res.data)) {
-      return { equipos: res.data };
-    }
-    if (res.data && typeof res.data === "object" && "equipos" in res.data) {
-      return res.data;
-    }
-    return { equipos: [] };
+    return res.data;
   },
-  createAdminEquipo: async (data: unknown) => {
+  createAdminEquipo: async (data: any) => {
     const res = await apiClient.post("/api/admin/equipos", data);
     return res.data;
   },
-  updateAdminEquipo: async (codigo: string, data: unknown) => {
+  updateAdminEquipo: async (codigo: string, data: any) => {
     const res = await apiClient.put(`/api/admin/equipos/${codigo}`, data);
     return res.data;
   },

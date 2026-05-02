@@ -1,6 +1,6 @@
 [
    {
-      "cantidad" : 24500,
+      "cantidad" : 32500,
       "codigo" : "MED-001",
       "fabricante" : "Laboratorios Cofasa",
       "fecha_vencimiento" : "2027-06-30",
@@ -11,7 +11,7 @@
       "principio_activo" : "Amoxicilina"
    },
    {
-      "cantidad" : 37000,
+      "cantidad" : 49000,
       "codigo" : "MED-002",
       "fabricante" : "Laboratorios Lancasco",
       "fecha_vencimiento" : "2026-12-31",
@@ -22,7 +22,7 @@
       "principio_activo" : "Paracetamol"
    },
    {
-      "cantidad" : 18400,
+      "cantidad" : 24400,
       "codigo" : "MED-003",
       "fabricante" : "Laboratorios Farmindustria",
       "fecha_vencimiento" : "2027-08-15",
@@ -33,7 +33,7 @@
       "principio_activo" : "Omeprazol"
    },
    {
-      "cantidad" : 30000,
+      "cantidad" : 40000,
       "codigo" : "MED-004",
       "fabricante" : "GenericLab",
       "fecha_vencimiento" : "2027-04-25",
@@ -45,7 +45,7 @@
       "tipo" : "MEDICAMENTO"
    },
    {
-      "cantidad" : 9000,
+      "cantidad" : 12000,
       "codigo" : "MED-005",
       "fabricante" : "FarmacentroGT",
       "fecha_vencimiento" : "2027-02-14",
@@ -57,7 +57,7 @@
       "tipo" : "MEDICAMENTO"
    },
    {
-      "cantidad" : 45000,
+      "cantidad" : 60000,
       "codigo" : "MED-006",
       "fabricante" : "GenericLab",
       "fecha_vencimiento" : "2027-12-31",
@@ -69,7 +69,7 @@
       "tipo" : "MEDICAMENTO"
    },
    {
-      "cantidad" : 12000,
+      "cantidad" : 16000,
       "codigo" : "MED-007",
       "fabricante" : "FarmacentroGT",
       "fecha_vencimiento" : "2027-07-20",

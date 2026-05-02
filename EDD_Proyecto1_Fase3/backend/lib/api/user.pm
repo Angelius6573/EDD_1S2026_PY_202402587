@@ -4,6 +4,7 @@ use strict;
 use warnings;
 use utf8;
 use JSON::PP;
+use utilidades::leer_json;    # Añadir esta línea
 
 sub solo_usuario {
     my ($ctx) = @_;
@@ -36,7 +37,6 @@ sub actualizar_perfil {
     }
     $avl->insertar(%$usuario);
     $ctx->{tabla_hash}->insertar($usuario);
-    require utilidades::leer_json;
     utilidades::leer_json::guardar_json( 'datos/usuarios.json',
         $avl->a_array_json() );
     $ctx->{session}->{user} = $user;
@@ -109,19 +109,20 @@ sub inventario_equipos {
     my $dep      = $user->{departamento};
     my $permisos = $ctx->{permisos_departamento}->{$dep} // {};
     return { error => 'Acceso denegado' } unless $permisos->{equipos};
+
     my $filtro = $params->{filtro} // '';
-    my @equipos;
-    $ctx->{bst}->en_orden(
-        sub {
-            my ($n) = @_;
-            if (  !$filtro
-                || $n->{codigo} =~ /$filtro/i
-                || $n->{nombre} =~ /$filtro/i )
-            {
-                push @equipos, $n;
-            }
-        }
-    );
+
+    # Leer directamente del archivo JSON (mismo método que en admin)
+    my $equipos_data = utilidades::leer_json::parsear_json_posiblemente_vacio(
+        'datos/equipos.json');
+    my @equipos = @$equipos_data;
+
+    if ($filtro) {
+        @equipos = grep {
+            ( $_->{codigo} =~ /$filtro/i ) || ( $_->{nombre} =~ /$filtro/i )
+        } @equipos;
+    }
+
     return { equipos => \@equipos };
 }
 

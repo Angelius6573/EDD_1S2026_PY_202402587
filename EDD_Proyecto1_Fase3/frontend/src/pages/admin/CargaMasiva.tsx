@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { api } from "../../../services/api.ts";
+import { api } from "../../../services/api";
 import toast from "react-hot-toast";
 import {
   AlertCircle,
   CheckCircle,
   FileJson,
   FileText,
+  Package,
   Upload,
   Users,
 } from "lucide-react";
@@ -42,7 +43,6 @@ export default function CargaMasiva() {
       toast.success("Inventario cargado correctamente");
       setInventarioFile(null);
 
-      // Resetear el input file
       const fileInput = document.getElementById(
         "inventario-file",
       ) as HTMLInputElement;
@@ -77,7 +77,6 @@ export default function CargaMasiva() {
       toast.success("Usuarios cargados correctamente");
       setUsuariosFile(null);
 
-      // Resetear el input file
       const fileInput = document.getElementById(
         "usuarios-file",
       ) as HTMLInputElement;
@@ -295,7 +294,7 @@ export default function CargaMasiva() {
                   📦 Inventario
                 </h4>
                 <pre className="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono whitespace-pre-wrap max-h-60 overflow-y-auto">
-                                    {resultadoInventario}
+                  {resultadoInventario}
                 </pre>
               </div>
             )}
@@ -305,7 +304,7 @@ export default function CargaMasiva() {
                   👥 Usuarios
                 </h4>
                 <pre className="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono whitespace-pre-wrap max-h-60 overflow-y-auto">
-                                    {resultadoUsuarios}
+                  {resultadoUsuarios}
                 </pre>
               </div>
             )}
@@ -338,15 +337,14 @@ export default function CargaMasiva() {
       "numero_factura": "FAC-001",
       "entrega": [
         {
-          "tipo": "MEDICAMENTO",
+          "tipo": "EQUIPO",
           "codigo": "001",
-          "nombre": "Paracetamol",
-          "principio_activo": "Paracetamol",
-          "fabricante": "LabFarma",
-          "precio_unitario": 1.50,
-          "cantidad": 5000,
-          "fecha_vencimiento": "2026-12-31",
-          "nivel_minimo": 500
+          "nombre": "Monitor de Signos",
+          "fabricante": "MediTech",
+          "precio_unitario": 4500.00,
+          "cantidad": 10,
+          "fecha_ingreso": "2026-03-10",
+          "nivel_minimo": 2
         }
       ]
     }
@@ -377,19 +375,5 @@ export default function CargaMasiva() {
         </div>
       </div>
     </div>
-  );
-}
-
-// Componente auxiliar para el icono de Package
-function Package(props: any) {
-  return (
-    <svg {...props} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth={2}
-        d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"
-      />
-    </svg>
   );
 }

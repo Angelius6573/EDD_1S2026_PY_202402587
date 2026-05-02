@@ -1,6 +1,6 @@
 [
    {
-      "cantidad" : 45,
+      "cantidad" : 55,
       "codigo" : "EQU-001",
       "fabricante" : "Philips Medical",
       "fecha_ingreso" : "2026-01-15",
@@ -9,7 +9,7 @@
       "precio_unitario" : 8500
    },
    {
-      "cantidad" : 23,
+      "cantidad" : 28,
       "codigo" : "EQU-002",
       "fabricante" : "GE Healthcare",
       "fecha_ingreso" : "2026-02-28",
@@ -18,7 +18,7 @@
       "precio_unitario" : 12500
    },
    {
-      "cantidad" : 100,
+      "cantidad" : 120,
       "codigo" : "EQU-003",
       "fabricante" : "BuenaVidaGT",
       "fecha_ingreso" : "2026-03-12",
@@ -27,12 +27,21 @@
       "precio_unitario" : 180
    },
    {
-      "cantidad" : 80,
+      "cantidad" : 100,
       "codigo" : "EQU-004",
       "fabricante" : "BuenaVidaGT",
       "fecha_ingreso" : "2026-03-12",
       "nivel_minimo" : 4,
-      "nombre" : "TensiÃ³metro Manual Aneroide",
+      "nombre" : "Tensiometro Manual Aneroide",
       "precio_unitario" : 180
+   },
+   {
+      "cantidad" : 1,
+      "codigo" : "EQU-009",
+      "fabricante" : "Test",
+      "fecha_ingreso" : "2026-05-15",
+      "nivel_minimo" : 15,
+      "nombre" : "Test",
+      "precio_unitario" : 15
    }
 ]

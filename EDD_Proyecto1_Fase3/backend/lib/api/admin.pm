@@ -211,9 +211,14 @@ sub listar_equipos {
     my ($ctx) = @_;
     my $denied = solo_admin($ctx);
     return $denied if $denied;
-    my @equipos;
-    $ctx->{bst}->en_orden( sub { push @equipos, $_[0] } );
-    return { equipos => \@equipos };
+
+    # my @equipos;
+    # $ctx->{bst}->en_orden( sub { push @equipos, $_[0] } );
+    my $equipos_data = utilidades::leer_json::parsear_json_posiblemente_vacio(
+        'datos/equipos.json');
+
+    # return { equipos => \@equipos };
+    return { equipos => $equipos_data // [] };
 }
 
 sub agregar_equipo {
@@ -263,7 +268,6 @@ sub actualizar_equipo {
       // $equipo->{fecha_ingreso};
     $equipo->{nivel_minimo} = $params->{nivel_minimo}
       // $equipo->{nivel_minimo};
-
     _guardar_equipos($ctx);
     return { success => 1, equipo => $equipo };
 }

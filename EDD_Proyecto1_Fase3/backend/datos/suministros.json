@@ -1,6 +1,6 @@
 [
    {
-      "cantidad" : 240000,
+      "cantidad" : 300000,
       "codigo" : "SUM-001",
       "fabricante" : "MediSupplyGT",
       "fecha_vencimiento" : "2028-06-30",
@@ -9,7 +9,7 @@
       "precio_unitario" : 0.12
    },
    {
-      "cantidad" : 160000,
+      "cantidad" : 200000,
       "codigo" : "SUM-002",
       "fabricante" : "MediSupplyGT",
       "fecha_vencimiento" : "2028-01-15",
@@ -18,7 +18,7 @@
       "precio_unitario" : 0.25
    },
    {
-      "cantidad" : 100000,
+      "cantidad" : 125000,
       "codigo" : "SUM-003",
       "fabricante" : "MediSupplyGT",
       "fecha_vencimiento" : "2029-12-01",

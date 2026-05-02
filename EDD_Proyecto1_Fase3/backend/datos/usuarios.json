@@ -3,30 +3,6 @@
       "contrasena" : "medgen2026",
       "departamento" : "DEP-MED",
       "especialidad" : "Medicina General",
-      "nombre_completo" : "Ana Ramirez",
-      "numero_colegio" : "COL-10001",
-      "tipo_usuario" : "TIPO-01"
-   },
-   {
-      "contrasena" : "medgen2026B",
-      "departamento" : "DEP-MED",
-      "especialidad" : "Medicina Interna",
-      "nombre_completo" : "Dra. SofÃ­a Alejandra RamÃ­rez Cruz",
-      "numero_colegio" : "COL-10002",
-      "tipo_usuario" : "TIPO-01"
-   },
-   {
-      "contrasena" : "medfam2026",
-      "departamento" : "DEP-MED",
-      "especialidad" : "Medicina Familiar",
-      "nombre_completo" : "Dr. Roberto Emilio Castillo Vega",
-      "numero_colegio" : "COL-10003",
-      "tipo_usuario" : "TIPO-01"
-   },
-   {
-      "contrasena" : "medgen2026",
-      "departamento" : "DEP-MED",
-      "especialidad" : "Medicina General",
       "nombre_completo" : "Ana RamÃ­rez",
       "numero_colegio" : "COL-10245",
       "tipo_usuario" : "TIPO-01"
@@ -48,30 +24,6 @@
       "tipo_usuario" : "TIPO-01"
    },
    {
-      "contrasena" : "cirgen2026A",
-      "departamento" : "DEP-CIR",
-      "especialidad" : "CirugÃ­a General",
-      "nombre_completo" : "Dr. Alejandro Javier Morales RÃ­os",
-      "numero_colegio" : "COL-20001",
-      "tipo_usuario" : "TIPO-02"
-   },
-   {
-      "contrasena" : "circar2026",
-      "departamento" : "DEP-CIR",
-      "especialidad" : "CirugÃ­a Cardiovascular",
-      "nombre_completo" : "Dra. Valentina Beatriz Herrera JuÃ¡rez",
-      "numero_colegio" : "COL-20002",
-      "tipo_usuario" : "TIPO-02"
-   },
-   {
-      "contrasena" : "cardio2026",
-      "departamento" : "DEP-MED",
-      "especialidad" : "CardiologÃ­a",
-      "nombre_completo" : "Dr. Fernando JosÃ© Alvarado SÃ¡nchez",
-      "numero_colegio" : "COL-20003",
-      "tipo_usuario" : "TIPO-02"
-   },
-   {
       "contrasena" : "cirgen2026",
       "departamento" : "DEP-CIR",
       "especialidad" : "CirugÃ­a General",
@@ -86,38 +38,6 @@
       "nombre_completo" : "Roberto Salazar",
       "numero_colegio" : "COL-20567",
       "tipo_usuario" : "TIPO-02"
-   },
-   {
-      "contrasena" : "enffar2026A",
-      "departamento" : "DEP-FAR",
-      "especialidad" : "",
-      "nombre_completo" : "Lic. MarÃ­a Elena GonzÃ¡lez Ruiz",
-      "numero_colegio" : "COL-30001",
-      "tipo_usuario" : "TIPO-03"
-   },
-   {
-      "contrasena" : "enfmed2026A",
-      "departamento" : "DEP-MED",
-      "especialidad" : "",
-      "nombre_completo" : "Lic. Carmen Alejandra Ponce LÃ³pez",
-      "numero_colegio" : "COL-30002",
-      "tipo_usuario" : "TIPO-03"
-   },
-   {
-      "contrasena" : "enfcir2026A",
-      "departamento" : "DEP-CIR",
-      "especialidad" : "",
-      "nombre_completo" : "Lic. Rosa Miriam AjÃº PÃ©rez",
-      "numero_colegio" : "COL-30003",
-      "tipo_usuario" : "TIPO-03"
-   },
-   {
-      "contrasena" : "enffar2026B",
-      "departamento" : "DEP-FAR",
-      "especialidad" : "",
-      "nombre_completo" : "Lic. Jorge Luis Monroy Castro",
-      "numero_colegio" : "COL-30004",
-      "tipo_usuario" : "TIPO-03"
    },
    {
       "contrasena" : "valeria2026",
@@ -144,22 +64,6 @@
       "tipo_usuario" : "TIPO-03"
    },
    {
-      "contrasena" : "labhem2026",
-      "departamento" : "DEP-LAB",
-      "especialidad" : "HematologÃ­a ClÃ­nica",
-      "nombre_completo" : "Tec. Luis Fernando Morales Salazar",
-      "numero_colegio" : "COL-40001",
-      "tipo_usuario" : "TIPO-04"
-   },
-   {
-      "contrasena" : "labmic2026",
-      "departamento" : "DEP-LAB",
-      "especialidad" : "MicrobiologÃ­a",
-      "nombre_completo" : "Tec. Sandra Patricia GÃ³mez Xicol",
-      "numero_colegio" : "COL-40002",
-      "tipo_usuario" : "TIPO-04"
-   },
-   {
       "contrasena" : "diego2026",
       "departamento" : "DEP-LAB",
       "especialidad" : "HematologÃ­a",
@@ -174,21 +78,5 @@
       "nombre_completo" : "SofÃ­a Gramajo",
       "numero_colegio" : "COL-40890",
       "tipo_usuario" : "TIPO-04"
-   },
-   {
-      "contrasena" : "adm2026A",
-      "departamento" : "DEP-ADM",
-      "especialidad" : "AdministraciÃ³n Hospitalaria",
-      "nombre_completo" : "Lic. Pedro Antonio Herrera Caal",
-      "numero_colegio" : "COL-50001",
-      "tipo_usuario" : "TIPO-05"
-   },
-   {
-      "contrasena" : "adm2026B",
-      "departamento" : "DEP-ADM",
-      "especialidad" : "GestiÃ³n de Salud",
-      "nombre_completo" : "Lic. Gabriela Fernanda Castillo AjÃº",
-      "numero_colegio" : "COL-50002",
-      "tipo_usuario" : "TIPO-05"
    }
 ]

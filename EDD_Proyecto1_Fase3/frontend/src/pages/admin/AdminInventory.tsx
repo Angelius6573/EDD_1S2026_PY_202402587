@@ -6,6 +6,7 @@ import {
   Edit,
   Package,
   Plus,
+  RefreshCw,
   Search,
   Syringe,
   Trash2,
@@ -33,51 +34,23 @@ export default function AdminInventory() {
     setLoading(true);
     setError(null);
     try {
-      let lista: any[] = [];
+      let res;
       if (activeTab === "medicamentos") {
-        const res = await api.getAdminMedicamentos();
-        lista = res.medicamentos || [];
+        res = await api.getAdminMedicamentos();
+        setItems(res.medicamentos || []);
       } else if (activeTab === "equipos") {
-        const res = await api.getAdminEquipos();
-        // Normalizar: si es array directo o viene en objeto
+        res = await api.getAdminEquipos();
+        let lista = [];
         if (Array.isArray(res)) {
           lista = res;
         } else if (res && typeof res === "object") {
           lista = res.equipos || res.data || [];
         }
+        setItems(lista);
       } else if (activeTab === "suministros") {
-        const res = await api.getAdminSuministros();
-        lista = res.suministros || [];
+        res = await api.getAdminSuministros();
+        setItems(res.suministros || []);
       }
-
-      // ELIMINAR CUALQUIER ELEMENTO NULL O UNDEFINED
-      lista = lista.filter((item) => item != null && typeof item === "object");
-
-      // SANITIZAR CADA ITEM (asignar valores por defecto)
-      lista = lista.map((item) => ({
-        codigo: item.codigo || "",
-        nombre: item.nombre || "",
-        cantidad: item.cantidad ?? 0,
-        precio_unitario: item.precio_unitario ?? 0,
-        nivel_minimo: item.nivel_minimo ?? 0,
-        // Campos adicionales según tipo
-        ...(activeTab === "medicamentos" && {
-          principio_activo: item.principio_activo || "",
-          laboratorio: item.laboratorio || "",
-          fabricante: item.fabricante || "",
-          fecha_vencimiento: item.fecha_vencimiento || "",
-        }),
-        ...(activeTab === "equipos" && {
-          fabricante: item.fabricante || "",
-          fecha_ingreso: item.fecha_ingreso || "",
-        }),
-        ...(activeTab === "suministros" && {
-          fabricante: item.fabricante || "",
-          fecha_vencimiento: item.fecha_vencimiento || "",
-        }),
-      }));
-
-      setItems(lista);
     } catch (err: any) {
       console.error("Error cargando:", err);
       setError(err.message || "Error al cargar datos");
@@ -156,12 +129,12 @@ export default function AdminInventory() {
     }
   };
 
-  const filteredItems = items.filter((item) => {
-    if (!item || typeof item !== "object") return false;
-    const codigo = (item.codigo || "").toLowerCase();
-    const nombre = (item.nombre || "").toLowerCase();
-    const searchLower = search.toLowerCase();
-    return codigo.includes(searchLower) || nombre.includes(searchLower);
+  const filteredItems = items.filter((i) => {
+    if (!i) return false;
+    const codigo = (i.codigo || "").toLowerCase();
+    const nombre = (i.nombre || "").toLowerCase();
+    return codigo.includes(search.toLowerCase()) ||
+      nombre.includes(search.toLowerCase());
   });
 
   const tabs = [
@@ -245,7 +218,7 @@ export default function AdminInventory() {
         {activeTab === "medicamentos" && (
           <>
             <div>
-              <label className="label">Principio Activo</label>
+              <label>Principio Activo</label>
               <input
                 type="text"
                 value={formData.principio_activo || ""}
@@ -258,7 +231,7 @@ export default function AdminInventory() {
               />
             </div>
             <div>
-              <label className="label">Laboratorio</label>
+              <label>Laboratorio</label>
               <input
                 type="text"
                 value={formData.laboratorio || ""}
@@ -268,7 +241,7 @@ export default function AdminInventory() {
               />
             </div>
             <div>
-              <label className="label">Fabricante</label>
+              <label>Fabricante</label>
               <input
                 type="text"
                 value={formData.fabricante || ""}
@@ -278,7 +251,7 @@ export default function AdminInventory() {
               />
             </div>
             <div>
-              <label className="label">Fecha Vencimiento</label>
+              <label>Fecha Vencimiento</label>
               <input
                 type="date"
                 value={formData.fecha_vencimiento || ""}
@@ -295,7 +268,7 @@ export default function AdminInventory() {
         {(activeTab === "equipos" || activeTab === "suministros") && (
           <>
             <div>
-              <label className="label">Fabricante</label>
+              <label>Fabricante</label>
               <input
                 type="text"
                 value={formData.fabricante || ""}
@@ -306,7 +279,7 @@ export default function AdminInventory() {
             </div>
             {activeTab === "equipos" && (
               <div>
-                <label className="label">Fecha Ingreso</label>
+                <label>Fecha Ingreso</label>
                 <input
                   type="date"
                   value={formData.fecha_ingreso || ""}
@@ -318,7 +291,7 @@ export default function AdminInventory() {
             )}
             {activeTab === "suministros" && (
               <div>
-                <label className="label">Fecha Vencimiento</label>
+                <label>Fecha Vencimiento</label>
                 <input
                   type="date"
                   value={formData.fecha_vencimiento || ""}
@@ -344,11 +317,11 @@ export default function AdminInventory() {
           Gestión de Inventario
         </h1>
         <button
-          onClick={() => handleOpenModal()}
-          className="btn-primary flex items-center space-x-2"
+          onClick={cargarItems}
+          className="btn-secondary flex items-center space-x-2"
         >
-          <Plus size={18} />
-          <span>Nuevo {activeTab.slice(0, -1)}</span>
+          <RefreshCw size={18} />
+          <span>Recargar</span>
         </button>
       </div>
 
@@ -374,18 +347,27 @@ export default function AdminInventory() {
         </div>
       </div>
 
-      <div className="mb-4 relative">
-        <Search
-          className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
-          size={18}
-        />
-        <input
-          type="text"
-          placeholder="Buscar por código o nombre..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          className="input pl-10"
-        />
+      <div className="flex justify-between items-center mb-4 gap-4">
+        <div className="relative flex-1">
+          <Search
+            className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+            size={18}
+          />
+          <input
+            type="text"
+            placeholder="Buscar por código o nombre..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="input pl-10"
+          />
+        </div>
+        <button
+          onClick={() => handleOpenModal()}
+          className="btn-primary flex items-center space-x-2"
+        >
+          <Plus size={18} />
+          <span>Nuevo {activeTab.slice(0, -1)}</span>
+        </button>
       </div>
 
       {loading
@@ -399,10 +381,7 @@ export default function AdminInventory() {
         ? (
           <div className="card text-center py-12 text-red-600">
             <p>Error: {error}</p>
-            <button
-              onClick={() => cargarItems()}
-              className="btn-secondary mt-4"
-            >
+            <button onClick={cargarItems} className="btn-secondary mt-4">
               Reintentar
             </button>
           </div>
